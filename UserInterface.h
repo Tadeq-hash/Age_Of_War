@@ -22,31 +22,28 @@ private:
     std::map<std::string,sf::Sprite> buttons;
     std::map<std::string,sf::IntRect> buttons_animation_rects;
     //Setup of buttons
-    void initButtons();
-    void init_animation_rects();
-    void animate_concave_butt(std::string map_butt, std::string concave_map);
-    void animate_convex_butt(std::string map_butt,std::string convex_map);
-    void button_blocked_animation();
+    void initButtons();          //creating buttons
+    void init_animation_rects(); //rects from texture
 
-    bool canAfford(int price_); //checking if you have enough money or xp to click button
-    bool canUpgrade(int xp_);
+    void animate_concave_butt(std::string map_butt, std::string concave_map); //concave animation of button
+    void animate_convex_butt(std::string map_butt,std::string convex_map);    //convex animation of button
+    
+    void button_blocked_animation(); //switching button animation to blocked
+    bool canAfford(int price_); //checking if you have enough money to click button
+    bool canUpgrade(int xp_);  //checking if you have enough xp to click button
 
     /*
-        #INTERFACE
+        #INTERFACE BACKGROUND *ONLY SPRITE*
     */
     sf::Sprite user_info;
     void init_user_info();
-
 
 
     /*
         #MONEY
     */
 
-
-    void display_player_resources();
-
-    //Setting prices
+    //Setting prices 
     int warrior_price=70;
     int archer_price=100;
     int boss_price=200;
@@ -59,18 +56,16 @@ private:
     void init_prices();
 
 
-
     /*
-        #PLAYER RESOURCES / XP & GOLD AMOUNT & HP
+        #PLAYER RESOURCES / XP & GOLD AMOUNT & HP *Uploading from class Player*
     */
 
     Player* player;
     sf::Text current_gold;
-    int curr_gold;
-    int curr_xp;
-    int curr_hp;
-    bool second_life;
-
+    int curr_gold; //taking from class player
+    int curr_xp;   //taking from class player
+    int curr_hp;   //taking from class player
+    bool second_life; //second hp bar
 
 
     //xp_bar
@@ -85,17 +80,19 @@ private:
     sf::IntRect hp_rect_red;
     sf::IntRect hp_rect_orange;
 
+    //Class player initation
     void initPlayer();
-    void updateResources();
-    void initResources();
-
+    
+    //Uploading hp,xp,gold 
     void init_gold_amount();
     void init_xp_bar();
     void init_hp_bar();
+    void initResources();
 
+    //updating hp,xp from class Player
     void update_xp_bar();
     void update_hp_bar();
-
+    void updateResources();
 
     /*
       #Class meth

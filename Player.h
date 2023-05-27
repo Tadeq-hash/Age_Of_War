@@ -15,12 +15,14 @@ private:
     void initVariables();
 public:
 
+    //CONSTRUCTOR
     Player();
 
+    //CHANGING RESOURCES IN PLAYER CLASS
     void change_xp(int _xp);
     void change_hp(int _hp);
 
-    //Return player gold, xp, hp
+    //RETURNS ACTUAL RESOURCES
     int current_gold();
     int current_xp();
     int current_hp();

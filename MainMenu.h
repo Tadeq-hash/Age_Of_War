@@ -42,10 +42,10 @@ public:
     //GAME
     void Game_run();
     //
-    //OPTIONS
+    //OPTIONS TODO
     void Options_run();
     //
-    //CREDTIS
+    //CREDTIS TODO
     void Credits_run();
     //----------------------//
 

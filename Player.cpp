@@ -1,16 +1,16 @@
 #include "Player.h"
 
+//CONSTRUCTORS
+Player::Player()
+{
+    this->initVariables();
+}
 
 void Player::initVariables()
 {
     this->hp=const_hp; // it's 100, because second life of orange bar
     this->gold_amount=80;
     this->xp=20;
-}
-
-Player::Player()
-{
-    this->initVariables();
 }
 
 void Player::change_xp(int _xp)

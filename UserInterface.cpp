@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-//CONSTRUCTOR & DESTRUCTOR//
+//--CONSTRUCTOR & DESTRUCTOR--//
 
 UserInterface::UserInterface(sf::Texture *texture, sf::RenderWindow *window_, sf::Event *event_, sf::Font *font_)
 {
@@ -26,7 +26,11 @@ UserInterface::~UserInterface()
  delete this->player;
 }
 
+//---------------------------//
 
+/*
+    #FROM CLASS PLAYER
+*/
 void UserInterface::initPlayer()
 {
     this->player = new Player;
@@ -35,6 +39,96 @@ void UserInterface::initPlayer()
     this->curr_hp=player->current_hp();
 }
 
+/*
+    #INITS ANIMATION RECTS
+*/
+
+void UserInterface::init_animation_rects()
+{
+    //convex (default)
+    this->buttons_animation_rects["exit_convex"] = sf::IntRect(1, 81, 14, 14);
+    this->buttons_animation_rects["warrior_convex"] = sf::IntRect(71, 178, 14, 14);
+    this->buttons_animation_rects["archer_convex"] = sf::IntRect(88, 178, 14, 14);
+    this->buttons_animation_rects["boss_convex"] = sf::IntRect(105, 178, 14, 14);
+    this->buttons_animation_rects["upgrade_convex"] = sf::IntRect(121, 178, 14, 14);
+
+    //concave
+    this->buttons_animation_rects["exit_conc"] = sf::IntRect(48, 209, 14, 13);
+    this->buttons_animation_rects["warrior_conc"] = sf::IntRect(71, 194, 14, 13);
+    this->buttons_animation_rects["archer_conc"] = sf::IntRect(88, 194, 14, 13);
+    this->buttons_animation_rects["boss_conc"] = sf::IntRect(106, 194, 14, 13);
+    this->buttons_animation_rects["upgrade_conc"] = sf::IntRect(121, 194, 14, 13);
+
+    //blocked
+    this->buttons_animation_rects["warrior_blocked"] = sf::IntRect(71, 208, 14, 14);
+    this->buttons_animation_rects["archer_blocked"] = sf::IntRect(88, 208, 14, 14);
+    this->buttons_animation_rects["boss_blocked"] = sf::IntRect(106, 208, 14, 14);
+    this->buttons_animation_rects["upgrade_blocked"] = sf::IntRect(122, 208, 14, 14);
+
+
+}
+
+/*
+    #INIT PRICES IN SHOP INTERFACE
+*/
+void UserInterface::init_prices()
+{
+
+
+    sf::Text warrior_price;
+    warrior_price.setFont(this->font);
+    warrior_price.setCharacterSize(7);
+    warrior_price.setOutlineColor(sf::Color::Yellow);
+    warrior_price.setOutlineThickness(0.3);
+    warrior_price.setFillColor(sf::Color::Yellow);
+    warrior_price.setString(std::to_string(this->warrior_price));
+    warrior_price.setPosition(this->buttons["warrior"].getPosition().x + 7, this->buttons["warrior"].getPosition().y + this->buttons["warrior"].getGlobalBounds().height + 12);
+    this->prices_in_shop["warrior_price"] = warrior_price;
+
+    sf::Text archer_price;
+    archer_price.setFont(this->font);
+    archer_price.setCharacterSize(7);
+    archer_price.setOutlineColor(sf::Color::Yellow);
+    archer_price.setOutlineThickness(0.3);
+    archer_price.setFillColor(sf::Color::Yellow);
+    archer_price.setString(std::to_string(this->archer_price));
+    archer_price.setPosition(this->buttons["archer"].getPosition().x + 6, this->buttons["archer"].getPosition().y + this->buttons["archer"].getGlobalBounds().height + 12);
+    this->prices_in_shop["archer_price"] = archer_price;
+
+    sf::Text boss_price;
+    boss_price.setFont(this->font);
+    boss_price.setCharacterSize(7);
+    boss_price.setFillColor(sf::Color::Yellow);
+    boss_price.setOutlineColor(sf::Color::Yellow);
+    boss_price.setOutlineThickness(0.3);
+    boss_price.setString(std::to_string(this->boss_price));
+    boss_price.setPosition(this->buttons["boss"].getPosition().x + 6, this->buttons["boss"].getPosition().y + this->buttons["boss"].getGlobalBounds().height + 12);
+    this->prices_in_shop["boss_price"] = boss_price;
+
+
+
+    coins[0].setTexture(this->gui);
+    coins[1].setTexture(this->gui);
+    coins[2].setTexture(this->gui);
+
+    coins[0].setTextureRect(sf::IntRect(137, 22, 5, 6));
+    coins[0].setScale(2, 2);
+    coins[0].setPosition(this->prices_in_shop["warrior_price"].getPosition().x + this->prices_in_shop["warrior_price"].getGlobalBounds().width + 6, this->prices_in_shop["warrior_price"].getGlobalBounds().top);
+
+    coins[1].setTextureRect(sf::IntRect(137, 22, 5, 6));
+    coins[1].setScale(2, 2);
+    coins[1].setPosition(this->prices_in_shop["archer_price"].getPosition().x + this->prices_in_shop["archer_price"].getGlobalBounds().width + 6, this->prices_in_shop["archer_price"].getGlobalBounds().top);
+
+    coins[2].setTextureRect(sf::IntRect(137, 22, 5, 6));
+    coins[2].setScale(2, 2);
+    coins[2].setPosition(this->prices_in_shop["boss_price"].getPosition().x + this->prices_in_shop["boss_price"].getGlobalBounds().width + 6, this->prices_in_shop["boss_price"].getGlobalBounds().top);
+
+}
+
+
+/*
+    #INITS RESOURCES XP & GOLD & HP
+*/
 void UserInterface::initResources()
 {
     this->second_life=false;
@@ -80,7 +174,60 @@ void UserInterface::init_hp_bar()
     this->hp_sprite_orange.setTextureRect(this->hp_rect_orange);
 }
 
+/*
+    #INIT BUTTONS (SETTINGS, DEFAULTS)
+*/
+void UserInterface::initButtons()
+{
+    sf::Sprite background_of_ui;
+    background_of_ui.setTexture(this->gui);
+    background_of_ui.setTextureRect(sf::IntRect(2, 34, 74, 44));
+    background_of_ui.setScale(4.5, 2.6);
+    background_of_ui.setPosition(405, -1);
+    this->buttons["a_background_of_ui"] = background_of_ui;
 
+    sf::Sprite exit_butt;
+    exit_butt.setTexture(this->gui);
+    exit_butt.setTextureRect(this->buttons_animation_rects["exit_convex"]);
+    exit_butt.setPosition(450, 20);
+    exit_butt.setScale(3, 3);
+    this->buttons["exit"] = exit_butt;
+
+    sf::Sprite warrior;
+    warrior.setTexture(this->gui);
+    warrior.setTextureRect(this->buttons_animation_rects["warrior_convex"]);
+    warrior.setScale(3, 3);
+    warrior.setPosition(500, 20);
+    this->buttons["warrior"] = warrior;
+
+    sf::Sprite archer;
+    archer.setTexture(this->gui);
+    archer.setTextureRect(this->buttons_animation_rects["archer_convex"]);
+    archer.setScale(3, 3);
+    archer.setPosition(550, 20);
+    this->buttons["archer"] = archer;
+
+    sf::Sprite boss;
+    boss.setTexture(this->gui);
+    boss.setTextureRect(this->buttons_animation_rects["boss_convex"]);
+    boss.setScale(3, 3);
+    boss.setPosition(600, 20);
+    this->buttons["boss"] = boss;
+
+    sf::Sprite upgrade_era;
+    upgrade_era.setTexture(this->gui);
+    upgrade_era.setTextureRect(this->buttons_animation_rects["upgrade_convex"]);
+    upgrade_era.setScale(3, 3);
+    upgrade_era.setPosition(650, 20);
+    this->buttons["upgrade_era"] = upgrade_era;
+
+
+
+}
+
+/*
+    #UPDATE RESOURCES XP & GOLD & HP FROM CLASS PLAYER
+*/
 
 void UserInterface::updateResources()
 {
@@ -88,11 +235,13 @@ void UserInterface::updateResources()
     this->curr_xp=this->player->current_xp();
     this->curr_hp=this->player->current_hp();
 
-    this->gold.setString(std::to_string(this->curr_gold));
+    this->gold.setString(std::to_string(this->curr_gold));   //display money amount in interface
 
 }
 
-
+/*
+    ANIMATIONS OF HEALTH & XP BAR
+*/
 
 void UserInterface::update_xp_bar()
 {
@@ -133,31 +282,11 @@ void UserInterface::update_hp_bar()
     }
 }
 
-void UserInterface::init_animation_rects()
-{
-    //convex (default)
-    this->buttons_animation_rects["exit_convex"]=sf::IntRect(1,81,14,14);
-    this->buttons_animation_rects["warrior_convex"]=sf::IntRect(71,178,14,14);
-    this->buttons_animation_rects["archer_convex"]=sf::IntRect(88,178,14,14);
-    this->buttons_animation_rects["boss_convex"]=sf::IntRect(105,178,14,14);
-    this->buttons_animation_rects["upgrade_convex"]=sf::IntRect(121,178,14,14);
+/*
+    ANIMATIONS OF BUTTON 'BLOCKED', 'CONCAVE', 'CONVEX
+*/
 
-    //concave
-    this->buttons_animation_rects["exit_conc"]=sf::IntRect(48,209,14,13);
-    this->buttons_animation_rects["warrior_conc"]=sf::IntRect(71,194,14,13);
-    this->buttons_animation_rects["archer_conc"]=sf::IntRect(88,194,14,13);
-    this->buttons_animation_rects["boss_conc"]=sf::IntRect(106,194,14,13);
-    this->buttons_animation_rects["upgrade_conc"]=sf::IntRect(121,194,14,13);
-
-    //blocked
-    this->buttons_animation_rects["warrior_blocked"]=sf::IntRect(71,208,14,14);
-    this->buttons_animation_rects["archer_blocked"]=sf::IntRect(88,208,14,14);
-    this->buttons_animation_rects["boss_blocked"]=sf::IntRect(106,208,14,14);
-    this->buttons_animation_rects["upgrade_blocked"]=sf::IntRect(122,208,14,14);
-
-
-}
-
+//BLOCKED
 void UserInterface::button_blocked_animation()
 {
     if(!this->canAfford(this->warrior_price))
@@ -194,19 +323,23 @@ void UserInterface::button_blocked_animation()
     }
 
 }
-
+//CONCAVE
 void UserInterface::animate_concave_butt(std::string map_butt, std::string concave_map)
 {
     this->buttons[map_butt].setTextureRect(this->buttons_animation_rects[concave_map]);
     this->buttons[map_butt].setPosition(this->buttons[map_butt].getPosition().x,this->buttons[map_butt].getPosition().y+2);
 }
 
+//CONVEX
 void UserInterface::animate_convex_butt(std::string map_butt, std::string convex_map)
 {
     this->buttons[map_butt].setTextureRect(this->buttons_animation_rects[convex_map]);
     this->buttons[map_butt].setPosition(this->buttons[map_butt].getPosition().x,this->buttons[map_butt].getPosition().y-2);
 }
 
+/*
+    #UPDATING ANIMATIONS (IF ENOUGH MONEY OR XP)
+*/
 bool UserInterface::canAfford(int price_)
 {
     if(this->curr_gold>=price_)
@@ -233,56 +366,9 @@ bool UserInterface::canUpgrade(int xp_)
 
 
 
-
-//BUTTON SETTINGS
-void UserInterface::initButtons()
-{
-    sf::Sprite background_of_ui;
-    background_of_ui.setTexture(this->gui);
-    background_of_ui.setTextureRect(sf::IntRect(2,34,74,44));
-    background_of_ui.setScale(4.5,2.6);
-    background_of_ui.setPosition(405,-1);
-    this->buttons["a_background_of_ui"] = background_of_ui;
-
-    sf::Sprite exit_butt;
-    exit_butt.setTexture(this->gui);
-    exit_butt.setTextureRect(this->buttons_animation_rects["exit_convex"]);
-    exit_butt.setPosition(450,20);
-    exit_butt.setScale(3,3);
-    this->buttons["exit"] = exit_butt;
-
-    sf::Sprite warrior;
-    warrior.setTexture(this->gui);
-    warrior.setTextureRect(this->buttons_animation_rects["warrior_convex"]);
-    warrior.setScale(3,3);
-    warrior.setPosition(500,20);
-    this->buttons["warrior"] = warrior;
-
-    sf::Sprite archer;
-    archer.setTexture(this->gui);
-    archer.setTextureRect(this->buttons_animation_rects["archer_convex"]);
-    archer.setScale(3,3);
-    archer.setPosition(550,20);
-    this->buttons["archer"] = archer;
-
-    sf::Sprite boss;
-    boss.setTexture(this->gui);
-    boss.setTextureRect(this->buttons_animation_rects["boss_convex"]);
-    boss.setScale(3,3);
-    boss.setPosition(600,20);
-    this->buttons["boss"] = boss;
-
-    sf::Sprite upgrade_era;
-    upgrade_era.setTexture(this->gui);
-    upgrade_era.setTextureRect(this->buttons_animation_rects["upgrade_convex"]);
-    upgrade_era.setScale(3,3);
-    upgrade_era.setPosition(650,20);
-    this->buttons["upgrade_era"] = upgrade_era;
-
-
-
-}
-//Health, Avatar etc.
+/*
+    #INITS ONLY BACKGROUND OF INTERFACE
+*/
 void UserInterface::init_user_info()
 {
     this->user_info.setTexture(this->gui);
@@ -292,6 +378,9 @@ void UserInterface::init_user_info()
 
 }
 
+/*
+    #DRAWING
+*/
 void UserInterface::drawInterface()
 {
     for(const auto &button:this->buttons)
@@ -322,6 +411,9 @@ void UserInterface::drawInterface()
     this->window->draw(this->hp_sprite_red);
 }
 
+/*
+    #UPDATING
+*/
 void UserInterface::update()
 {
      this->button_blocked_animation();
@@ -332,60 +424,6 @@ void UserInterface::update()
 
 }
 
-void UserInterface::init_prices()
-{
-
-
-
-    sf::Text warrior_price;
-    warrior_price.setFont(this->font);
-    warrior_price.setCharacterSize(7);
-    warrior_price.setOutlineColor(sf::Color::Yellow);
-    warrior_price.setOutlineThickness(0.3);
-    warrior_price.setFillColor(sf::Color::Yellow);
-    warrior_price.setString(std::to_string(this->warrior_price));
-    warrior_price.setPosition(this->buttons["warrior"].getPosition().x+7,this->buttons["warrior"].getPosition().y+this->buttons["warrior"].getGlobalBounds().height+12);
-    this->prices_in_shop["warrior_price"]=warrior_price;
-
-    sf::Text archer_price;
-    archer_price.setFont(this->font);
-    archer_price.setCharacterSize(7);
-    archer_price.setOutlineColor(sf::Color::Yellow);
-    archer_price.setOutlineThickness(0.3);
-    archer_price.setFillColor(sf::Color::Yellow);
-    archer_price.setString(std::to_string(this->archer_price));
-    archer_price.setPosition(this->buttons["archer"].getPosition().x+6,this->buttons["archer"].getPosition().y+this->buttons["archer"].getGlobalBounds().height+12);
-    this->prices_in_shop["archer_price"]=archer_price;
-
-    sf::Text boss_price;
-    boss_price.setFont(this->font);
-    boss_price.setCharacterSize(7);
-    boss_price.setFillColor(sf::Color::Yellow);
-    boss_price.setOutlineColor(sf::Color::Yellow);
-    boss_price.setOutlineThickness(0.3);
-    boss_price.setString(std::to_string(this->boss_price));
-    boss_price.setPosition(this->buttons["boss"].getPosition().x+6,this->buttons["boss"].getPosition().y+this->buttons["boss"].getGlobalBounds().height+12);
-    this->prices_in_shop["boss_price"]=boss_price;
-
-
-
-    coins[0].setTexture(this->gui);
-    coins[1].setTexture(this->gui);
-    coins[2].setTexture(this->gui);
-
-    coins[0].setTextureRect(sf::IntRect(137,22,5,6));
-    coins[0].setScale(2,2);
-    coins[0].setPosition(this->prices_in_shop["warrior_price"].getPosition().x+this->prices_in_shop["warrior_price"].getGlobalBounds().width+6,this->prices_in_shop["warrior_price"].getGlobalBounds().top);
-
-    coins[1].setTextureRect(sf::IntRect(137,22,5,6));
-    coins[1].setScale(2,2);
-    coins[1].setPosition(this->prices_in_shop["archer_price"].getPosition().x+this->prices_in_shop["archer_price"].getGlobalBounds().width+6,this->prices_in_shop["archer_price"].getGlobalBounds().top);
-
-    coins[2].setTextureRect(sf::IntRect(137,22,5,6));
-    coins[2].setScale(2,2);
-    coins[2].setPosition(this->prices_in_shop["boss_price"].getPosition().x+this->prices_in_shop["boss_price"].getGlobalBounds().width+6,this->prices_in_shop["boss_price"].getGlobalBounds().top);
-
-}
 
 
 //BUTTON EVENTS LOOP

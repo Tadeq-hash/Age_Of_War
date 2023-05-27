@@ -103,17 +103,7 @@ void MainMenu::pollEvents()
 
 
 
-
-
-
-
-
-
-
-
-
-
-                //==================TRASH TO DO ===================================
+                //==================TRASH TO DO =================================== //Class options, Class Credits
 
                 //OPTIONS LOOP
                 if(x==1)
@@ -202,11 +192,6 @@ void MainMenu::pollEvents()
         }
     }
 }
-
-
-
-
-
 
 
 
