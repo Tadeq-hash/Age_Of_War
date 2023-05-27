@@ -111,8 +111,6 @@ private:
     */
 
      
-
-
 public:
     //constructor & destructor
     UserInterface(sf::Texture *texture, sf::RenderWindow *window_, sf::Event *event_, sf::Font *font_);

@@ -5,7 +5,6 @@
 	#LOADING ANIMATION, COOLDOWN BAR, QUEUE
 */
 
-
 class InitCharacter
 {
 private:
@@ -31,8 +30,6 @@ private:
 
 
 public:
-
-	
 
 	//constructor
 	InitCharacter(std::string _character,sf::Sprite _character_sprite, sf::RenderWindow *window, int size);

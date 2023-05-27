@@ -6,8 +6,6 @@ void InitCharacter::InitVariables()
 
 }
 
-
-
 //DRAWING
 void InitCharacter::drawButton()
 {
@@ -79,7 +77,6 @@ void InitCharacter::update(std::vector<InitCharacter*>& vec, int size)
 
 	if (clock.getElapsedTime().asSeconds() > 3)
 	{	
-		
 		std::cout << "Niszcze \n";
 		vec.erase(vec.begin());
 		this->vec_size--;
