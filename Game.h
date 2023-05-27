@@ -41,7 +41,6 @@ sf::Texture *interface_tex;
 sf::Font *digitals;
 
 void initButtons();
-void init_player_info();
 void drawInterface();
 
 

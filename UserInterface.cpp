@@ -409,6 +409,14 @@ void UserInterface::drawInterface()
     this->window->draw(this->hp_sprite_orange);
 
     this->window->draw(this->hp_sprite_red);
+    
+    if (this->num_of_char_queue.size() > 0)
+    {
+        for (const auto& charc : this->num_of_char_queue)
+        {
+            charc->drawButton();
+        }
+    }
 }
 
 /*
@@ -421,10 +429,40 @@ void UserInterface::update()
      this->updateResources();
      this->update_xp_bar();
      this->update_hp_bar();
-
+     this->update_all_char();
+     std::cout << "dzialam\n";
 }
 
 
+
+void UserInterface::INIT_Character(std::map<std::string, sf::Sprite> buttons, std::string charac)
+{
+
+    if (this->num_of_char_queue.size() <= max_of_queue)
+    {
+        std::cout << "Respawning warrior\n";
+        InitCharacter* character = new InitCharacter(charac, this->buttons[charac],this->window);
+        this->num_of_char_queue.emplace_back(character);
+    }
+    else
+    {
+        std::cout << "Queue is full \n";
+    }
+
+}
+
+//REMOVING OBJECT FOR QUEUE
+void UserInterface::update_all_char()
+{
+    std::cout << this->num_of_char_queue.size()<<"\n";
+    if (this->num_of_char_queue.size() > 0)
+    {
+        for (int i=0;i<this->num_of_char_queue.size();i++)
+        {
+           num_of_char_queue[i]->update(this->num_of_char_queue);
+        }
+    }
+}
 
 //BUTTON EVENTS LOOP
 void UserInterface::pollEvents()
@@ -472,7 +510,9 @@ void UserInterface::pollEvents()
                     if(this->buttons["warrior"].getGlobalBounds().contains(mouse_position) && this->canAfford(this->warrior_price))
                     {   //WARRIOR
                         this->animate_convex_butt("warrior","warrior_convex");
-                        std::cout<<"Respawning warrior\n";
+                        
+                        this->INIT_Character(this->buttons, "warrior");
+                        
                     }
 
                     if(this->buttons["archer"].getGlobalBounds().contains(mouse_position) && this->canAfford(this->archer_price))

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Player.h"
+#include "InitCharacter.h"
 
 class UserInterface
 {
@@ -93,6 +94,16 @@ private:
     void update_xp_bar();
     void update_hp_bar();
     void updateResources();
+
+    /*
+        !!! INIT CHARACTER !!!
+    */
+    const int max_of_queue = 3;
+    std::vector<InitCharacter*> num_of_char_queue;  
+    void INIT_Character(std::map<std::string, sf::Sprite> buttons, std::string);
+    
+    //UPDATING LOADING QUEUE, REMOVING CHARACTER, CLEAN IT , CHAOS IN CODE
+    void update_all_char();
 
     /*
       #Class meth

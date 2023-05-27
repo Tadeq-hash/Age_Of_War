@@ -227,7 +227,8 @@ bool MainMenu::getWindowIsOpen()
 void MainMenu::update()
 {
     this->pollEvents();
-
+    std::cout << "dzialam1_menu\n";
+    std::cout << "dzialeeejej\n";
 
 }
 

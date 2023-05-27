@@ -110,13 +110,15 @@ void Game::PollEvents()
 {
     while(this->window->pollEvent(*event))
     {
-        if(this->event->type==sf::Event::Closed)
+        std::cout << "dzialam_grierakkarka\n";
+        
+        if(event->type==sf::Event::Closed)
         {
             this->window->close();
         }
 
-
-        //Button update
+        
+        //Button updates
         this->interface->update();
 
         //Pressed
