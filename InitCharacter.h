@@ -11,27 +11,36 @@ class InitCharacter
 private:
 	//timer to load cooldown of creating character
 	sf::Clock clock;
+	sf::RenderWindow* _window;
 
-	sf::RenderWindow *_window;
 	//setting variables from constructor
-	std::string character;
-	sf::Sprite character_sprite;
-	std::vector<InitCharacter*> vector_of_charactes;
 	void InitVariables();
+	sf::Sprite character_sprite;
+	std::string character;
 
-	
-	//deleting object
+	//actuall size of vector (vector of objects in queue)
+	int vec_size;
+		
+	//BUTTON SETTING
+	void sprite_setup();
+	void setupButtons(std::vector<InitCharacter*>& vec, int size);
+	//BUTTON QUEUE POSITIONS
+	void setposition_0();
+	void setposition_1();
+	void setposition_2();
 
 
 public:
-	//constructor
-	InitCharacter(std::string _character,sf::Sprite _character_sprite, sf::RenderWindow *window);
+
 	
 
+	//constructor
+	InitCharacter(std::string _character,sf::Sprite _character_sprite, sf::RenderWindow *window, int size);
+	
 	//destructor
 	~InitCharacter();
 	void drawButton();
-	void update(std::vector<InitCharacter*>& vec);
+	void update(std::vector<InitCharacter*>& vec, int size);
 
 	
 };

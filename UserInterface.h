@@ -100,6 +100,7 @@ private:
     */
     const int max_of_queue = 3;
     std::vector<InitCharacter*> num_of_char_queue;  
+    int size_of_vec;
     void INIT_Character(std::map<std::string, sf::Sprite> buttons, std::string);
     
     //UPDATING LOADING QUEUE, REMOVING CHARACTER, CLEAN IT , CHAOS IN CODE
@@ -109,7 +110,7 @@ private:
       #Class meth
     */
 
-     void pollEvents();
+     
 
 
 public:
@@ -118,7 +119,7 @@ public:
     ~UserInterface();
 
     void drawInterface();
-
+    void pollEvents();
     //Poll events
     void update();
 

@@ -385,9 +385,7 @@ void UserInterface::drawInterface()
 {
     for(const auto &button:this->buttons)
     {
-
         this->window->draw(button.second);
-
     }
 
     for(const auto &price:this->prices_in_shop)
@@ -410,11 +408,12 @@ void UserInterface::drawInterface()
 
     this->window->draw(this->hp_sprite_red);
     
-    if (this->num_of_char_queue.size() > 0)
+    //drawing buttons in queue from class InitCharacter
+    if (this->num_of_char_queue.size() >= 0)
     {
         for (const auto& charc : this->num_of_char_queue)
         {
-            charc->drawButton();
+        charc->drawButton();
         }
     }
 }
@@ -425,23 +424,21 @@ void UserInterface::drawInterface()
 void UserInterface::update()
 {
      this->button_blocked_animation();
-     this->pollEvents();
      this->updateResources();
      this->update_xp_bar();
      this->update_hp_bar();
      this->update_all_char();
-     std::cout << "dzialam\n";
 }
 
 
-
+//INITING AND CHECKING IF QUEUE HAS ONLY 3 CHARACTERS
 void UserInterface::INIT_Character(std::map<std::string, sf::Sprite> buttons, std::string charac)
 {
-
-    if (this->num_of_char_queue.size() <= max_of_queue)
+    this->size_of_vec = this->num_of_char_queue.size() + 1;
+    if (this->num_of_char_queue.size() < max_of_queue)
     {
-        std::cout << "Respawning warrior\n";
-        InitCharacter* character = new InitCharacter(charac, this->buttons[charac],this->window);
+        std::cout << "Respawning"<<charac<<"\n";
+        InitCharacter* character = new InitCharacter(charac, this->buttons[charac],this->window, this->num_of_char_queue.size());
         this->num_of_char_queue.emplace_back(character);
     }
     else
@@ -451,17 +448,16 @@ void UserInterface::INIT_Character(std::map<std::string, sf::Sprite> buttons, st
 
 }
 
-//REMOVING OBJECT FOR QUEUE
+//UPDATING CHARACTERS FROM VECTOR
 void UserInterface::update_all_char()
 {
     std::cout << this->num_of_char_queue.size()<<"\n";
-    if (this->num_of_char_queue.size() > 0)
+   
+    for (const auto& character : num_of_char_queue)
     {
-        for (int i=0;i<this->num_of_char_queue.size();i++)
-        {
-           num_of_char_queue[i]->update(this->num_of_char_queue);
-        }
+        character->update(num_of_char_queue,this->num_of_char_queue.size());
     }
+    
 }
 
 //BUTTON EVENTS LOOP
@@ -509,16 +505,14 @@ void UserInterface::pollEvents()
                     }
                     if(this->buttons["warrior"].getGlobalBounds().contains(mouse_position) && this->canAfford(this->warrior_price))
                     {   //WARRIOR
-                        this->animate_convex_butt("warrior","warrior_convex");
-                        
-                        this->INIT_Character(this->buttons, "warrior");
-                        
+                        this->animate_convex_butt("warrior", "warrior_convex");
+                        this->INIT_Character(this->buttons, "warrior");                       
                     }
 
                     if(this->buttons["archer"].getGlobalBounds().contains(mouse_position) && this->canAfford(this->archer_price))
                     {   //ARCHER
                         this->animate_convex_butt("archer","archer_convex");
-                        std::cout<<"Respawning archer\n";
+                        this->INIT_Character(this->buttons, "archer");
                     }
 
 
@@ -526,7 +520,7 @@ void UserInterface::pollEvents()
                     {
                         //BOSS
                         this->animate_convex_butt("boss","boss_convex");
-                        std::cout<<"Respawning boss\n";
+                        this->INIT_Character(this->buttons, "boss");
                     }
 
                     if(this->buttons["upgrade_era"].getGlobalBounds().contains(mouse_position) && this->canUpgrade(const_xp))
@@ -539,7 +533,7 @@ void UserInterface::pollEvents()
 
             }
 
-          //CHECKING {LINES TO REMOVE}
+            //CHECKING {LINES TO REMOVE}
             if(this->event->type==sf::Event::KeyPressed)
             {
 
@@ -570,10 +564,7 @@ void UserInterface::pollEvents()
                     this->player->change_hp(this->curr_hp);
 
                 }
-
             }
-
-
 
 }
 

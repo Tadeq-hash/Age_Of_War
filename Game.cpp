@@ -103,14 +103,14 @@ void Game::drawInterface()
 void Game::update()
 {
     this->PollEvents();
-
+    this->interface->update();
 }
 
 void Game::PollEvents()
 {
     while(this->window->pollEvent(*event))
     {
-        std::cout << "dzialam_grierakkarka\n";
+       
         
         if(event->type==sf::Event::Closed)
         {
@@ -119,7 +119,7 @@ void Game::PollEvents()
 
         
         //Button updates
-        this->interface->update();
+        this->interface->pollEvents();
 
         //Pressed
         if(this->event->type==sf::Event::KeyPressed)
@@ -129,7 +129,6 @@ void Game::PollEvents()
             {
                 this->window->close();
             }
-
 
 
         }

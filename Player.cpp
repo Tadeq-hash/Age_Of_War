@@ -9,7 +9,7 @@ Player::Player()
 void Player::initVariables()
 {
     this->hp=const_hp; // it's 100, because second life of orange bar
-    this->gold_amount=80;
+    this->gold_amount=200;
     this->xp=20;
 }
 
