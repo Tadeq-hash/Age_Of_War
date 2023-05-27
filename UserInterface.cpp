@@ -262,7 +262,7 @@ void UserInterface::update_hp_bar()
     if(this->curr_hp>0 && !this->second_life)
     {
         this->hp_sprite_red.setTextureRect(sf::IntRect(72,22,this->curr_hp-1,3));
-        std::cout<<"hp: "<<this->curr_hp<<"\n";
+       
     }
 
     else if(this->curr_hp==0 && !this->second_life)
@@ -274,11 +274,11 @@ void UserInterface::update_hp_bar()
     else if(this->curr_hp>0 && this->second_life)
     {
         this->hp_sprite_orange.setTextureRect(sf::IntRect(6,22,this->curr_hp-1,3));
-        std::cout<<"hp: "<<this->curr_hp<<"\n";
+      
     }
     else
     {
-        std::cout<<"YOU ARE DEAD";
+      
     }
 }
 
@@ -433,7 +433,7 @@ void UserInterface::pollEvents()
         this->mouse_position = window->mapPixelToCoords(sf::Mouse::getPosition(*window));
         if(this->event->type==sf::Event::MouseButtonPressed)
         {
-            std::cout<<mouse_position.x<<"\n";
+           
             if(this->event->mouseButton.button==sf::Mouse::Left)
             {
                 if(this->buttons["exit"].getGlobalBounds().contains(mouse_position))
@@ -507,7 +507,7 @@ void UserInterface::pollEvents()
                 {
                     this->curr_xp--;
                     this->player->change_xp(this->curr_xp);
-                    std::cout<<this->curr_xp;
+                  
                 }
 
                 if(this->event->key.code==sf::Keyboard::Right)
@@ -521,7 +521,7 @@ void UserInterface::pollEvents()
                 {
                     this->curr_hp++;
                     this->player->change_hp(this->curr_hp);
-                    std::cout<<this->curr_hp;
+                   
                 }
 
                 if(this->event->key.code==sf::Keyboard::Down)
