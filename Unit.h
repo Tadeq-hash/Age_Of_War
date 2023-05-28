@@ -5,12 +5,9 @@
 
 class Unit
 {
-
 public:
-	//Konstruktor 
-	Unit() {};
-	virtual void attack() {};
-	virtual void move() {};
+	virtual void attack()=0;
+	void move();
 };
 
 //	-----KLASA WOJOWNIKA-----
@@ -19,14 +16,20 @@ class Warrior : public Unit
 {
 
 public:
-	Warrior() { std::cout << "Tworze wojownika" << std::endl; }
-	void attack() {};
+	// KONSTRUKTOR
+	Warrior();
+
+	void attack();
 };
 
 //	-----KLASA £UCZNIKA-----
 
 class Archer : public Unit
 {
-	Archer() { std::cout << "Tworze lucznika" << std::endl; }
-	void attack() {};
+
+public:
+	// KONSTRUKTOR
+	Archer();
+
+	void attack() ;
 };

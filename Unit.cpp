@@ -1,13 +1,19 @@
 #include "Unit.h"
 
-Unit::Unit() {};
-
 
 //	-----KLASA WOJOWNIKA-----
 
-Warrior::Warrior() {};
+// KONSTRUKTOR
+Warrior::Warrior() { std::cout << "Tworze wojownika" << std::endl; };
+
+// METODY	
+void Warrior::attack() {};
 
 
 //	-----KLASA £UCZNIKA-----
 
-Archer::Archer() {};
+// KONSTRUKTOR
+Archer::Archer() { std::cout << "Tworze lucznika" << std::endl; };
+
+// METODY	
+void Archer::attack() {};

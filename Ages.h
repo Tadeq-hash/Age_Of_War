@@ -8,8 +8,12 @@
 class Age
 {
 public:
-	virtual void MakeWarrior() {};
-	virtual void MakeArcher() {};
+
+	// -> TWORZENIE JEDNOSTEK
+	/*funkcje tworza jednostki z danymi texturami i statystykami dla odpowiedniej ery i zwracaja wskaznik na nie
+	aby zaoszczêdziæ pamiêci */ 
+	virtual Unit* MakeWarrior()=0;
+	virtual Unit* MakeArcher()=0;
 };
 
 //	-----AGE OF KNIGHTS-----
@@ -17,7 +21,13 @@ public:
 class AgeOfKnights :public Age
 {
 public:
-	AgeOfKnights() { std::cout << "Tworze ere Rycerzy" << std::endl; }
+	// KONSTRUKTOR
+	AgeOfKnights();
+
+	// -> TWORZENIE JEDNOSTEK
+
+	virtual Unit* MakeWarrior();
+	virtual Unit* MakeArcher();
 };
 
 //	-----AGE OF GUNPOWDER-----
@@ -26,6 +36,9 @@ class AgeOfGunpowder :public Age
 {
 
 public:
-	AgeOfGunpowder() { std::cout << "Tworze ere Prochu" << std::endl; }
+	// KONSTRUKTOR
+	AgeOfGunpowder();
 
+	virtual Unit* MakeWarrior();
+	virtual Unit* MakeArcher();
 };
