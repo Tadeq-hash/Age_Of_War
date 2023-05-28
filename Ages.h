@@ -8,17 +8,16 @@
 class Age
 {
 public:
-	void MakeWarrior() {};
-	void MakeArcher() {};
+	virtual void MakeWarrior() {};
+	virtual void MakeArcher() {};
 };
 
 //	-----AGE OF KNIGHTS-----
 
 class AgeOfKnights :public Age
 {
-
-
-
+public:
+	AgeOfKnights() { std::cout << "Tworze ere Rycerzy" << std::endl; }
 };
 
 //	-----AGE OF GUNPOWDER-----
@@ -26,6 +25,7 @@ class AgeOfKnights :public Age
 class AgeOfGunpowder :public Age
 {
 
-
+public:
+	AgeOfGunpowder() { std::cout << "Tworze ere Prochu" << std::endl; }
 
 };
