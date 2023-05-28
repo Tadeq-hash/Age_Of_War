@@ -12,11 +12,16 @@ private:
 	sf::Clock clock;
 	sf::RenderWindow* _window;
 
+
+	float cooldown;
 	//setting variables from constructor
 	void InitVariables();
 	sf::Sprite character_sprite;
 	std::string character;
 
+	sf::Sprite cooldown_bar;
+	sf::Sprite cooldown_animation;
+	sf::Texture bar_texture;
 	//actuall size of vector (vector of objects in queue)
 	int vec_size;
 		
@@ -28,12 +33,17 @@ private:
 	void setposition_1();
 	void setposition_2();
 
+	//BAR
+	void bar_setup();
+	void bar_animation();
+
+
 
 public:
 
 	//constructor
-	InitCharacter(std::string _character,sf::Sprite _character_sprite, sf::RenderWindow *window, int size);
-	
+	InitCharacter(std::string _character, sf::Sprite _character_sprite, sf::RenderWindow* window, int size, sf::Texture _tex);
+	void bar_init();
 	//destructor
 	~InitCharacter();
 	void drawButton();

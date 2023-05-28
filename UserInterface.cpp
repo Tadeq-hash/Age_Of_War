@@ -414,8 +414,12 @@ void UserInterface::drawInterface()
         for (const auto& charc : this->num_of_char_queue)
         {
         charc->drawButton();
+        this->num_of_char_queue[0]->bar_init();
         }
+        
     }
+   
+
 }
 
 /*
@@ -438,7 +442,7 @@ void UserInterface::INIT_Character(std::map<std::string, sf::Sprite> buttons, st
     if (this->num_of_char_queue.size() < max_of_queue)
     {
         std::cout << "Respawning"<<charac<<"\n";
-        InitCharacter* character = new InitCharacter(charac, this->buttons[charac],this->window, this->num_of_char_queue.size());
+        InitCharacter* character = new InitCharacter(charac, this->buttons[charac],this->window, this->num_of_char_queue.size(),this->gui);
         this->num_of_char_queue.emplace_back(character);
     }
     else

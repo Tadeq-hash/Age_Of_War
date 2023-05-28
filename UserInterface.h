@@ -123,5 +123,4 @@ public:
 
 };
 
-
 #endif // USERINTERFACE_H
