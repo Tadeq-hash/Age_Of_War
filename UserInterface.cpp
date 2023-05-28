@@ -451,7 +451,7 @@ void UserInterface::INIT_Character(std::map<std::string, sf::Sprite> buttons, st
 //UPDATING CHARACTERS FROM VECTOR
 void UserInterface::update_all_char()
 {
-    std::cout << this->num_of_char_queue.size()<<"\n";
+    //std::cout << this->num_of_char_queue.size()<<"\n";
    
     for (const auto& character : num_of_char_queue)
     {

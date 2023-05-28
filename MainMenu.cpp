@@ -66,6 +66,8 @@ void MainMenu::loadButtons()
 
 }
 
+
+
 void MainMenu::pollEvents()
 {
     while(this->window->pollEvent(event))
@@ -227,8 +229,8 @@ bool MainMenu::getWindowIsOpen()
 void MainMenu::update()
 {
     this->pollEvents();
-    std::cout << "dzialam1_menu\n";
-    std::cout << "dzialeeejej\n";
+    //std::cout << "dzialam1_menu\n";
+    //std::cout << "dzialeeejej\n";
 
 }
 

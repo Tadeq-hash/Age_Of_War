@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "Ages.h"
 /*
 	#LOADING ANIMATION, COOLDOWN BAR, QUEUE
 */
@@ -16,6 +17,7 @@ private:
 	void InitVariables();
 	sf::Sprite character_sprite;
 	std::string character;
+	Unit_type unit_type;
 
 	//actuall size of vector (vector of objects in queue)
 	int vec_size;
@@ -28,6 +30,9 @@ private:
 	void setposition_1();
 	void setposition_2();
 
+
+	//zamiana stringa w enum class
+	void stringToEnumClass();
 
 public:
 

@@ -4,6 +4,7 @@
 Player::Player()
 {
     this->initVariables();
+    //age_ptr = 
 }
 
 void Player::initVariables()
