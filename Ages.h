@@ -42,3 +42,20 @@ public:
 	virtual Unit* MakeWarrior();
 	virtual Unit* MakeArcher();
 };
+
+
+// Klasa do przetrzymywania tekstur i statystyk jednostek
+class AgeHolder
+{
+private:
+	// Zarz¹dzanie i £adowanie Er i Jednostek
+	AgeOfKnights age_of_knights;
+	AgeOfGunpowder age_of_gunpowder;
+
+public:
+	AgeHolder();
+	Age* getAgeOfKnightsAlloc();
+	Age* getAgeOfGunpowderAlloc();
+
+
+};

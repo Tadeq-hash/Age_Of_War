@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "Ages.h"
 /*
 	#LOADING ANIMATION, COOLDOWN BAR, QUEUE
 */
@@ -18,6 +19,7 @@ private:
 	void InitVariables();
 	sf::Sprite character_sprite;
 	std::string character;
+	Unit_type unit_type;
 
 	sf::Sprite cooldown_bar;
 	sf::Sprite cooldown_animation;
@@ -38,6 +40,9 @@ private:
 	void bar_animation();
 
 
+
+	//zamiana stringa w enum class
+	void stringToEnumClass();
 
 public:
 

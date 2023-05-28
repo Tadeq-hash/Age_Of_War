@@ -1,6 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "Ages.h"
+
 #define const_xp 43
 #define const_hp 50
 class Player
@@ -11,6 +13,8 @@ private:
     int hp;
     int xp;
 
+    //Wskaünik na aktualnπ Ere
+    Age* age_ptr;
 
     void initVariables();
 public:

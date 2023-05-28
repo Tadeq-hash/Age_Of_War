@@ -1,6 +1,15 @@
 #pragma once
 #include <iostream>
 
+//  - klasa wyliczeniowa - 
+	/*Do przycisków*/
+enum class Unit_type
+{
+	Warrior,
+	Archer,	
+	Boss
+};
+
 //	-- klasa abstraktyjna --
 
 class Unit

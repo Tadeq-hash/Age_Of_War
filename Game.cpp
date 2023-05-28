@@ -61,7 +61,6 @@ Game::Game()
 
  this->InitBackground();
  this->initButtons();
-
 }
 //-----! DESTRUCTOR !-----//
 Game::~Game()
@@ -96,8 +95,6 @@ void Game::drawInterface()
     this->interface->drawInterface();
 
 }
-
-
 
 //UPDATING GAME//
 void Game::update()

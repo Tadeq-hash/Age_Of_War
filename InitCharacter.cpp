@@ -23,11 +23,12 @@ InitCharacter::InitCharacter(std::string _character, sf::Sprite _character_sprit
 	this->InitVariables();
 	this->sprite_setup();
 	this->bar_setup();
+	this->stringToEnumClass();
 }
 //DESTRUCTOR
 InitCharacter::~InitCharacter()
 {
-	std::cout << "OBIEKT WYJEBANY Z WEKTORA, TERAZ TWORZE POSTAÆ :)";
+	std::cout << "OBIEKT WYJEBANY Z WEKTORA, TERAZ TWORZE POSTAÆ :)" << std::endl;;
 }
 
 
@@ -115,8 +116,34 @@ void InitCharacter::update(std::vector<InitCharacter*>& vec, int size)
 		std::cout << "Niszcze \n";
 		vec.erase(vec.begin());
 		this->vec_size--;
-		delete this;			
+		delete this;		
+		//tutaj wstawiam tworzenie postaci
+		switch (unit_type)
+		{
+		case Unit_type::Warrior:
+
+			break;
+		case Unit_type::Archer:
+
+			break;
+		case Unit_type::Boss:
+
+			break;
+		}
 	}
 }
 
+
+//zamiana stringa w enum class
+void InitCharacter::stringToEnumClass() {
+	if (character == "warrior") {
+		unit_type = Unit_type::Warrior;
+	}
+	else if (character == "archer") {
+		unit_type = Unit_type::Archer;
+	}
+	else if (character == "boss") {
+		unit_type = Unit_type::Boss;
+	}
+}
 
