@@ -4,15 +4,13 @@
 Player::Player()
 {
     this->initVariables();
-    std::cout << "Tworze player" << std::endl;
-    //age_ptr = 
 }
 
-//Player::Player(Age* age1, Age* age2)
-//{
-//    this->initVariables();
-//    age_ptr = age1;
-//}
+Player::Player(Age* age1, Age* age2)
+{
+    this->initVariables();
+    age_ptr = age1;
+}
 
 void Player::initVariables()
 {
@@ -46,5 +44,8 @@ int Player::current_hp()
     return this->hp;
 }
 
-
+Age* Player::current_age() 
+{
+    return this->age_ptr;
+}
 

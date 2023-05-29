@@ -15,6 +15,8 @@ private:
     sf::Font font;
     sf::Vector2f mouse_position;
 
+    Age* age1;
+    Age* age2;
     /*
         #BUTTONS
     */
@@ -113,7 +115,7 @@ private:
      
 public:
     //constructor & destructor
-    UserInterface(sf::Texture *texture, sf::RenderWindow *window_, sf::Event *event_, sf::Font *font_);
+    UserInterface(sf::Texture *texture, sf::RenderWindow *window_, sf::Event *event_, sf::Font *font_,Age* age1_,Age* age2_);
     ~UserInterface();
 
     void drawInterface();

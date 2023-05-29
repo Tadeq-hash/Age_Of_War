@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Ages.h"
+#include "Player.h"
 /*
 	#LOADING ANIMATION, COOLDOWN BAR, QUEUE
 */
@@ -9,6 +10,8 @@
 class InitCharacter
 {
 private:
+	Player* player;
+
 	//timer to load cooldown of creating character
 	sf::Clock clock;
 	sf::RenderWindow* _window;
@@ -47,7 +50,7 @@ private:
 public:
 
 	//constructor
-	InitCharacter(std::string _character, sf::Sprite _character_sprite, sf::RenderWindow* window, int size, sf::Texture _tex);
+	InitCharacter(std::string _character, sf::Sprite _character_sprite, sf::RenderWindow* window, int size, sf::Texture _tex,Player* player_);
 	void bar_init();
 	//destructor
 	~InitCharacter();

@@ -13,13 +13,14 @@ void InitCharacter::drawButton()
 }
 
 //CONSTRUCTOR
-InitCharacter::InitCharacter(std::string _character, sf::Sprite _character_sprite, sf::RenderWindow* window, int size, sf::Texture _tex)
+InitCharacter::InitCharacter(std::string _character, sf::Sprite _character_sprite, sf::RenderWindow* window, int size, sf::Texture _tex, Player* player_)
 {
 	this->bar_texture = _tex;
 	this->vec_size = size;
 	this->_window = window;
 	this->character = _character;
 	this->character_sprite=_character_sprite;
+	this->player = player_;
 	this->InitVariables();
 	this->sprite_setup();
 	this->bar_setup();
@@ -28,7 +29,22 @@ InitCharacter::InitCharacter(std::string _character, sf::Sprite _character_sprit
 //DESTRUCTOR
 InitCharacter::~InitCharacter()
 {
-	std::cout << "OBIEKT WYJEBANY Z WEKTORA, TERAZ TWORZE POSTAÆ :)" << std::endl;;
+	//std::cout << "OBIEKT WYJEBANY Z WEKTORA, TERAZ TWORZE POSTAÆ :)" << std::endl;;
+	//tutaj wstawiam tworzenie postaci
+	switch (unit_type)
+	{
+	case Unit_type::Warrior:
+		std::cout << "Tworze Warrior..." << std::endl;
+		player->current_age()->MakeWarrior();
+		break;
+	case Unit_type::Archer:
+		std::cout << "Tworze Archer..." << std::endl;
+		player->current_age()->MakeArcher();
+		break;
+	case Unit_type::Boss:
+		std::cout << "Tworze Boss..." << std::endl;
+		break;
+	}
 }
 
 
@@ -110,26 +126,13 @@ void InitCharacter::update(std::vector<InitCharacter*>& vec, int size)
 
 	this->setupButtons(vec, size);
 	this->bar_animation();
-	std::cout<<clock.getElapsedTime().asMilliseconds()<<"\n";
+	//std::cout<<clock.getElapsedTime().asMilliseconds()<<"\n";
 	if (clock.getElapsedTime().asMilliseconds() > cooldown*1000)
 	{	
 		std::cout << "Niszcze \n";
 		vec.erase(vec.begin());
 		this->vec_size--;
 		delete this;		
-		//tutaj wstawiam tworzenie postaci
-		switch (unit_type)
-		{
-		case Unit_type::Warrior:
-
-			break;
-		case Unit_type::Archer:
-
-			break;
-		case Unit_type::Boss:
-
-			break;
-		}
 	}
 }
 

@@ -28,8 +28,8 @@ void LoadFonts();
 */
 
 ////Age Textures
-//AgeOfKnights age_of_knights;
-//AgeOfGunpowder age_of_gunpowder;
+AgeOfKnights age_of_knights;
+AgeOfGunpowder age_of_gunpowder;
 
 //background
 private:

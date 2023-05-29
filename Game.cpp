@@ -86,7 +86,7 @@ void Game::InitBackground()
 //BUTTONS
 void Game::initButtons()
 {
-    this->interface= new UserInterface(this->interface_tex,this->window,this->event,this->digitals);
+    this->interface= new UserInterface(this->interface_tex,this->window,this->event,this->digitals,&age_of_knights,&age_of_gunpowder);
 }
 
 void Game::drawInterface()

@@ -21,6 +21,7 @@ public:
 
     //CONSTRUCTOR
     Player();
+    Player(Age* age1, Age* age2);
 
     //CHANGING RESOURCES IN PLAYER CLASS
     void change_xp(int _xp);
@@ -30,6 +31,7 @@ public:
     int current_gold();
     int current_xp();
     int current_hp();
+    Age* current_age();
 
 };
 

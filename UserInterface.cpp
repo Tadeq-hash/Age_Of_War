@@ -4,13 +4,14 @@
 
 //--CONSTRUCTOR & DESTRUCTOR--//
 
-UserInterface::UserInterface(sf::Texture *texture, sf::RenderWindow *window_, sf::Event *event_, sf::Font *font_)
+UserInterface::UserInterface(sf::Texture *texture, sf::RenderWindow *window_, sf::Event *event_, sf::Font *font_, Age* age1_, Age* age2_)
 {
     this->gui=*texture;
     this->window=window_;
     this->font=*font_;
     this->event=event_;
-
+    this->age1 = age1_;
+    this->age2 = age2_;
 
     initPlayer();
     initResources();
@@ -33,7 +34,7 @@ UserInterface::~UserInterface()
 */
 void UserInterface::initPlayer()
 {
-    this->player = new Player;
+    this->player = new Player(age1, age2);
     this->curr_gold=player->current_gold();
     this->curr_xp=player->current_xp();
     this->curr_hp=player->current_hp();
@@ -442,7 +443,7 @@ void UserInterface::INIT_Character(std::map<std::string, sf::Sprite> buttons, st
     if (this->num_of_char_queue.size() < max_of_queue)
     {
         std::cout << "Respawning"<<charac<<"\n";
-        InitCharacter* character = new InitCharacter(charac, this->buttons[charac],this->window, this->num_of_char_queue.size(),this->gui);
+        InitCharacter* character = new InitCharacter(charac, this->buttons[charac],this->window, this->num_of_char_queue.size(),this->gui, player);
         this->num_of_char_queue.emplace_back(character);
     }
     else
