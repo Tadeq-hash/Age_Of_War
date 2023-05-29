@@ -27,6 +27,10 @@ void LoadFonts();
   #TEXTURES
 */
 
+////Age Textures
+//AgeOfKnights age_of_knights;
+//AgeOfGunpowder age_of_gunpowder;
+
 //background
 private:
 sf::Texture medieval_back_tex;
