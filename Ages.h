@@ -14,6 +14,7 @@ public:
 	aby zaoszczêdziæ pamiêci */ 
 	virtual Unit* MakeWarrior()=0;
 	virtual Unit* MakeArcher()=0;
+	virtual Unit* MakeBoss() = 0;
 };
 
 //	-----AGE OF KNIGHTS-----
@@ -28,6 +29,7 @@ public:
 
 	virtual Unit* MakeWarrior();
 	virtual Unit* MakeArcher();
+	virtual Unit* MakeBoss();
 };
 
 //	-----AGE OF GUNPOWDER-----
@@ -41,21 +43,5 @@ public:
 
 	virtual Unit* MakeWarrior();
 	virtual Unit* MakeArcher();
-};
-
-
-// Klasa do przetrzymywania tekstur i statystyk jednostek
-class AgeHolder
-{
-private:
-	// Zarz¹dzanie i £adowanie Er i Jednostek
-	AgeOfKnights age_of_knights;
-	AgeOfGunpowder age_of_gunpowder;
-
-public:
-	AgeHolder();
-	Age* getAgeOfKnightsAlloc();
-	Age* getAgeOfGunpowderAlloc();
-
-
+	virtual Unit* MakeBoss();
 };

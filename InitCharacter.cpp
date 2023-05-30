@@ -43,6 +43,7 @@ InitCharacter::~InitCharacter()
 		break;
 	case Unit_type::Boss:
 		std::cout << "Tworze Boss..." << std::endl;
+		player->current_age()->MakeBoss();
 		break;
 	}
 }
