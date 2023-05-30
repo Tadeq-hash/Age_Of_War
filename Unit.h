@@ -22,12 +22,17 @@ class Unit
 	int* dmg;
 	int* speed;
 	float* dmg_reduction;
-
-	sf::Sprite sprite;
 public:
+	sf::Sprite sprite;
+	Unit_type unit_type;
+	//	KONSTRUKTOR
 	Unit(sf::Texture* texture_,int* max_hp_,int hp_, int* range_, int* dmg_, int* speed_ , float* dmg_reduction_);
+	// DESTRUKTOR
+	~Unit();
 	virtual void attack()=0;
 	void move();
+	void update();
+	int return_hp();
 };
 
 //	-----KLASA WOJOWNIKA-----
@@ -38,6 +43,8 @@ class Warrior : public Unit
 public:
 	// KONSTRUKTOR
 	using Unit::Unit;
+
+	Unit_type unit_type = Unit_type::Warrior;
 
 	void attack();
 };
@@ -51,6 +58,8 @@ public:
 	// KONSTRUKTOR
 	using Unit::Unit;
 
+	Unit_type unit_type = Unit_type::Archer;
+
 	void attack() ;
 };
 
@@ -62,6 +71,8 @@ class Boss : public Unit
 public:
 	// KONSTRUKTOR
 	using Unit::Unit;
+
+	Unit_type unit_type = Unit_type::Boss;
 
 	void attack();
 };

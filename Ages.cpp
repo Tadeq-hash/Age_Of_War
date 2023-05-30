@@ -41,6 +41,7 @@ Unit* AgeOfKnights::MakeArcher() {
 //Boss
 Unit* AgeOfKnights::MakeBoss() {
 	sf::Texture texture;
+	texture.loadFromFile("textures/Boss_Age_Of_Knights.png");
 	int max_hp = 200;
 	int hp = max_hp;
 	int range = 12;

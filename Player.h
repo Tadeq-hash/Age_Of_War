@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <vector>
 #include "Ages.h"
 
 #define const_xp 43
@@ -15,6 +16,9 @@ private:
 
     //Wskaünik na aktualnπ Ere
     Age* age_ptr;
+
+    //Wektor wskaünikÛw posiadanych jednostek
+    std::vector<Unit*> units;
 
     void initVariables();
 public:
@@ -33,6 +37,8 @@ public:
     int current_hp();
     Age* current_age();
 
+    void push_unit(Unit* unit_);
+    void update_units();
 };
 
 #endif // PLAYER_H

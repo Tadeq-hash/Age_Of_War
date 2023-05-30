@@ -49,3 +49,23 @@ Age* Player::current_age()
     return this->age_ptr;
 }
 
+
+void Player::push_unit(Unit* unit_) {
+    units.push_back(unit_);
+    std::cout << "Ilosc jednostek w wektorze gracza wynosi: " << units.size() << std::endl;
+    std::cout << "Na miejscu pierwszym: " << units[0]->return_hp() << std::endl;
+    current_age()->MakeWarrior();
+}
+
+
+void Player::update_units() {
+    for (int i = 0; i < units.size(); ++i) {
+        units[i]->move();
+    }
+    for (int i = 0; i < units.size(); ++i) {
+        units[i]->attack();
+    }
+    for (int i = 0; i < units.size(); ++i) {
+        units[i]->update();
+    }
+}

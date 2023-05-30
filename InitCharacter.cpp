@@ -29,23 +29,25 @@ InitCharacter::InitCharacter(std::string _character, sf::Sprite _character_sprit
 //DESTRUCTOR
 InitCharacter::~InitCharacter()
 {
+	Unit* unit=0;
 	//std::cout << "OBIEKT WYJEBANY Z WEKTORA, TERAZ TWORZE POSTAÆ :)" << std::endl;;
 	//tutaj wstawiam tworzenie postaci
 	switch (unit_type)
 	{
 	case Unit_type::Warrior:
 		std::cout << "Tworze Warrior..." << std::endl;
-		player->current_age()->MakeWarrior();
+		unit = player->current_age()->MakeWarrior();
 		break;
 	case Unit_type::Archer:
 		std::cout << "Tworze Archer..." << std::endl;
-		player->current_age()->MakeArcher();
+		unit = player->current_age()->MakeArcher();
 		break;
 	case Unit_type::Boss:
 		std::cout << "Tworze Boss..." << std::endl;
-		player->current_age()->MakeBoss();
+		unit = player->current_age()->MakeBoss();
 		break;
 	}
+	player->push_unit(unit);
 }
 
 
