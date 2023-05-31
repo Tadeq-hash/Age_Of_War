@@ -27,9 +27,7 @@ void LoadFonts();
   #TEXTURES
 */
 
-////Age Textures
-AgeOfKnights age_of_knights;
-AgeOfGunpowder age_of_gunpowder;
+
 
 //background
 private:
@@ -65,7 +63,9 @@ bool getWindowIsOpen();
 //  ! ! ! !  //
 
 
-
+////Age Textures
+AgeOfKnights age_of_knights;
+AgeOfGunpowder age_of_gunpowder;
 };
 
 #endif // GAME_H

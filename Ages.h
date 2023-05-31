@@ -7,14 +7,17 @@
 //Przechowuje statystyki ka¿dego typu jednostki oraz tekstury wyj¹tkowe dla ery
 class Age
 {
+protected:
+	sf::Texture boss_texture;
 public:
 
 	// -> TWORZENIE JEDNOSTEK
 	/*funkcje tworza jednostki z danymi texturami i statystykami dla odpowiedniej ery i zwracaja wskaznik na nie
 	aby zaoszczêdziæ pamiêci */ 
-	virtual Unit* MakeWarrior()=0;
-	virtual Unit* MakeArcher()=0;
-	virtual Unit* MakeBoss() = 0;
+	virtual std::unique_ptr<Unit> MakeWarrior()=0;
+	virtual std::unique_ptr<Unit> MakeArcher()=0;
+	virtual std::unique_ptr<Unit> MakeBoss()=0;
+	~Age(){std::cout<<"Niszcze Ere\n";}
 };
 
 //	-----AGE OF KNIGHTS-----
@@ -27,9 +30,9 @@ public:
 
 	// -> TWORZENIE JEDNOSTEK
 
-	virtual Unit* MakeWarrior();
-	virtual Unit* MakeArcher();
-	virtual Unit* MakeBoss();
+	virtual std::unique_ptr<Unit> MakeWarrior();
+	virtual std::unique_ptr<Unit> MakeArcher();
+	virtual std::unique_ptr<Unit> MakeBoss();
 };
 
 //	-----AGE OF GUNPOWDER-----
@@ -41,7 +44,7 @@ public:
 	// KONSTRUKTOR
 	AgeOfGunpowder();
 
-	virtual Unit* MakeWarrior();
-	virtual Unit* MakeArcher();
-	virtual Unit* MakeBoss();
+	virtual std::unique_ptr<Unit> MakeWarrior();
+	virtual std::unique_ptr<Unit> MakeArcher();
+	virtual std::unique_ptr<Unit> MakeBoss();
 };

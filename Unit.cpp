@@ -5,7 +5,6 @@
 //	KONSTRUKTOR
 Unit::Unit(sf::Texture* texture_, int* max_hp_, int hp_, int* range_, int* dmg_, int* speed_ , float* dmg_reduction_) {
 	texture = texture_;
-	sprite.setTexture(*texture);
 	max_hp = max_hp_;
 	hp = hp_;
 	range = range_;
@@ -14,7 +13,7 @@ Unit::Unit(sf::Texture* texture_, int* max_hp_, int hp_, int* range_, int* dmg_,
 	dmg_reduction = dmg_reduction_;
 
 	sprite.setTexture(*texture);
-	sprite.setPosition(sf::Vector2f(50, 200));
+	sprite.setPosition(sf::Vector2f(50, 700));
 }
 
 // DESTRUKTOR
@@ -30,13 +29,22 @@ void Unit::update() {
 }
 
 void Unit::move() {
-	std::cout << "Ruszam sie" << std::endl;
+	if (false) {
+		std::cout << "Ruszam sie" << std::endl;
+	}
+
 }
 
 int Unit::return_hp() {
 	return hp;
 }
 
+
+void Unit::attack() {}
+
+void Unit::draw(sf::RenderWindow* window_) {
+	window_->draw(sprite);
+}
 //	-----KLASA WOJOWNIKA-----
 
 // KONSTRUKTOR

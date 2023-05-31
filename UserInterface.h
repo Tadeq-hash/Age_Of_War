@@ -63,7 +63,6 @@ private:
         #PLAYER RESOURCES / XP & GOLD AMOUNT & HP *Uploading from class Player*
     */
 
-    Player* player;
     sf::Text current_gold;
     int curr_gold; //taking from class player
     int curr_xp;   //taking from class player
@@ -114,6 +113,7 @@ private:
 
      
 public:
+    Player* player;
     //constructor & destructor
     UserInterface(sf::Texture *texture, sf::RenderWindow *window_, sf::Event *event_, sf::Font *font_,Age* age1_,Age* age2_);
     ~UserInterface();

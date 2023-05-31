@@ -6,10 +6,13 @@ Player::Player()
     this->initVariables();
 }
 
-Player::Player(Age* age1, Age* age2)
+Player::Player(Age* age1_, Age* age2_,sf::RenderWindow* window_)
 {
     this->initVariables();
+    age1 = age1_;
+    age2 = age2_;
     age_ptr = age1;
+    window = window_;
 }
 
 void Player::initVariables()
@@ -50,11 +53,10 @@ Age* Player::current_age()
 }
 
 
-void Player::push_unit(Unit* unit_) {
-    units.push_back(unit_);
+void Player::push_unit(std::unique_ptr<Unit> unit_) {
+    std::cout << "Odbieram jednostke\n";
+    units.push_back(move(unit_));
     std::cout << "Ilosc jednostek w wektorze gracza wynosi: " << units.size() << std::endl;
-    std::cout << "Na miejscu pierwszym: " << units[0]->return_hp() << std::endl;
-    current_age()->MakeWarrior();
 }
 
 
@@ -67,5 +69,17 @@ void Player::update_units() {
     }
     for (int i = 0; i < units.size(); ++i) {
         units[i]->update();
+    }
+}
+
+
+void Player::draw_units() {
+    //std::cout << "Rysuje jednostki...\n";
+    //
+    //if (units.size() > 0) {
+    //    std::cout << "Jednostka na 1 miejscu ma hp: " << units[0]->return_hp() << std::endl;
+    //}
+    for (int i = 0; i < units.size(); ++i) {
+        units[i]->draw(window);
     }
 }

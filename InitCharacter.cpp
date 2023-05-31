@@ -36,18 +36,18 @@ InitCharacter::~InitCharacter()
 	{
 	case Unit_type::Warrior:
 		std::cout << "Tworze Warrior..." << std::endl;
-		unit = player->current_age()->MakeWarrior();
+		player->push_unit(move(player->current_age()->MakeWarrior()));
 		break;
 	case Unit_type::Archer:
 		std::cout << "Tworze Archer..." << std::endl;
-		unit = player->current_age()->MakeArcher();
+		player->push_unit(move(player->current_age()->MakeArcher()));
 		break;
 	case Unit_type::Boss:
 		std::cout << "Tworze Boss..." << std::endl;
-		unit = player->current_age()->MakeBoss();
+		player->push_unit(move(player->current_age()->MakeBoss()));
+		std::cout << "Jednostka przekazana do wektora\n";
 		break;
 	}
-	player->push_unit(unit);
 }
 
 

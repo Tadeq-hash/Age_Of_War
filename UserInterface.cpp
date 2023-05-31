@@ -34,7 +34,7 @@ UserInterface::~UserInterface()
 */
 void UserInterface::initPlayer()
 {
-    this->player = new Player(age1, age2);
+    this->player = new Player(age1, age2, window);
     this->curr_gold=player->current_gold();
     this->curr_xp=player->current_xp();
     this->curr_hp=player->current_hp();

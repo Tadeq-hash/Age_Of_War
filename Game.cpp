@@ -101,6 +101,7 @@ void Game::update()
 {
     this->PollEvents();
     this->interface->update();
+    this->interface->player->update_units();
 }
 
 void Game::PollEvents()
@@ -152,7 +153,9 @@ void Game::render()
     //Buttons
     this->drawInterface();
 
+    //Units
 
+    this->interface->player->draw_units();
 
     //-----------//
 

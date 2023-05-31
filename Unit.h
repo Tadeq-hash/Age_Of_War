@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <memory>
 
 //  - klasa wyliczeniowa - 
 	/*Do przycisków*/
@@ -29,9 +30,10 @@ public:
 	Unit(sf::Texture* texture_,int* max_hp_,int hp_, int* range_, int* dmg_, int* speed_ , float* dmg_reduction_);
 	// DESTRUKTOR
 	~Unit();
-	virtual void attack()=0;
+	virtual void attack();
 	void move();
 	void update();
+	void draw(sf::RenderWindow* window_);
 	int return_hp();
 };
 
