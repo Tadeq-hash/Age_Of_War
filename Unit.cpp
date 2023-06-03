@@ -4,6 +4,8 @@
 
 //	KONSTRUKTOR
 Unit::Unit(sf::Texture* texture_, int* max_hp_, int hp_, int* range_, int* dmg_, int* speed_ , float* dmg_reduction_) {
+	
+	//Init variables
 	texture = texture_;
 	max_hp = max_hp_;
 	hp = hp_;
@@ -11,6 +13,7 @@ Unit::Unit(sf::Texture* texture_, int* max_hp_, int hp_, int* range_, int* dmg_,
 	dmg = dmg_;
 	speed = speed_;
 	dmg_reduction = dmg_reduction_;
+
 
 	sprite.setTexture(*texture);
 	sprite.setPosition(sf::Vector2f(50, 700));
@@ -71,3 +74,7 @@ void Archer::attack() {};
 
 // METODY
 void Boss::attack() {};
+
+void Unit::update()
+{
+}
