@@ -75,4 +75,6 @@ void Archer::attack() {};
 // METODY
 void Boss::attack() {};
 
-
+void Unit::update()
+{
+}
