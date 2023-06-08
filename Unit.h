@@ -16,8 +16,6 @@ enum class Unit_type
 
 class Unit
 {
-private:
-
 	sf::Texture* texture;
 	int* max_hp;
 	int hp;
@@ -25,26 +23,18 @@ private:
 	int* dmg;
 	int* speed;
 	float* dmg_reduction;
-	
 public:
-
 	sf::Sprite sprite;
 	Unit_type unit_type;
-
-
 	//	KONSTRUKTOR
 	Unit(sf::Texture* texture_,int* max_hp_,int hp_, int* range_, int* dmg_, int* speed_ , float* dmg_reduction_);
 	// DESTRUKTOR
 	~Unit();
-
-	//Actions
-	int return_hp();
 	virtual void attack();
 	void move();
-
-	//Render
-	void draw(sf::RenderWindow* window_);
 	void update();
+	void draw(sf::RenderWindow* window_);
+	int return_hp();
 };
 
 //	-----KLASA WOJOWNIKA-----
