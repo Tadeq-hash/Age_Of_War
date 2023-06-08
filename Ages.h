@@ -8,16 +8,18 @@
 class Age
 {
 protected:
+	sf::Texture warrior_texture;
+	sf::Texture archer_texture;
 	sf::Texture boss_texture;
 public:
 
 	// -> TWORZENIE JEDNOSTEK
 	/*funkcje tworza jednostki z danymi texturami i statystykami dla odpowiedniej ery i zwracaja wskaznik na nie
-	aby zaoszczêdziæ pamiêci */ 
-	virtual std::unique_ptr<Unit> MakeWarrior()=0;
-	virtual std::unique_ptr<Unit> MakeArcher()=0;
-	virtual std::unique_ptr<Unit> MakeBoss()=0;
-	~Age(){std::cout<<"Niszcze Ere\n";}
+	aby zaoszczêdziæ pamiêci */
+	virtual std::unique_ptr<Unit> MakeWarrior() = 0;
+	virtual std::unique_ptr<Unit> MakeArcher() = 0;
+	virtual std::unique_ptr<Unit> MakeBoss() = 0;
+	~Age() { std::cout << "Niszcze Ere\n"; }
 };
 
 //	-----AGE OF KNIGHTS-----

@@ -4,30 +4,31 @@
 //VARIABLES
 void Game::InitVariables()
 {
-    this->event=nullptr;
-    this->interface_tex=nullptr;
+    this->event = nullptr;
+    this->interface_tex = nullptr;
+    this->secondInterface = nullptr;
     this->interface = nullptr;
-    this->window=nullptr;
-    this->digitals=nullptr;
-    this->video_size=this->video_size.getDesktopMode();
+    this->window = nullptr;
+    this->digitals = nullptr;
+    this->video_size = this->video_size.getDesktopMode();
 }
 
 //TEXTURES
 void Game::LoadTextures()
 {
-  //background tex
-  if(!medieval_back_tex.loadFromFile("textures/background_medieval.png"))
-  {
-      std::cout<<"Couldn't load texture 'background'\n";
-  }
+    //background tex
+    if (!medieval_back_tex.loadFromFile("textures/background_medieval.png"))
+    {
+        std::cout << "Couldn't load texture 'background'\n";
+    }
 
-  //user interface ui
-  interface_tex=new sf::Texture;
+    //user interface ui
+    interface_tex = new sf::Texture;
 
-  if(!interface_tex->loadFromFile("textures/GUI.png"))
-  {
-      std::cout<<"Coulnd't load texture 'GUI'\n";
-  }
+    if (!interface_tex->loadFromFile("textures/GUI.png"))
+    {
+        std::cout << "Coulnd't load texture 'GUI'\n";
+    }
 
 
 
@@ -37,39 +38,40 @@ void Game::LoadTextures()
 void Game::LoadFonts()
 {
     this->digitals = new sf::Font();
-    if(!this->digitals->loadFromFile("fonts/PixelFJVerdana12pt.ttf"))
+    if (!this->digitals->loadFromFile("fonts/PixelFJVerdana12pt.ttf"))
     {
-        std::cout<<"couldn't load font\n";
+        std::cout << "couldn't load font\n";
     }
 }
 
 //WINDOW
 void Game::InitWindow()
 {
-    this->window = new sf::RenderWindow(this->video_size,"Age_Of_War");
+    this->window = new sf::RenderWindow(this->video_size, "Age_Of_War");
     this->event = new sf::Event();
     this->window->setFramerateLimit(120);
 }
 //-----! CONSTRUCTOR !-----//
-Game::Game()
+Game::Game(bool bot_)
 {
+    //this->Bot = bot_;
+    this->InitVariables();
+    this->LoadTextures();
+    this->InitWindow();
+    this->LoadFonts();
 
- this->InitVariables();
- this->LoadTextures();
- this->InitWindow();
- this->LoadFonts();
-
- this->InitBackground();
- this->initButtons();
+    this->InitBackground();
+    this->initButtons();
+    this->initBot();
 }
 //-----! DESTRUCTOR !-----//
 Game::~Game()
 {
- delete this->window;
- delete this->interface_tex;
- delete this->interface;
- delete this->event;
- delete this->digitals;
+    delete this->window;
+    delete this->interface_tex;
+    delete this->interface;
+    delete this->event;
+    delete this->digitals;
 }
 
 
@@ -86,7 +88,7 @@ void Game::InitBackground()
 //BUTTONS
 void Game::initButtons()
 {
-    this->interface= new UserInterface(this->interface_tex,this->window,this->event,this->digitals,&age_of_knights,&age_of_gunpowder);
+    this->interface = new UserInterface(this->interface_tex, this->window, this->event, this->digitals, &age_of_knights, &age_of_gunpowder);
 }
 
 void Game::drawInterface()
@@ -96,34 +98,42 @@ void Game::drawInterface()
 
 }
 
+void Game::initBot()
+{
+    if (Bot) {
+        this->secondInterface = new UserInterface(this->interface_tex, this->window, this->event, this->digitals, &age_of_knights, &age_of_gunpowder);
+    }
+}
+
 //UPDATING GAME//
 void Game::update()
 {
     this->PollEvents();
     this->interface->update();
-    this->interface->player->update_units();
+    this->update_units(interface->player->units, secondInterface->player->units, &clock);
+    clock.restart();
 }
 
 void Game::PollEvents()
 {
-    while(this->window->pollEvent(*event))
+    while (this->window->pollEvent(*event))
     {
-       
-        
-        if(event->type==sf::Event::Closed)
+
+
+        if (event->type == sf::Event::Closed)
         {
             this->window->close();
         }
 
-        
+
         //Button updates
         this->interface->pollEvents();
 
         //Pressed
-        if(this->event->type==sf::Event::KeyPressed)
+        if (this->event->type == sf::Event::KeyPressed)
         {
 
-            if(this->event->key.code==sf::Keyboard::Escape)
+            if (this->event->key.code == sf::Keyboard::Escape)
             {
                 this->window->close();
             }
@@ -165,3 +175,42 @@ void Game::render()
 }
 
 //-------------//
+
+
+
+//Funkcje do obs³ugi jednostek
+
+void Game::update_units(std::vector<Unit*> units, std::vector<Unit*> enemies, sf::Clock* clock_) {
+    this->move(units, clock_);
+    this->move(enemies, clock_);
+}
+
+
+void Game::move(std::vector<Unit*> units, sf::Clock* clock_) {
+    bool spaceForMove = 1;
+
+    for (int i = 0; i < units.size(); ++i) {
+        //Wspolczynnik szybkosci pozwalajacy szybciej przeprowadzac symulacje
+        int wsp = 5;
+        sf::Time time = clock_->getElapsedTime();
+        if (false) {
+            std::cout << time.asSeconds() << " speed: " << units[i]->getSpeed() << std::endl;
+        }
+        spaceForMove = 1;
+        sf::FloatRect rec = units[i]->sprite.getGlobalBounds();
+        rec.left += units[i]->getSpeed() * time.asSeconds() * wsp;
+
+
+        for (int j = 0; j < units.size(); ++j) {
+            if (units[i] != units[j]) {
+                if (rec.intersects(units[j]->sprite.getGlobalBounds())) {
+                    spaceForMove = 0;
+                    //std::cout << j<< "\n";
+                }
+            }
+        }
+        if (spaceForMove) {
+            units[i]->sprite.move(sf::Vector2f(time.asSeconds() * units[i]->getSpeed() * wsp, 0));
+        }
+    }
+}

@@ -4,12 +4,12 @@
 
 //--CONSTRUCTOR & DESTRUCTOR--//
 
-UserInterface::UserInterface(sf::Texture *texture, sf::RenderWindow *window_, sf::Event *event_, sf::Font *font_, Age* age1_, Age* age2_)
+UserInterface::UserInterface(sf::Texture* texture, sf::RenderWindow* window_, sf::Event* event_, sf::Font* font_, Age* age1_, Age* age2_)
 {
-    this->gui=*texture;
-    this->window=window_;
-    this->font=*font_;
-    this->event=event_;
+    this->gui = *texture;
+    this->window = window_;
+    this->font = *font_;
+    this->event = event_;
     this->age1 = age1_;
     this->age2 = age2_;
 
@@ -24,7 +24,7 @@ UserInterface::UserInterface(sf::Texture *texture, sf::RenderWindow *window_, sf
 
 UserInterface::~UserInterface()
 {
- delete this->player;
+    delete this->player;
 }
 
 //---------------------------//
@@ -35,9 +35,9 @@ UserInterface::~UserInterface()
 void UserInterface::initPlayer()
 {
     this->player = new Player(age1, age2, window);
-    this->curr_gold=player->current_gold();
-    this->curr_xp=player->current_xp();
-    this->curr_hp=player->current_hp();
+    this->curr_gold = player->current_gold();
+    this->curr_xp = player->current_xp();
+    this->curr_hp = player->current_hp();
 }
 
 /*
@@ -132,7 +132,7 @@ void UserInterface::init_prices()
 */
 void UserInterface::initResources()
 {
-    this->second_life=false;
+    this->second_life = false;
     this->init_gold_amount();
     this->init_xp_bar();
     this->init_hp_bar();
@@ -143,35 +143,35 @@ void UserInterface::init_gold_amount()
     this->gold.setCharacterSize(15);
     this->gold.setFont(this->font);
     this->gold.setFillColor(sf::Color::White);
-    this->gold.setPosition(162,78);
+    this->gold.setPosition(162, 78);
     this->gold.setString(std::to_string(this->curr_gold));
 }
 
 void UserInterface::init_xp_bar()
 {
-    this->xp_rect=sf::IntRect(72,6,this->curr_xp,3);
+    this->xp_rect = sf::IntRect(72, 6, this->curr_xp, 3);
     this->xp_sprite.setTexture(this->gui);
     this->xp_sprite.setTextureRect(this->xp_rect);
-    this->xp_sprite.setPosition(117,36);
-    this->xp_sprite.setScale(4.5,4.7);
+    this->xp_sprite.setPosition(117, 36);
+    this->xp_sprite.setScale(4.5, 4.7);
 }
 
 void UserInterface::init_hp_bar()
 {
 
-    this->hp_rect_orange=sf::IntRect(6,22,49,3); //orange bar
-    this->hp_rect_red=sf::IntRect(72,22,49,3); //red bar
+    this->hp_rect_orange = sf::IntRect(6, 22, 49, 3); //orange bar
+    this->hp_rect_red = sf::IntRect(72, 22, 49, 3); //red bar
 
     //red bar
-    this->hp_sprite_red.setPosition(117,9);
+    this->hp_sprite_red.setPosition(117, 9);
     this->hp_sprite_red.setTexture(this->gui);
-    this->hp_sprite_red.setScale(4.5,4.7);
+    this->hp_sprite_red.setScale(4.5, 4.7);
     this->hp_sprite_red.setTextureRect(this->hp_rect_red);
 
     //orange bar
-    this->hp_sprite_orange.setPosition(117,9);
+    this->hp_sprite_orange.setPosition(117, 9);
     this->hp_sprite_orange.setTexture(this->gui);
-    this->hp_sprite_orange.setScale(4.5,4.7);
+    this->hp_sprite_orange.setScale(4.5, 4.7);
     this->hp_sprite_orange.setTextureRect(this->hp_rect_orange);
 }
 
@@ -232,9 +232,9 @@ void UserInterface::initButtons()
 
 void UserInterface::updateResources()
 {
-    this->curr_gold=this->player->current_gold();
-    this->curr_xp=this->player->current_xp();
-    this->curr_hp=this->player->current_hp();
+    this->curr_gold = this->player->current_gold();
+    this->curr_xp = this->player->current_xp();
+    this->curr_hp = this->player->current_hp();
 
     this->gold.setString(std::to_string(this->curr_gold));   //display money amount in interface
 
@@ -246,40 +246,40 @@ void UserInterface::updateResources()
 
 void UserInterface::update_xp_bar()
 {
-    if(this->curr_xp>=43)
+    if (this->curr_xp >= 43)
     {
-        this->xp_rect=sf::IntRect(8,6,this->curr_xp,3);
+        this->xp_rect = sf::IntRect(8, 6, this->curr_xp, 3);
         this->xp_sprite.setTextureRect(this->xp_rect);
     }
     else
     {
-        this->xp_rect=sf::IntRect(72,6,this->curr_xp,3);
+        this->xp_rect = sf::IntRect(72, 6, this->curr_xp, 3);
         this->xp_sprite.setTextureRect(this->xp_rect);
     }
 }
 //TO THINK ABOUT LOCATION OF HP & XP, METHOD TO REPAIR IN LATER TIME
 void UserInterface::update_hp_bar()
 {
-    if(this->curr_hp>0 && !this->second_life)
+    if (this->curr_hp > 0 && !this->second_life)
     {
-        this->hp_sprite_red.setTextureRect(sf::IntRect(72,22,this->curr_hp-1,3));
-       
+        this->hp_sprite_red.setTextureRect(sf::IntRect(72, 22, this->curr_hp - 1, 3));
+
     }
 
-    else if(this->curr_hp==0 && !this->second_life)
+    else if (this->curr_hp == 0 && !this->second_life)
     {
-        this->second_life=true;
-        this->curr_hp=50;
+        this->second_life = true;
+        this->curr_hp = 50;
     }
 
-    else if(this->curr_hp>0 && this->second_life)
+    else if (this->curr_hp > 0 && this->second_life)
     {
-        this->hp_sprite_orange.setTextureRect(sf::IntRect(6,22,this->curr_hp-1,3));
-      
+        this->hp_sprite_orange.setTextureRect(sf::IntRect(6, 22, this->curr_hp - 1, 3));
+
     }
     else
     {
-      
+
     }
 }
 
@@ -290,33 +290,33 @@ void UserInterface::update_hp_bar()
 //BLOCKED
 void UserInterface::button_blocked_animation()
 {
-    if(!this->canAfford(this->warrior_price))
+    if (!this->canAfford(this->warrior_price))
     {
-         this->buttons["warrior"].setTextureRect(this->buttons_animation_rects["warrior_blocked"]);
+        this->buttons["warrior"].setTextureRect(this->buttons_animation_rects["warrior_blocked"]);
     }
     else
     {
         this->buttons["warrior"].setTextureRect(this->buttons_animation_rects["warrior_convex"]);
     }
-    if(!this->canAfford(this->archer_price))
+    if (!this->canAfford(this->archer_price))
     {
-         this->buttons["archer"].setTextureRect(this->buttons_animation_rects["archer_blocked"]);
+        this->buttons["archer"].setTextureRect(this->buttons_animation_rects["archer_blocked"]);
     }
     else
     {
         this->buttons["archer"].setTextureRect(this->buttons_animation_rects["archer_convex"]);
     }
-    if(!this->canAfford(this->boss_price))
+    if (!this->canAfford(this->boss_price))
     {
-         this->buttons["boss"].setTextureRect(this->buttons_animation_rects["boss_blocked"]);
+        this->buttons["boss"].setTextureRect(this->buttons_animation_rects["boss_blocked"]);
     }
     else
     {
         this->buttons["boss"].setTextureRect(this->buttons_animation_rects["boss_convex"]);
     }
-    if(!this->canUpgrade(const_xp))
+    if (!this->canUpgrade(const_xp))
     {
-         this->buttons["upgrade_era"].setTextureRect(this->buttons_animation_rects["upgrade_blocked"]);
+        this->buttons["upgrade_era"].setTextureRect(this->buttons_animation_rects["upgrade_blocked"]);
     }
     else
     {
@@ -328,14 +328,14 @@ void UserInterface::button_blocked_animation()
 void UserInterface::animate_concave_butt(std::string map_butt, std::string concave_map)
 {
     this->buttons[map_butt].setTextureRect(this->buttons_animation_rects[concave_map]);
-    this->buttons[map_butt].setPosition(this->buttons[map_butt].getPosition().x,this->buttons[map_butt].getPosition().y+2);
+    this->buttons[map_butt].setPosition(this->buttons[map_butt].getPosition().x, this->buttons[map_butt].getPosition().y + 2);
 }
 
 //CONVEX
 void UserInterface::animate_convex_butt(std::string map_butt, std::string convex_map)
 {
     this->buttons[map_butt].setTextureRect(this->buttons_animation_rects[convex_map]);
-    this->buttons[map_butt].setPosition(this->buttons[map_butt].getPosition().x,this->buttons[map_butt].getPosition().y-2);
+    this->buttons[map_butt].setPosition(this->buttons[map_butt].getPosition().x, this->buttons[map_butt].getPosition().y - 2);
 }
 
 /*
@@ -343,7 +343,7 @@ void UserInterface::animate_convex_butt(std::string map_butt, std::string convex
 */
 bool UserInterface::canAfford(int price_)
 {
-    if(this->curr_gold>=price_)
+    if (this->curr_gold >= price_)
     {
         return true;
     }
@@ -355,7 +355,7 @@ bool UserInterface::canAfford(int price_)
 
 bool UserInterface::canUpgrade(int xp_)
 {
-    if(this->curr_xp>=xp_)
+    if (this->curr_xp >= xp_)
     {
         return true;
     }
@@ -373,9 +373,9 @@ bool UserInterface::canUpgrade(int xp_)
 void UserInterface::init_user_info()
 {
     this->user_info.setTexture(this->gui);
-    this->user_info.setTextureRect(sf::IntRect(96,36,77,24));
-    this->user_info.setScale(4.5,4.5);
-    this->user_info.setPosition(0,0);
+    this->user_info.setTextureRect(sf::IntRect(96, 36, 77, 24));
+    this->user_info.setScale(4.5, 4.5);
+    this->user_info.setPosition(0, 0);
 
 }
 
@@ -384,17 +384,17 @@ void UserInterface::init_user_info()
 */
 void UserInterface::drawInterface()
 {
-    for(const auto &button:this->buttons)
+    for (const auto& button : this->buttons)
     {
         this->window->draw(button.second);
     }
 
-    for(const auto &price:this->prices_in_shop)
+    for (const auto& price : this->prices_in_shop)
     {
         this->window->draw(price.second);
     }
 
-    for(const auto& coin:coins)
+    for (const auto& coin : coins)
     {
         this->window->draw(coin);
     }
@@ -408,18 +408,18 @@ void UserInterface::drawInterface()
     this->window->draw(this->hp_sprite_orange);
 
     this->window->draw(this->hp_sprite_red);
-    
+
     //drawing buttons in queue from class InitCharacter
     if (this->num_of_char_queue.size() >= 0)
     {
         for (const auto& charc : this->num_of_char_queue)
         {
-        charc->drawButton();
-        this->num_of_char_queue[0]->bar_init();
+            charc->drawButton();
+            this->num_of_char_queue[0]->bar_init();
         }
-        
+
     }
-   
+
 
 }
 
@@ -428,11 +428,11 @@ void UserInterface::drawInterface()
 */
 void UserInterface::update()
 {
-     this->button_blocked_animation();
-     this->updateResources();
-     this->update_xp_bar();
-     this->update_hp_bar();
-     this->update_all_char();
+    this->button_blocked_animation();
+    this->updateResources();
+    this->update_xp_bar();
+    this->update_hp_bar();
+    this->update_all_char();
 }
 
 
@@ -442,8 +442,8 @@ void UserInterface::INIT_Character(std::map<std::string, sf::Sprite> buttons, st
     this->size_of_vec = this->num_of_char_queue.size() + 1;
     if (this->num_of_char_queue.size() < max_of_queue)
     {
-        std::cout << "Respawning"<<charac<<"\n";
-        InitCharacter* character = new InitCharacter(charac, this->buttons[charac],this->window, this->num_of_char_queue.size(),this->gui, player);
+        std::cout << "Respawning" << charac << "\n";
+        InitCharacter* character = new InitCharacter(charac, this->buttons[charac], this->window, this->num_of_char_queue.size(), this->gui, player);
         this->num_of_char_queue.emplace_back(character);
     }
     else
@@ -457,119 +457,122 @@ void UserInterface::INIT_Character(std::map<std::string, sf::Sprite> buttons, st
 void UserInterface::update_all_char()
 {
     //std::cout << this->num_of_char_queue.size()<<"\n";
-   
+
     for (const auto& character : num_of_char_queue)
     {
-        character->update(num_of_char_queue,this->num_of_char_queue.size());
+        character->update(num_of_char_queue, this->num_of_char_queue.size());
     }
-    
+
 }
 
 //BUTTON EVENTS LOOP
 void UserInterface::pollEvents()
 {
 
-        this->mouse_position = window->mapPixelToCoords(sf::Mouse::getPosition(*window));
-        if(this->event->type==sf::Event::MouseButtonPressed)
-        {
-           
-            if(this->event->mouseButton.button==sf::Mouse::Left)
-            {
-                if(this->buttons["exit"].getGlobalBounds().contains(mouse_position))
-                {
-                    this->animate_concave_butt("exit","exit_conc");
-                }
-                if(this->buttons["warrior"].getGlobalBounds().contains(mouse_position) && this->canAfford(this->warrior_price))
-                {
-                    this->animate_concave_butt("warrior","warrior_conc");
+    this->mouse_position = window->mapPixelToCoords(sf::Mouse::getPosition(*window));
+    if (this->event->type == sf::Event::MouseButtonPressed)
+    {
 
-                }
-                if(this->buttons["archer"].getGlobalBounds().contains(mouse_position) && this->canAfford(this->archer_price))
-                {
-                    this->animate_concave_butt("archer","archer_conc");
-                }
-                if(this->buttons["boss"].getGlobalBounds().contains(mouse_position) && this->canAfford(this->boss_price))
-                {                   
-                    this->animate_concave_butt("boss","boss_conc");
-                }
-                if(this->buttons["upgrade_era"].getGlobalBounds().contains(mouse_position) && this->canUpgrade(const_xp))
-                {                
-                    this->animate_concave_butt("upgrade_era","upgrade_conc");
-                }
+        if (this->event->mouseButton.button == sf::Mouse::Left)
+        {
+            if (this->buttons["exit"].getGlobalBounds().contains(mouse_position))
+            {
+                this->animate_concave_butt("exit", "exit_conc");
+            }
+            if (this->buttons["warrior"].getGlobalBounds().contains(mouse_position) && this->canAfford(this->warrior_price))
+            {
+                this->animate_concave_butt("warrior", "warrior_conc");
+
+            }
+            if (this->buttons["archer"].getGlobalBounds().contains(mouse_position) && this->canAfford(this->archer_price))
+            {
+                this->animate_concave_butt("archer", "archer_conc");
+            }
+            if (this->buttons["boss"].getGlobalBounds().contains(mouse_position) && this->canAfford(this->boss_price))
+            {
+                this->animate_concave_butt("boss", "boss_conc");
+            }
+            if (this->buttons["upgrade_era"].getGlobalBounds().contains(mouse_position) && this->canUpgrade(const_xp))
+            {
+                this->animate_concave_butt("upgrade_era", "upgrade_conc");
             }
         }
-            if(this->event->type==sf::Event::MouseButtonReleased)
-            {
+    }
+    if (this->event->type == sf::Event::MouseButtonReleased)
+    {
 
-                    //BUTTONS ACTIONS
+        //BUTTONS ACTIONS
 
-                    if(this->buttons["exit"].getGlobalBounds().contains(mouse_position))
-                    {   //EXIT
-                        this->animate_convex_butt("exit","exit_convex");
-                        this->window->close();
-                    }
-                    if(this->buttons["warrior"].getGlobalBounds().contains(mouse_position) && this->canAfford(this->warrior_price))
-                    {   //WARRIOR
-                        this->animate_convex_butt("warrior", "warrior_convex");
-                        this->INIT_Character(this->buttons, "warrior");                       
-                    }
+        if (this->buttons["exit"].getGlobalBounds().contains(mouse_position))
+        {   //EXIT
+            this->animate_convex_butt("exit", "exit_convex");
+            this->window->close();
+        }
+        if (this->buttons["warrior"].getGlobalBounds().contains(mouse_position) && this->canAfford(this->warrior_price))
+        {   //WARRIOR
+            this->animate_convex_butt("warrior", "warrior_convex");
+            this->INIT_Character(this->buttons, "warrior");
+        }
 
-                    if(this->buttons["archer"].getGlobalBounds().contains(mouse_position) && this->canAfford(this->archer_price))
-                    {   //ARCHER
-                        this->animate_convex_butt("archer","archer_convex");
-                        this->INIT_Character(this->buttons, "archer");
-                    }
-
-
-                    if(this->buttons["boss"].getGlobalBounds().contains(mouse_position) && this->canAfford(this->boss_price))
-                    {
-                        //BOSS
-                        this->animate_convex_butt("boss","boss_convex");
-                        this->INIT_Character(this->buttons, "boss");
-                    }
-
-                    if(this->buttons["upgrade_era"].getGlobalBounds().contains(mouse_position) && this->canUpgrade(const_xp))
-                    {
-                        //UPGRADE
-                        this->animate_convex_butt("upgrade_era","upgrade_convex");
-                        std::cout<<"Welcome to the new era \n";
-                    }
+        if (this->buttons["archer"].getGlobalBounds().contains(mouse_position) && this->canAfford(this->archer_price))
+        {   //ARCHER
+            this->animate_convex_butt("archer", "archer_convex");
+            this->INIT_Character(this->buttons, "archer");
+        }
 
 
+        if (this->buttons["boss"].getGlobalBounds().contains(mouse_position) && this->canAfford(this->boss_price))
+        {
+            //BOSS
+            this->animate_convex_butt("boss", "boss_convex");
+            this->INIT_Character(this->buttons, "boss");
+        }
+
+        if (this->buttons["upgrade_era"].getGlobalBounds().contains(mouse_position) && this->canUpgrade(const_xp))
+        {
+            //UPGRADE
+            this->animate_convex_butt("upgrade_era", "upgrade_convex");
+            std::cout << "Welcome to the new era \n";
+            if (player->age_ptr == age1) {
+                player->age_ptr = age2;
             }
+        }
 
-            //CHECKING {LINES TO REMOVE}
-            if(this->event->type==sf::Event::KeyPressed)
-            {
 
-                if(this->event->key.code==sf::Keyboard::Left)
-                {
-                    this->curr_xp--;
-                    this->player->change_xp(this->curr_xp);
-                  
-                }
+    }
 
-                if(this->event->key.code==sf::Keyboard::Right)
-                {
-                    this->curr_xp++;
-                    this->player->change_xp(this->curr_xp);
+    //CHECKING {LINES TO REMOVE}
+    if (this->event->type == sf::Event::KeyPressed)
+    {
 
-                }
+        if (this->event->key.code == sf::Keyboard::Left)
+        {
+            this->curr_xp--;
+            this->player->change_xp(this->curr_xp);
 
-                if(this->event->key.code==sf::Keyboard::Up)
-                {
-                    this->curr_hp++;
-                    this->player->change_hp(this->curr_hp);
-                   
-                }
+        }
 
-                if(this->event->key.code==sf::Keyboard::Down)
-                {
-                    this->curr_hp--;
-                    this->player->change_hp(this->curr_hp);
+        if (this->event->key.code == sf::Keyboard::Right)
+        {
+            this->curr_xp++;
+            this->player->change_xp(this->curr_xp);
 
-                }
-            }
+        }
+
+        if (this->event->key.code == sf::Keyboard::Up)
+        {
+            this->curr_hp++;
+            this->player->change_hp(this->curr_hp);
+
+        }
+
+        if (this->event->key.code == sf::Keyboard::Down)
+        {
+            this->curr_hp--;
+            this->player->change_hp(this->curr_hp);
+
+        }
+    }
 
 }
 

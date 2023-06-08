@@ -19,7 +19,7 @@ InitCharacter::InitCharacter(std::string _character, sf::Sprite _character_sprit
 	this->vec_size = size;
 	this->_window = window;
 	this->character = _character;
-	this->character_sprite=_character_sprite;
+	this->character_sprite = _character_sprite;
 	this->player = player_;
 	this->InitVariables();
 	this->sprite_setup();
@@ -29,7 +29,7 @@ InitCharacter::InitCharacter(std::string _character, sf::Sprite _character_sprit
 //DESTRUCTOR
 InitCharacter::~InitCharacter()
 {
-	Unit* unit=0;
+	Unit* unit = 0;
 	//std::cout << "OBIEKT WYJEBANY Z WEKTORA, TERAZ TWORZE POSTAÆ :)" << std::endl;;
 	//tutaj wstawiam tworzenie postaci
 	switch (unit_type)
@@ -53,9 +53,9 @@ InitCharacter::~InitCharacter()
 
 void InitCharacter::sprite_setup()
 {
-	this->character_sprite.setScale(2,2);
+	this->character_sprite.setScale(2, 2);
 	this->character_sprite.setColor(sf::Color::Green);
-	
+
 
 }
 
@@ -65,7 +65,7 @@ void InitCharacter::setupButtons(std::vector<InitCharacter*>& vec, int size)
 	if (size == 1)
 	{
 		vec[0]->setposition_0();
-		
+
 	}
 	if (size == 2)
 	{
@@ -82,7 +82,7 @@ void InitCharacter::setupButtons(std::vector<InitCharacter*>& vec, int size)
 
 void InitCharacter::setposition_0()
 {
-	
+
 	this->character_sprite.setPosition(375, 5);
 }
 
@@ -101,19 +101,19 @@ void InitCharacter::setposition_2()
 void InitCharacter::bar_setup()
 {
 	this->cooldown_bar.setTexture(this->bar_texture);
-	this->cooldown_bar.setTextureRect(sf::IntRect(184,50,3,250));
+	this->cooldown_bar.setTextureRect(sf::IntRect(184, 50, 3, 250));
 	this->cooldown_bar.setScale(5, 0.45);
 	this->cooldown_bar.setPosition(355, 0);
 
 }
-													 
+
 void InitCharacter::bar_animation()
 {
 	this->cooldown_animation.setTexture(this->bar_texture);
-	this->cooldown_animation.setTextureRect(sf::IntRect(190, 51, 1, this->clock.getElapsedTime().asMilliseconds()/11));
+	this->cooldown_animation.setTextureRect(sf::IntRect(190, 51, 1, this->clock.getElapsedTime().asMilliseconds() / 11));
 	this->cooldown_animation.setPosition(360, 5);
 	this->cooldown_animation.setScale(5, 0.45);
-	
+
 
 }
 
@@ -130,12 +130,12 @@ void InitCharacter::update(std::vector<InitCharacter*>& vec, int size)
 	this->setupButtons(vec, size);
 	this->bar_animation();
 	//std::cout<<clock.getElapsedTime().asMilliseconds()<<"\n";
-	if (clock.getElapsedTime().asMilliseconds() > cooldown*1000)
-	{	
+	if (clock.getElapsedTime().asMilliseconds() > cooldown * 1000 && isSpaceForRespawn())
+	{
 		std::cout << "Niszcze \n";
 		vec.erase(vec.begin());
 		this->vec_size--;
-		delete this;		
+		delete this;
 	}
 }
 
@@ -151,5 +151,28 @@ void InitCharacter::stringToEnumClass() {
 	else if (character == "boss") {
 		unit_type = Unit_type::Boss;
 	}
+}
+
+//Definiowanie miejsca dla spawnu
+bool InitCharacter::isSpaceForRespawn() {
+	sf::Rect<float> rect_;
+	switch (unit_type)
+	{
+	case Unit_type::Warrior:
+		rect_ = player->age_ptr->MakeWarrior()->sprite.getGlobalBounds();
+		break;
+	case Unit_type::Archer:
+		rect_ = player->age_ptr->MakeArcher()->sprite.getGlobalBounds();
+		break;
+	case Unit_type::Boss:
+		rect_ = player->age_ptr->MakeBoss()->sprite.getGlobalBounds();
+		break;
+	}
+	for (int i = 0; i < player->units.size(); i++) {
+		if (player->units[i]->sprite.getGlobalBounds().intersects(rect_)) {
+			return false;
+		}
+	}
+	return true;
 }
 

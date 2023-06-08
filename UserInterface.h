@@ -9,8 +9,8 @@
 class UserInterface
 {
 private:
-    sf::RenderWindow *window;
-    sf::Event *event;
+    sf::RenderWindow* window;
+    sf::Event* event;
     sf::Texture gui;
     sf::Font font;
     sf::Vector2f mouse_position;
@@ -22,15 +22,15 @@ private:
     */
 
     //Map of buttons
-    std::map<std::string,sf::Sprite> buttons;
-    std::map<std::string,sf::IntRect> buttons_animation_rects;
+    std::map<std::string, sf::Sprite> buttons;
+    std::map<std::string, sf::IntRect> buttons_animation_rects;
     //Setup of buttons
     void initButtons();          //creating buttons
     void init_animation_rects(); //rects from texture
 
     void animate_concave_butt(std::string map_butt, std::string concave_map); //concave animation of button
-    void animate_convex_butt(std::string map_butt,std::string convex_map);    //convex animation of button
-    
+    void animate_convex_butt(std::string map_butt, std::string convex_map);    //convex animation of button
+
     void button_blocked_animation(); //switching button animation to blocked
     bool canAfford(int price_); //checking if you have enough money to click button
     bool canUpgrade(int xp_);  //checking if you have enough xp to click button
@@ -47,14 +47,14 @@ private:
     */
 
     //Setting prices 
-    int warrior_price=70;
-    int archer_price=100;
-    int boss_price=200;
+    int warrior_price = 70;
+    int archer_price = 100;
+    int boss_price = 200;
 
     //Prices in shop
     sf::Text gold;
     sf::Sprite coins[3];
-    std::map<std::string,sf::Text> prices_in_shop;
+    std::map<std::string, sf::Text> prices_in_shop;
 
     void init_prices();
 
@@ -84,7 +84,7 @@ private:
 
     //Class player initation
     void initPlayer();
-    
+
     //Uploading hp,xp,gold 
     void init_gold_amount();
     void init_xp_bar();
@@ -100,10 +100,10 @@ private:
         !!! INIT CHARACTER !!!
     */
     const int max_of_queue = 3;
-    std::vector<InitCharacter*> num_of_char_queue;  
+    std::vector<InitCharacter*> num_of_char_queue;
     int size_of_vec;
     void INIT_Character(std::map<std::string, sf::Sprite> buttons, std::string);
-    
+
     //UPDATING LOADING QUEUE, REMOVING CHARACTER, CLEAN IT , CHAOS IN CODE
     void update_all_char();
 
@@ -111,11 +111,11 @@ private:
       #Class meth
     */
 
-     
+
 public:
     Player* player;
     //constructor & destructor
-    UserInterface(sf::Texture *texture, sf::RenderWindow *window_, sf::Event *event_, sf::Font *font_,Age* age1_,Age* age2_);
+    UserInterface(sf::Texture* texture, sf::RenderWindow* window_, sf::Event* event_, sf::Font* font_, Age* age1_, Age* age2_);
     ~UserInterface();
 
     void drawInterface();

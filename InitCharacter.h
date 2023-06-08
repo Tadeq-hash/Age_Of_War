@@ -29,7 +29,7 @@ private:
 	sf::Texture bar_texture;
 	//actuall size of vector (vector of objects in queue)
 	int vec_size;
-		
+
 	//BUTTON SETTING
 	void sprite_setup();
 	void setupButtons(std::vector<InitCharacter*>& vec, int size);
@@ -46,16 +46,18 @@ private:
 
 	//zamiana stringa w enum class
 	void stringToEnumClass();
+	//Definiowanie miejsca dla spawnu
+	bool isSpaceForRespawn();
 
 public:
 
 	//constructor
-	InitCharacter(std::string _character, sf::Sprite _character_sprite, sf::RenderWindow* window, int size, sf::Texture _tex,Player* player_);
+	InitCharacter(std::string _character, sf::Sprite _character_sprite, sf::RenderWindow* window, int size, sf::Texture _tex, Player* player_);
 	void bar_init();
 	//destructor
 	~InitCharacter();
 	void drawButton();
 	void update(std::vector<InitCharacter*>& vec, int size);
 
-	
+
 };

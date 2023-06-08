@@ -8,13 +8,13 @@
 #define max_buttons 4
 
 
-class MainMenu{
+class MainMenu {
 
 private:
-
+    bool Bot = 0;
     int MainMenuSelected;
     sf::VideoMode video_mode_size;
-    sf::RenderWindow *window;
+    sf::RenderWindow* window;
     sf::Event event;
 
     //BUTTONS AND FONT
@@ -54,7 +54,7 @@ public:
     bool getWindowIsOpen();
     void update();
     void render();
-    void draw(sf::RenderWindow &window);
+    void draw(sf::RenderWindow& window);
     //---------------------//
 
 

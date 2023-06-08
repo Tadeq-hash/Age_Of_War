@@ -14,6 +14,9 @@ private:
     int hp;
     int xp;
 
+    //Zegar
+    sf::Clock clock;
+
     //Wskaünik na aktualnπ Ere
     Age* age1;
     Age* age2;
@@ -26,10 +29,10 @@ public:
 
     //CONSTRUCTOR
     Player();
-    Player(Age* age1, Age* age2,sf::RenderWindow* window_);
+    Player(Age* age1, Age* age2, sf::RenderWindow* window_);
 
     //Wektor wskaünikÛw posiadanych jednostek
-    std::vector<std::unique_ptr<Unit>> units;
+    std::vector<Unit*> units;
 
     //CHANGING RESOURCES IN PLAYER CLASS
     void change_xp(int _xp);

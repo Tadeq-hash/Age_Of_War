@@ -9,7 +9,7 @@ int main()
     MainMenu menu;
 
     //MENU LOOP
-    while(menu.getWindowIsOpen())
+    while (menu.getWindowIsOpen())
     {
         //Updating menu
         menu.update();

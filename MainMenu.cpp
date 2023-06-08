@@ -14,23 +14,23 @@ void MainMenu::initVariables()
 {
 
     this->window = nullptr;
-    this->video_mode_size.width=800;
-    this->video_mode_size.height=800;
+    this->video_mode_size.width = 800;
+    this->video_mode_size.height = 800;
 
 }
 
 
 void MainMenu::initWindow()
 {
-    this->window = new sf::RenderWindow(this->video_mode_size,"MainMenu");
+    this->window = new sf::RenderWindow(this->video_mode_size, "MainMenu");
 }
 
 
 void MainMenu::loadButtons()
 {
-    if(!this->font.loadFromFile("fonts/fontmenu.ttf"))
+    if (!this->font.loadFromFile("fonts/fontmenu.ttf"))
     {
-        std::cout<<"Couldn't load font \n";
+        std::cout << "Couldn't load font \n";
     }
 
     //PLAY
@@ -38,30 +38,30 @@ void MainMenu::loadButtons()
     this->M_M_Text[0].setFillColor(sf::Color::White);
     this->M_M_Text[0].setString("PLAY");
     this->M_M_Text[0].setCharacterSize(70);
-    this->M_M_Text[0].setPosition(this->video_mode_size.width/3,this->video_mode_size.height/4);
+    this->M_M_Text[0].setPosition(this->video_mode_size.width / 3, this->video_mode_size.height / 4);
 
     //OPTIONS
     this->M_M_Text[1].setFont(this->font);
     this->M_M_Text[1].setFillColor(sf::Color::White);
     this->M_M_Text[1].setString("OPTIONS");
     this->M_M_Text[1].setCharacterSize(70);
-    this->M_M_Text[1].setPosition(this->video_mode_size.width/3,(this->video_mode_size.height/4+100));
+    this->M_M_Text[1].setPosition(this->video_mode_size.width / 3, (this->video_mode_size.height / 4 + 100));
 
     //ABOUT
     this->M_M_Text[2].setFont(this->font);
     this->M_M_Text[2].setFillColor(sf::Color::White);
     this->M_M_Text[2].setString("ABOUT");
     this->M_M_Text[2].setCharacterSize(70);
-    this->M_M_Text[2].setPosition(this->video_mode_size.width/3,(this->video_mode_size.height/4+200));
+    this->M_M_Text[2].setPosition(this->video_mode_size.width / 3, (this->video_mode_size.height / 4 + 200));
 
     //EXIT
     this->M_M_Text[3].setFont(this->font);
     this->M_M_Text[3].setFillColor(sf::Color::White);
     this->M_M_Text[3].setString("EXIT");
     this->M_M_Text[3].setCharacterSize(70);
-    this->M_M_Text[3].setPosition(this->video_mode_size.width/3,(this->video_mode_size.height/4+300));
+    this->M_M_Text[3].setPosition(this->video_mode_size.width / 3, (this->video_mode_size.height / 4 + 300));
 
-    MainMenuSelected=0;
+    MainMenuSelected = 0;
     this->M_M_Text[this->MainMenuSelected].setFillColor(sf::Color::Red);
 
 }
@@ -70,35 +70,35 @@ void MainMenu::loadButtons()
 
 void MainMenu::pollEvents()
 {
-    while(this->window->pollEvent(event))
+    while (this->window->pollEvent(event))
     {
-        if(event.type == sf::Event::Closed)
+        if (event.type == sf::Event::Closed)
         {
             this->window->close();
         }
 
-        if(event.type == sf::Event::KeyPressed)
+        if (event.type == sf::Event::KeyPressed)
         {
-            if(event.key.code==sf::Keyboard::Up)
+            if (event.key.code == sf::Keyboard::Up)
             {
                 MoveUp();
                 break;
             }
 
-            if(event.key.code==sf::Keyboard::Down)
+            if (event.key.code == sf::Keyboard::Down)
             {
                 MoveDown();
                 break;
             }
 
-            if(event.key.code==sf::Keyboard::Return)
+            if (event.key.code == sf::Keyboard::Return)
             {
                 int x = MainMenuPressed();
 
                 //......GAME LOOP.....
-                if(x==0)
+                if (x == 0)
                 {
-                   this->Game_run();
+                    this->Game_run();
                 }
                 //......................
 
@@ -108,32 +108,32 @@ void MainMenu::pollEvents()
                 //==================TRASH TO DO =================================== //Class options, Class Credits
 
                 //OPTIONS LOOP
-                if(x==1)
+                if (x == 1)
                 {
-                    sf::RenderWindow Options(sf::VideoMode(960,720),"Options");
+                    sf::RenderWindow Options(sf::VideoMode(960, 720), "Options");
                     this->window->setVisible(0);
 
 
-                    while(Options.isOpen())
+                    while (Options.isOpen())
                     {
 
                         sf::Event optionsEvent;
-                        while(Options.pollEvent(optionsEvent))
+                        while (Options.pollEvent(optionsEvent))
                         {
-                            if(optionsEvent.type==sf::Event::Closed)
+                            if (optionsEvent.type == sf::Event::Closed)
                             {
                                 Options.close();
                                 this->window->setVisible(1);
                             }
 
                             //KEYBOARD EVENT
-                            if(optionsEvent.type==sf::Event::KeyPressed)
+                            if (optionsEvent.type == sf::Event::KeyPressed)
                             {
 
-                                if(optionsEvent.key.code==sf::Keyboard::Escape)
+                                if (optionsEvent.key.code == sf::Keyboard::Escape)
                                 {
-                                   Options.close();
-                                   this->window->setVisible(1);
+                                    Options.close();
+                                    this->window->setVisible(1);
                                 }
 
                             }
@@ -148,26 +148,26 @@ void MainMenu::pollEvents()
                 }
 
                 //ABOUT LOOP
-                if(x==2)
+                if (x == 2)
                 {
                     this->window->setVisible(0);
-                    sf::RenderWindow About(sf::VideoMode(960,720),"About");
-                    while(About.isOpen())
+                    sf::RenderWindow About(sf::VideoMode(960, 720), "About");
+                    while (About.isOpen())
                     {
                         sf::Event aboutEvent;
-                        while(About.pollEvent(aboutEvent))
+                        while (About.pollEvent(aboutEvent))
                         {
-                            if(aboutEvent.type==sf::Event::Closed)
+                            if (aboutEvent.type == sf::Event::Closed)
                             {
                                 About.close();
                                 this->window->setVisible(1);
                             }
 
                             //KEYBOARD EVENT
-                            if(aboutEvent.type==sf::Event::KeyPressed)
+                            if (aboutEvent.type == sf::Event::KeyPressed)
                             {
 
-                                if(aboutEvent.key.code==sf::Keyboard::Escape)
+                                if (aboutEvent.key.code == sf::Keyboard::Escape)
                                 {
                                     About.close();
                                     this->window->setVisible(1);
@@ -183,7 +183,7 @@ void MainMenu::pollEvents()
                         About.display();
                     }
                 }
-                if(x==3)
+                if (x == 3)
                 {
                     this->window->close();
 
@@ -204,9 +204,9 @@ MainMenu::~MainMenu()
 
 void MainMenu::Game_run()
 {
-    Game game;
+    Game game(Bot);
     this->window->setVisible(0);
-    while(game.getWindowIsOpen())
+    while (game.getWindowIsOpen())
     {
         //Update
         game.update();
@@ -241,9 +241,9 @@ void MainMenu::render()
     this->window->display();
 }
 
-void MainMenu::draw(sf::RenderWindow &window)
+void MainMenu::draw(sf::RenderWindow& window)
 {
-    for(int i=0; i<max_buttons;i++)
+    for (int i = 0; i < max_buttons; i++)
     {
         window.draw(this->M_M_Text[i]);
     }
@@ -252,17 +252,17 @@ void MainMenu::draw(sf::RenderWindow &window)
 void MainMenu::MoveUp()
 {
 
-    if(this->MainMenuSelected >= -1)
+    if (this->MainMenuSelected >= -1)
     {
         this->M_M_Text[MainMenuSelected].setFillColor(sf::Color::White);
         MainMenuSelected--;
 
 
-        if(MainMenuSelected == -1)
+        if (MainMenuSelected == -1)
         {
             MainMenuSelected = 3;
         }
-        std::cout<<this->MainMenuSelected<<"\n";
+        std::cout << this->MainMenuSelected << "\n";
         this->M_M_Text[MainMenuSelected].setFillColor(sf::Color::Red);
 
     }
@@ -270,17 +270,17 @@ void MainMenu::MoveUp()
 
 void MainMenu::MoveDown()
 {
-    if(MainMenuSelected <= max_buttons-1)
+    if (MainMenuSelected <= max_buttons - 1)
     {
         this->M_M_Text[MainMenuSelected].setFillColor(sf::Color::White);
         MainMenuSelected++;
 
 
-        if(MainMenuSelected==4)
+        if (MainMenuSelected == 4)
         {
-            MainMenuSelected=0;
+            MainMenuSelected = 0;
         }
-        std::cout<<this->MainMenuSelected<<"\n";
+        std::cout << this->MainMenuSelected << "\n";
         this->M_M_Text[MainMenuSelected].setFillColor(sf::Color::Red);
     }
 }
