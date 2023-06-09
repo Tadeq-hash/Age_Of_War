@@ -50,7 +50,7 @@ private:
     void initButtons();
     void drawInterface();
     void initBot();
-
+    void initAges();
 
     /*
         #VARIABULES
@@ -73,15 +73,14 @@ public:
 
 
     ////Age Textures
-    AgeOfKnights age_of_knights;
-    AgeOfGunpowder age_of_gunpowder;
+    AgeOfKnights* age_of_knights;
+    AgeOfGunpowder* age_of_gunpowder;
 
     //Funkcje do obs³ugi jednostek
-
-
     void update_units(std::vector<Unit*> units, std::vector<Unit*> enemies, sf::Clock* clock_);
-
     void move(std::vector<Unit*> units, sf::Clock* clock_);
+    bool attack(Unit* atacker, Unit* victim);
+    void testOnelyMakeBotWarrior();
 
 };
 

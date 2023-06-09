@@ -68,7 +68,7 @@ private:
     int curr_xp;   //taking from class player
     int curr_hp;   //taking from class player
     bool second_life; //second hp bar
-
+    int side; //side on the screen
 
     //xp_bar
     sf::Sprite xp_sprite;
@@ -115,7 +115,7 @@ private:
 public:
     Player* player;
     //constructor & destructor
-    UserInterface(sf::Texture* texture, sf::RenderWindow* window_, sf::Event* event_, sf::Font* font_, Age* age1_, Age* age2_);
+    UserInterface(sf::Texture* texture, sf::RenderWindow* window_, sf::Event* event_, sf::Font* font_, Age* age1_, Age* age2_, int side_);
     ~UserInterface();
 
     void drawInterface();

@@ -4,6 +4,8 @@
 //VARIABLES
 void Game::InitVariables()
 {
+    this->age_of_knights = nullptr;
+    this->age_of_gunpowder = nullptr;
     this->event = nullptr;
     this->interface_tex = nullptr;
     this->secondInterface = nullptr;
@@ -29,7 +31,6 @@ void Game::LoadTextures()
     {
         std::cout << "Coulnd't load texture 'GUI'\n";
     }
-
 
 
 
@@ -60,6 +61,7 @@ Game::Game(bool bot_)
     this->InitWindow();
     this->LoadFonts();
 
+    this->initAges();
     this->InitBackground();
     this->initButtons();
     this->initBot();
@@ -88,7 +90,7 @@ void Game::InitBackground()
 //BUTTONS
 void Game::initButtons()
 {
-    this->interface = new UserInterface(this->interface_tex, this->window, this->event, this->digitals, &age_of_knights, &age_of_gunpowder);
+    this->interface = new UserInterface(this->interface_tex, this->window, this->event, this->digitals, age_of_knights, age_of_gunpowder, 1);
 }
 
 void Game::drawInterface()
@@ -101,8 +103,15 @@ void Game::drawInterface()
 void Game::initBot()
 {
     if (Bot) {
-        this->secondInterface = new UserInterface(this->interface_tex, this->window, this->event, this->digitals, &age_of_knights, &age_of_gunpowder);
+        this->secondInterface = new UserInterface(this->interface_tex, this->window, this->event, this->digitals, age_of_knights, age_of_gunpowder, -1);
     }
+}
+
+void Game::initAges()
+{
+    //Ages
+    age_of_knights = new AgeOfKnights(window);
+    age_of_gunpowder = new AgeOfGunpowder(window);
 }
 
 //UPDATING GAME//
@@ -141,6 +150,13 @@ void Game::PollEvents()
 
         }
 
+        //Testing rest for Bot
+        if (this->event->type == sf::Event::KeyPressed) {
+            if (event->key.code == sf::Keyboard::W) {
+                this->testOnelyMakeBotWarrior();
+            }
+        }
+
 
     }
 }
@@ -166,6 +182,7 @@ void Game::render()
     //Units
 
     this->interface->player->draw_units();
+    this->secondInterface->player->draw_units();
 
     //-----------//
 
@@ -181,36 +198,62 @@ void Game::render()
 //Funkcje do obs³ugi jednostek
 
 void Game::update_units(std::vector<Unit*> units, std::vector<Unit*> enemies, sf::Clock* clock_) {
+    for (int n = 0; n < units.size(); n++) {
+        for (int m = 0; m < enemies.size(); m++) {
+            attack(units[n], enemies[m]);
+        }
+    }
     this->move(units, clock_);
     this->move(enemies, clock_);
 }
+
+
+bool Game::attack(Unit* attacker, Unit* victim) {
+    sf::FloatRect rangeRec = attacker->sprite.getGlobalBounds();
+    rangeRec.left += attacker->getRange() * attacker->side + (((attacker->side) + 1) / 2) * attacker->sprite.getGlobalBounds().width;
+    if (rangeRec.intersects(victim->sprite.getGlobalBounds())) {
+        std::cout << "Mam cie w zasiegu!!!\n";
+        attacker->attacking = true;
+    }
+    else {
+        attacker->attacking = false;
+    }
+    return 0;
+}
+
 
 
 void Game::move(std::vector<Unit*> units, sf::Clock* clock_) {
     bool spaceForMove = 1;
 
     for (int i = 0; i < units.size(); ++i) {
-        //Wspolczynnik szybkosci pozwalajacy szybciej przeprowadzac symulacje
-        int wsp = 5;
-        sf::Time time = clock_->getElapsedTime();
-        if (false) {
-            std::cout << time.asSeconds() << " speed: " << units[i]->getSpeed() << std::endl;
-        }
-        spaceForMove = 1;
-        sf::FloatRect rec = units[i]->sprite.getGlobalBounds();
-        rec.left += units[i]->getSpeed() * time.asSeconds() * wsp;
+        if (units[i]->attacking == false) {
+            //Wspolczynnik szybkosci pozwalajacy szybciej przeprowadzac symulacje
+            int wsp = 5;
+            sf::Time time = clock_->getElapsedTime();
+            if (false) {
+                std::cout << time.asSeconds() << " speed: " << units[i]->getSpeed() << std::endl;
+            }
+            spaceForMove = 1;
+            sf::FloatRect rec = units[i]->sprite.getGlobalBounds();
+            rec.left += units[i]->getSpeed() * time.asSeconds() * wsp * units[i]->side;
 
 
-        for (int j = 0; j < units.size(); ++j) {
-            if (units[i] != units[j]) {
-                if (rec.intersects(units[j]->sprite.getGlobalBounds())) {
-                    spaceForMove = 0;
-                    //std::cout << j<< "\n";
+            for (int j = 0; j < units.size(); ++j) {
+                if (units[i] != units[j]) {
+                    if (rec.intersects(units[j]->sprite.getGlobalBounds())) {
+                        spaceForMove = 0;
+                        //std::cout << j<< "\n";
+                    }
                 }
             }
+            if (spaceForMove) {
+                units[i]->sprite.move(sf::Vector2f(time.asSeconds() * units[i]->getSpeed() * wsp * units[i]->side, 0));
+            }
         }
-        if (spaceForMove) {
-            units[i]->sprite.move(sf::Vector2f(time.asSeconds() * units[i]->getSpeed() * wsp, 0));
-        }
-    }
+    } 
+}
+
+void Game::testOnelyMakeBotWarrior() {
+    secondInterface->player->push_unit(std::move(secondInterface->player->current_age()->MakeWarrior(secondInterface->player->side)));
 }

@@ -3,7 +3,9 @@
 //   -- KLASA UNIT --
 
 //	KONSTRUKTOR
-Unit::Unit(sf::Texture* texture_, int* max_hp_, int hp_, int* range_, int* dmg_, int* speed_, float* dmg_reduction_) {
+Unit::Unit(sf::Texture* texture_, int* max_hp_, int hp_, int* range_, int* dmg_, int* speed_, float* dmg_reduction_, int side_, sf::RenderWindow* window_) {
+	window = window_;
+	side = side_;
 	texture = texture_;
 	max_hp = *max_hp_;
 	hp = hp_;
@@ -13,7 +15,7 @@ Unit::Unit(sf::Texture* texture_, int* max_hp_, int hp_, int* range_, int* dmg_,
 	dmg_reduction = *dmg_reduction_;
 
 	sprite.setTexture(*texture);
-	sprite.setPosition(sf::Vector2f(50, 987 - sprite.getGlobalBounds().height));
+	sprite.setPosition(sf::Vector2f((((side) - 1) / 2) * -(window->getSize().x - sprite.getGlobalBounds().width) + 50, 987 - sprite.getGlobalBounds().height));
 }
 
 // DESTRUKTOR
@@ -42,6 +44,10 @@ void Unit::move(sf::Clock* clock_) {
 int Unit::getSpeed() {
 	return speed;
 }
+
+int Unit::getDmg() { return dmg; }
+int Unit::getDmgRed() { return dmg_reduction; }
+int Unit::getRange() { return range; }
 
 int Unit::return_hp() {
 	return hp;

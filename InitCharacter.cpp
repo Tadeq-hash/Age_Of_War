@@ -36,16 +36,16 @@ InitCharacter::~InitCharacter()
 	{
 	case Unit_type::Warrior:
 		std::cout << "Tworze Warrior..." << std::endl;
-		player->push_unit(move(player->current_age()->MakeWarrior()));
+		player->push_unit(move(player->current_age()->MakeWarrior(player->side)));
 		break;
 	case Unit_type::Archer:
 		std::cout << "Tworze Archer..." << std::endl;
-		player->push_unit(move(player->current_age()->MakeArcher()));
+		player->push_unit(move(player->current_age()->MakeArcher(player->side)));
 		break;
 	case Unit_type::Boss:
 		std::cout << "Tworze Boss..." << std::endl;
-		player->push_unit(move(player->current_age()->MakeBoss()));
-		std::cout << "Jednostka przekazana do wektora\n";
+		player->push_unit(move(player->current_age()->MakeBoss(player->side)));
+		//std::cout << "Jednostka przekazana do wektora\n";
 		break;
 	}
 }
@@ -157,15 +157,15 @@ void InitCharacter::stringToEnumClass() {
 bool InitCharacter::isSpaceForRespawn() {
 	sf::Rect<float> rect_;
 	switch (unit_type)
-	{
+	{  
 	case Unit_type::Warrior:
-		rect_ = player->age_ptr->MakeWarrior()->sprite.getGlobalBounds();
+		rect_ = player->age_ptr->MakeWarrior(player->side)->sprite.getGlobalBounds(); 
 		break;
 	case Unit_type::Archer:
-		rect_ = player->age_ptr->MakeArcher()->sprite.getGlobalBounds();
+		rect_ = player->age_ptr->MakeArcher(player->side)->sprite.getGlobalBounds();
 		break;
 	case Unit_type::Boss:
-		rect_ = player->age_ptr->MakeBoss()->sprite.getGlobalBounds();
+		rect_ = player->age_ptr->MakeBoss(player->side)->sprite.getGlobalBounds();
 		break;
 	}
 	for (int i = 0; i < player->units.size(); i++) {

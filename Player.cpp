@@ -1,18 +1,13 @@
 #include "Player.h"
 
-//CONSTRUCTORS
-Player::Player()
-{
-    this->initVariables();
-}
-
-Player::Player(Age* age1_, Age* age2_, sf::RenderWindow* window_)
+Player::Player(Age* age1_, Age* age2_, sf::RenderWindow* window_, int side_)
 {
     this->initVariables();
     age1 = age1_;
     age2 = age2_;
     age_ptr = age1;
     window = window_;
+    this->side = side_;
 }
 
 void Player::initVariables()

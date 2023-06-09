@@ -4,8 +4,9 @@
 
 //--CONSTRUCTOR & DESTRUCTOR--//
 
-UserInterface::UserInterface(sf::Texture* texture, sf::RenderWindow* window_, sf::Event* event_, sf::Font* font_, Age* age1_, Age* age2_)
+UserInterface::UserInterface(sf::Texture* texture, sf::RenderWindow* window_, sf::Event* event_, sf::Font* font_, Age* age1_, Age* age2_,int side_)
 {
+    this->side = side_;
     this->gui = *texture;
     this->window = window_;
     this->font = *font_;
@@ -34,7 +35,7 @@ UserInterface::~UserInterface()
 */
 void UserInterface::initPlayer()
 {
-    this->player = new Player(age1, age2, window);
+    this->player = new Player(age1, age2, window, side);
     this->curr_gold = player->current_gold();
     this->curr_xp = player->current_xp();
     this->curr_hp = player->current_hp();

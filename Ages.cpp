@@ -4,9 +4,9 @@
 //	-----AGE OF KNIGHTS-----
 
 // KONSTRUKTOR
-AgeOfKnights::AgeOfKnights()
-{
+AgeOfKnights::AgeOfKnights(sf::RenderWindow* window_){
 	std::cout << "Tworze ere Rycerzy" << std::endl;
+	window = window_;
 	warrior_texture.loadFromFile("textures/Warrior_Age_Of_Knights.png");
 	archer_texture.loadFromFile("textures/Archer_Age_Of_Knights.png");
 	boss_texture.loadFromFile("textures/Boss_Age_Of_Knights.png");
@@ -15,7 +15,7 @@ AgeOfKnights::AgeOfKnights()
 // -> TWORZENIE JEDNOSTEK
 
 //Wojownik
-std::unique_ptr<Unit> AgeOfKnights::MakeWarrior() {
+std::unique_ptr<Unit> AgeOfKnights::MakeWarrior(int side_) {
 	int max_hp = 50;
 	int hp = max_hp;
 	int range = 10;
@@ -24,11 +24,11 @@ std::unique_ptr<Unit> AgeOfKnights::MakeWarrior() {
 	float dmg_reduction = 0.9;
 	//std::cout << "Wywoluje wojownika ze statami z ery Rycerzy" << std::endl;
 	//Warrior warrior(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
-	return std::make_unique<Unit>(Warrior(&warrior_texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction));
+	return std::make_unique<Unit>(Warrior(&warrior_texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction, side_, window));
 };
 
 //£uznik
-std::unique_ptr<Unit> AgeOfKnights::MakeArcher() {
+std::unique_ptr<Unit> AgeOfKnights::MakeArcher(int side_) {
 	int max_hp = 35;
 	int hp = max_hp;
 	int range = 50;
@@ -37,18 +37,18 @@ std::unique_ptr<Unit> AgeOfKnights::MakeArcher() {
 	float dmg_reduction = 1;
 	//std::cout << "Wywoluje Lucznika ze statami z ery Rycerzy" << std::endl;
 	//Archer archer(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
-	return std::make_unique<Unit>(Archer(&archer_texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction));
+	return std::make_unique<Unit>(Archer(&archer_texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction, side_, window));
 }
 
 //Boss
-std::unique_ptr<Unit> AgeOfKnights::MakeBoss() {
+std::unique_ptr<Unit> AgeOfKnights::MakeBoss(int side_) {
 	int max_hp = 200;
 	int hp = max_hp;
 	int range = 12;
 	int dmg = 15;
 	int speed = 20;
 	float dmg_reduction = 0.7;
-	Boss boss(&boss_texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
+	Boss boss(&boss_texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction, side_, window);
 	//std::cout << "Wywoluje Bossa ze statami z ery Rycerzy" << std::endl;
 	//Boss boss(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
 	std::unique_ptr<Unit> unit = move(std::make_unique<Unit>(boss));
@@ -62,8 +62,9 @@ std::unique_ptr<Unit> AgeOfKnights::MakeBoss() {
 
 
 // KONSTRUKTOR
-AgeOfGunpowder::AgeOfGunpowder() {
+AgeOfGunpowder::AgeOfGunpowder(sf::RenderWindow* window_) {
 	std::cout << "Tworze ere Prochu" << std::endl;
+	window = window_;
 	warrior_texture.loadFromFile("textures/Warrior_Age_Of_Gunpowder.png");
 	archer_texture.loadFromFile("textures/Archer_Age_Of_Gunpowder.png");
 	boss_texture.loadFromFile("textures/Boss_Age_Of_Gunpowder.png");
@@ -72,7 +73,7 @@ AgeOfGunpowder::AgeOfGunpowder() {
 // -> TWORZENIE JEDNOSTEK
 
 //Wojownik
-std::unique_ptr<Unit> AgeOfGunpowder::MakeWarrior() {
+std::unique_ptr<Unit> AgeOfGunpowder::MakeWarrior(int side_) {
 	int max_hp = 80;
 	int hp = max_hp;
 	int range = 10;
@@ -81,11 +82,11 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeWarrior() {
 	float dmg_reduction = 1;
 	//std::cout << "Wywoluje wojownika ze statami z ery Prochu" << std::endl;
 	//Warrior warrior(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
-	return move(std::make_unique<Unit>(Warrior(&warrior_texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction)));
+	return move(std::make_unique<Unit>(Warrior(&warrior_texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction, side_, window)));
 };
 
 //£uznik
-std::unique_ptr<Unit> AgeOfGunpowder::MakeArcher() {
+std::unique_ptr<Unit> AgeOfGunpowder::MakeArcher(int side_) {
 	int max_hp = 45;
 	int hp = max_hp;
 	int range = 75;
@@ -94,11 +95,11 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeArcher() {
 	float dmg_reduction = 1;
 	//std::cout << "Wywoluje Lucznika ze statami z ery Prochu" << std::endl;
 	//Archer archer(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
-	return std::make_unique<Unit>(Archer(&archer_texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction));
+	return std::make_unique<Unit>(Archer(&archer_texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction, side_, window));
 }
 
 //Boss
-std::unique_ptr<Unit> AgeOfGunpowder::MakeBoss() {
+std::unique_ptr<Unit> AgeOfGunpowder::MakeBoss(int side_) {
 	int max_hp = 200;
 	int hp = max_hp;
 	int range = 60;
@@ -107,7 +108,7 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeBoss() {
 	float dmg_reduction = 1;
 	//std::cout << "Wywoluje Bossa ze statami z ery Prochu" << std::endl;
 	//Boss boss(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
-	return std::make_unique<Unit>(Boss(&boss_texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction));
+	return std::make_unique<Unit>(Boss(&boss_texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction,side_, window));
 }
 
 

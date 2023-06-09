@@ -11,14 +11,15 @@ protected:
 	sf::Texture warrior_texture;
 	sf::Texture archer_texture;
 	sf::Texture boss_texture;
+	sf::RenderWindow* window;
 public:
 
 	// -> TWORZENIE JEDNOSTEK
 	/*funkcje tworza jednostki z danymi texturami i statystykami dla odpowiedniej ery i zwracaja wskaznik na nie
 	aby zaoszczêdziæ pamiêci */
-	virtual std::unique_ptr<Unit> MakeWarrior() = 0;
-	virtual std::unique_ptr<Unit> MakeArcher() = 0;
-	virtual std::unique_ptr<Unit> MakeBoss() = 0;
+	virtual std::unique_ptr<Unit> MakeWarrior(int side_) = 0;
+	virtual std::unique_ptr<Unit> MakeArcher(int side_) = 0;
+	virtual std::unique_ptr<Unit> MakeBoss(int side_) = 0;
 	~Age() { std::cout << "Niszcze Ere\n"; }
 };
 
@@ -28,13 +29,13 @@ class AgeOfKnights :public Age
 {
 public:
 	// KONSTRUKTOR
-	AgeOfKnights();
+	AgeOfKnights(sf::RenderWindow* window_);
 
 	// -> TWORZENIE JEDNOSTEK
 
-	virtual std::unique_ptr<Unit> MakeWarrior();
-	virtual std::unique_ptr<Unit> MakeArcher();
-	virtual std::unique_ptr<Unit> MakeBoss();
+	virtual std::unique_ptr<Unit> MakeWarrior(int side_);
+	virtual std::unique_ptr<Unit> MakeArcher(int side_);
+	virtual std::unique_ptr<Unit> MakeBoss(int side_);
 };
 
 //	-----AGE OF GUNPOWDER-----
@@ -44,9 +45,9 @@ class AgeOfGunpowder :public Age
 
 public:
 	// KONSTRUKTOR
-	AgeOfGunpowder();
+	AgeOfGunpowder(sf::RenderWindow* window_);
 
-	virtual std::unique_ptr<Unit> MakeWarrior();
-	virtual std::unique_ptr<Unit> MakeArcher();
-	virtual std::unique_ptr<Unit> MakeBoss();
+	virtual std::unique_ptr<Unit> MakeWarrior(int side_);
+	virtual std::unique_ptr<Unit> MakeArcher(int side_);
+	virtual std::unique_ptr<Unit> MakeBoss(int side_);
 };

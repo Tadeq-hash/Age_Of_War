@@ -25,11 +25,11 @@ private:
 
     void initVariables();
 public:
+    int side;
     Age* age_ptr;
 
     //CONSTRUCTOR
-    Player();
-    Player(Age* age1, Age* age2, sf::RenderWindow* window_);
+    Player(Age* age1, Age* age2, sf::RenderWindow* window_,int side_);
 
     //Wektor wskaŸników posiadanych jednostek
     std::vector<Unit*> units;
