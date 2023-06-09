@@ -27,7 +27,7 @@ class Unit
 	float dmg_reduction;
 	float dmg_delay = 0.5;
 public:
-	int side;
+	float side;
 	bool attacking = 0;
 	bool moving = 0;
 	sf::Sprite sprite;
@@ -38,13 +38,14 @@ public:
 	~Unit();
 	virtual void attack(sf::Clock* clock_);
 	void move(sf::Clock* clock_);
-	void update();
+	//void update();
 	void draw(sf::RenderWindow* window_);
 	int return_hp();
 	int getSpeed();
 	int getRange();
 	int getDmg();
 	int getDmgRed();
+	void sufferDmg(int sufferDmg_);
 	
 };
 

@@ -81,6 +81,8 @@ public:
     void move(std::vector<Unit*> units, sf::Clock* clock_);
     bool attack(Unit* atacker, Unit* victim);
     void testOnelyMakeBotWarrior();
+    void testOnelyMakeBotArcher();
+    void testOnelyMakeBotBoss();
 
 };
 

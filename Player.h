@@ -45,8 +45,9 @@ public:
     Age* current_age();
 
     void push_unit(std::unique_ptr<Unit> unit_);
-    void update_units();
+    //void update_units();
     void draw_units();
+    void checkDeads();
 };
 
 #endif // PLAYER_H

@@ -31,7 +31,7 @@ std::unique_ptr<Unit> AgeOfKnights::MakeWarrior(int side_) {
 std::unique_ptr<Unit> AgeOfKnights::MakeArcher(int side_) {
 	int max_hp = 35;
 	int hp = max_hp;
-	int range = 50;
+	int range = 300;
 	int dmg = 5;
 	int speed = 8;
 	float dmg_reduction = 1;

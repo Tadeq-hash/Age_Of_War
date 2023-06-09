@@ -55,19 +55,19 @@ void Player::push_unit(std::unique_ptr<Unit> unit_) {
 }
 
 
-void Player::update_units() {
-    for (int i = 0; i < units.size(); ++i) {
-        units[i]->move(&clock);
-        //Unit* unitptr = units[i].get();
-    }
-    for (int i = 0; i < units.size(); ++i) {
-        units[i]->attack(&clock);
-    }
-    for (int i = 0; i < units.size(); ++i) {
-        units[i]->update();
-    }
-    clock.restart();
-}
+//void Player::update_units() {
+//    for (int i = 0; i < units.size(); ++i) {
+//        units[i]->move(&clock);
+//        //Unit* unitptr = units[i].get();
+//    }
+//    for (int i = 0; i < units.size(); ++i) {
+//        units[i]->attack(&clock);
+//    }
+//    for (int i = 0; i < units.size(); ++i) {
+//        //units[i]->update();
+//    }
+//    clock.restart();
+//}
 
 
 void Player::draw_units() {
@@ -80,3 +80,13 @@ void Player::draw_units() {
         units[i]->draw(window);
     }
 }
+
+void Player::checkDeads() {
+    for (int i = 0; i < units.size(); i++) {
+        if (units[i]->return_hp() <= 0) {
+            units.erase(units.begin() + i);
+            i--;
+        }
+    }
+}
+

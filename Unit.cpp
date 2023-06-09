@@ -15,7 +15,8 @@ Unit::Unit(sf::Texture* texture_, int* max_hp_, int hp_, int* range_, int* dmg_,
 	dmg_reduction = *dmg_reduction_;
 
 	sprite.setTexture(*texture);
-	sprite.setPosition(sf::Vector2f((((side) - 1) / 2) * -(window->getSize().x - sprite.getGlobalBounds().width) + 50, 987 - sprite.getGlobalBounds().height));
+	sprite.setScale(side, 1);
+	sprite.setPosition(sf::Vector2f(((side - 1) / (-2))*(window->getSize().x  - 100) + 50, 987 - sprite.getGlobalBounds().height));
 }
 
 // DESTRUKTOR
@@ -23,12 +24,12 @@ Unit::~Unit() {
 	//std::cout << "Umieram\n";
 }
 
-void Unit::update() {
-	if (hp <= 0) {
-		std::cout << "Zabijam jednostke\n";
-		delete this;
-	}
-}
+//void Unit::update() {
+//	if (hp <= 0) {
+//		std::cout << "Umieram \n";
+//		
+//	}
+//}
 
 void Unit::move(sf::Clock* clock_) {
 	//Wspolczynnik szybkosci pozwalajacy szybciej przeprowadzac symulacje
@@ -47,6 +48,12 @@ int Unit::getSpeed() {
 
 int Unit::getDmg() { return dmg; }
 int Unit::getDmgRed() { return dmg_reduction; }
+
+void Unit::sufferDmg(int sufferDmg_)
+{
+	hp -= sufferDmg_;
+}
+
 int Unit::getRange() { return range; }
 
 int Unit::return_hp() {

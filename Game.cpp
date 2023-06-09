@@ -155,6 +155,12 @@ void Game::PollEvents()
             if (event->key.code == sf::Keyboard::W) {
                 this->testOnelyMakeBotWarrior();
             }
+            if (event->key.code == sf::Keyboard::A) {
+                this->testOnelyMakeBotArcher();
+            }
+            if (event->key.code == sf::Keyboard::B) {
+                this->testOnelyMakeBotBoss();
+            }
         }
 
 
@@ -199,24 +205,32 @@ void Game::render()
 
 void Game::update_units(std::vector<Unit*> units, std::vector<Unit*> enemies, sf::Clock* clock_) {
     for (int n = 0; n < units.size(); n++) {
+        units[n]->attacking = false;
         for (int m = 0; m < enemies.size(); m++) {
             attack(units[n], enemies[m]);
         }
     }
+    for (int n = 0; n < enemies.size(); n++) {
+        enemies[n]->attacking = false;
+        for (int m = 0; m < units.size(); m++) {
+            attack(enemies[n], units[m]);
+        }
+    }
     this->move(units, clock_);
     this->move(enemies, clock_);
+    interface->player->checkDeads();
+    secondInterface->player->checkDeads();
 }
 
 
 bool Game::attack(Unit* attacker, Unit* victim) {
     sf::FloatRect rangeRec = attacker->sprite.getGlobalBounds();
-    rangeRec.left += attacker->getRange() * attacker->side + (((attacker->side) + 1) / 2) * attacker->sprite.getGlobalBounds().width;
+    rangeRec.width += attacker->getRange();
+    if (attacker->side == -1) { rangeRec.left -= attacker->getRange(); }
     if (rangeRec.intersects(victim->sprite.getGlobalBounds())) {
         std::cout << "Mam cie w zasiegu!!!\n";
         attacker->attacking = true;
-    }
-    else {
-        attacker->attacking = false;
+        victim->sufferDmg(attacker->getDmg());
     }
     return 0;
 }
@@ -256,4 +270,12 @@ void Game::move(std::vector<Unit*> units, sf::Clock* clock_) {
 
 void Game::testOnelyMakeBotWarrior() {
     secondInterface->player->push_unit(std::move(secondInterface->player->current_age()->MakeWarrior(secondInterface->player->side)));
+}
+
+void Game::testOnelyMakeBotArcher() {
+    secondInterface->player->push_unit(std::move(secondInterface->player->current_age()->MakeArcher(secondInterface->player->side)));
+}
+
+void Game::testOnelyMakeBotBoss() {
+    secondInterface->player->push_unit(std::move(secondInterface->player->current_age()->MakeBoss(secondInterface->player->side)));
 }
