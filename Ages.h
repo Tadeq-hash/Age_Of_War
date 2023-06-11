@@ -10,11 +10,24 @@ class Age
 
 
 protected:
-	std::vector<sf::IntRect> warrior_rects;
-	std::vector<sf::IntRect> archer_rects;
-	std::vector<sf::IntRect> boss_rects;
+	std::vector<sf::IntRect> warrior_idle_rects;
+	std::vector<sf::IntRect> warrior_move_rects;
+	std::vector<sf::IntRect> warrior_attack_rects;
+	std::vector<sf::IntRect> warrior_die_rects;
+
+	std::vector<sf::IntRect> archer_idle_rects;
+	std::vector<sf::IntRect> archer_move_rects;
+	std::vector<sf::IntRect> archer_attack_rects;
+	std::vector<sf::IntRect> archer_die_rects;
+
+	std::vector<sf::IntRect> boss_idle_rects;
+	std::vector<sf::IntRect> boss_move_rects;
+	std::vector<sf::IntRect> boss_attack_rects;
+	std::vector<sf::IntRect> boss_die_rects;
+
 
 	void initAnimationsRects();
+	
 
 
 protected:

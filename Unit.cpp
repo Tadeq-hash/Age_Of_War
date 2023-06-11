@@ -2,8 +2,24 @@
 
 //   -- KLASA UNIT --
 
+//4 wektory animacji
+
+void Unit::move_animation()
+{
+	
+	this->sprite.setTextureRect(this->move_rects[this->current_frame]);
+	if (this->current_frame == this->move_rects.size())
+	{
+		this->current_frame = 0;
+	}
+	else
+	{
+		this->current_frame++;
+	}
+}
+
 //	KONSTRUKTOR
-Unit::Unit(sf::Texture* texture_, int* max_hp_, int hp_, int* range_, int* dmg_, int* speed_, float* dmg_reduction_, int side_, sf::RenderWindow* window_, std::vector<sf::IntRect>& vec_warrior) {
+Unit::Unit(sf::Texture* texture_, int* max_hp_, int hp_, int* range_, int* dmg_, int* speed_, float* dmg_reduction_, int side_, sf::RenderWindow* window_, std::vector<sf::IntRect>& rects_idle, std::vector<sf::IntRect>& rects_move, std::vector<sf::IntRect>& rects_attack, std::vector<sf::IntRect>& rects_die) {
 	window = window_;
 	side = side_;
 	texture = texture_;
@@ -13,11 +29,14 @@ Unit::Unit(sf::Texture* texture_, int* max_hp_, int hp_, int* range_, int* dmg_,
 	dmg = *dmg_;
 	speed = *speed_;
 	dmg_reduction = *dmg_reduction_;
-
+	this->idle_rects = rects_idle;
+	this->move_rects = rects_move;
+	this->attack_rects = rects_attack;
+	this->die_rects = rects_die;
 
 	sprite.setTexture(*texture);
 	sprite.setScale(side*2, 2);
-	sprite.setTextureRect(vec_warrior[0]);
+	sprite.setTextureRect(idle_rects[0]);
 	sprite.setPosition(sf::Vector2f(((side - 1) / (-2))*(window->getSize().x  - 100) + 50, 987 - sprite.getGlobalBounds().height));
 }
 

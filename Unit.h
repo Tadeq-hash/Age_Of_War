@@ -13,6 +13,8 @@ enum class Unit_type
 	Boss
 };
 
+
+
 //	-- klasa abstraktyjna --
 
 class Unit
@@ -26,7 +28,22 @@ class Unit
 	int speed;
 	float dmg_reduction;
 	float dmg_delay = 0.5;
+
+	//ANIMATIONS
+	std::vector<sf::IntRect> idle_rects;
+	std::vector<sf::IntRect> move_rects;
+	std::vector<sf::IntRect> attack_rects;
+	std::vector<sf::IntRect> die_rects;
+	int current_frame = 0;
+
+
+
 public:
+	
+	//ANIMATIONS 
+	void move_animation();
+
+
 	sf::Clock clockAttack;
 	sf::Clock clockMove;
 	sf::Clock clockDie;
@@ -37,7 +54,7 @@ public:
 	sf::Sprite sprite;
 	Unit_type unit_type;
 	//	KONSTRUKTOR
-	Unit(sf::Texture* texture_, int* max_hp_, int hp_, int* range_, int* dmg_, int* speed_, float* dmg_reduction_, int side_, sf::RenderWindow* window_, std::vector<sf::IntRect>& vec);
+	Unit(sf::Texture* texture_, int* max_hp_, int hp_, int* range_, int* dmg_, int* speed_, float* dmg_reduction_, int side_, sf::RenderWindow* window_, std::vector<sf::IntRect>& rects_idle, std::vector<sf::IntRect>& rects_move, std::vector<sf::IntRect>& rects_attack, std::vector<sf::IntRect>& rects_die);
 	// DESTRUKTOR
 	~Unit();
 	virtual void attack(sf::Clock* clock_);
