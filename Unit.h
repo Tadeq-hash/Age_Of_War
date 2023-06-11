@@ -27,9 +27,13 @@ class Unit
 	float dmg_reduction;
 	float dmg_delay = 0.5;
 public:
+	sf::Clock clockAttack;
+	sf::Clock clockMove;
+	sf::Clock clockDie;
 	float side;
 	bool attacking = 0;
 	bool moving = 0;
+	bool die = 0;
 	sf::Sprite sprite;
 	Unit_type unit_type;
 	//	KONSTRUKTOR
@@ -45,6 +49,7 @@ public:
 	int getRange();
 	int getDmg();
 	int getDmgRed();
+	float getDmgDelay();
 	void sufferDmg(int sufferDmg_);
 	
 };

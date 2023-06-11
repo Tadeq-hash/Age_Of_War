@@ -51,6 +51,11 @@ int Unit::getSpeed() {
 int Unit::getDmg() { return dmg; }
 int Unit::getDmgRed() { return dmg_reduction; }
 
+float Unit::getDmgDelay()
+{
+	return dmg_delay;
+}
+
 void Unit::sufferDmg(int sufferDmg_)
 {
 	hp -= sufferDmg_;

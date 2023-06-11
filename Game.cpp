@@ -230,7 +230,14 @@ bool Game::attack(Unit* attacker, Unit* victim) {
     if (rangeRec.intersects(victim->sprite.getGlobalBounds())) {
         std::cout << "Mam cie w zasiegu!!!\n";
         attacker->attacking = true;
-        victim->sufferDmg(attacker->getDmg());
+        if (attacker->clockAttack.getElapsedTime().asSeconds() >= attacker->getDmgDelay()) {
+            victim->sufferDmg(attacker->getDmg());
+            attacker->clockAttack.restart();
+            std::cout << "Zadaje dmg\n";
+        }
+    }
+    else {
+        attacker->clockAttack.restart();
     }
     return 0;
 }
@@ -263,6 +270,9 @@ void Game::move(std::vector<Unit*> units, sf::Clock* clock_) {
             }
             if (spaceForMove) {
                 units[i]->sprite.move(sf::Vector2f(time.asSeconds() * units[i]->getSpeed() * wsp * units[i]->side, 0));
+            }
+            else {
+
             }
         }
     } 

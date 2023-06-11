@@ -56,10 +56,10 @@ std::unique_ptr<Unit> AgeOfKnights::MakeBoss(int side_) {
 	int speed = 20;
 	float dmg_reduction = 0.7;
 	Boss boss(&boss_texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction, side_, window, warrior_rects);
-	//std::cout << "Wywoluje Bossa ze statami z ery Rycerzy" << std::endl;
+	std::cout << "Wywoluje Bossa ze statami z ery Rycerzy" << std::endl;
 	//Boss boss(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
 	std::unique_ptr<Unit> unit = move(std::make_unique<Unit>(boss));
-	//std::cout << "stworzony uinique_ptr, teraz zwracam\n";
+	std::cout << "stworzony uinique_ptr, teraz zwracam\n";
 	return move(unit);
 }
 
@@ -113,7 +113,7 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeBoss(int side_) {
 	int dmg = 20;
 	int speed = 10;
 	float dmg_reduction = 1;
-	//std::cout << "Wywoluje Bossa ze statami z ery Prochu" << std::endl;
+	std::cout << "Wywoluje Bossa ze statami z ery Prochu" << std::endl;
 	//Boss boss(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
 	return std::make_unique<Unit>(Boss(&boss_texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction,side_, window, warrior_rects));
 }
