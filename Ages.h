@@ -7,6 +7,16 @@
 //Przechowuje statystyki ka¿dego typu jednostki oraz tekstury wyj¹tkowe dla ery
 class Age
 {
+
+
+protected:
+	std::vector<sf::IntRect> warrior_rects;
+	std::vector<sf::IntRect> archer_rects;
+	std::vector<sf::IntRect> boss_rects;
+
+	void initAnimationsRects();
+
+
 protected:
 	sf::Texture warrior_texture;
 	sf::Texture archer_texture;

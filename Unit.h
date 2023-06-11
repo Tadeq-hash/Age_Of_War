@@ -33,7 +33,7 @@ public:
 	sf::Sprite sprite;
 	Unit_type unit_type;
 	//	KONSTRUKTOR
-	Unit(sf::Texture* texture_, int* max_hp_, int hp_, int* range_, int* dmg_, int* speed_, float* dmg_reduction_, int side_, sf::RenderWindow* window_);
+	Unit(sf::Texture* texture_, int* max_hp_, int hp_, int* range_, int* dmg_, int* speed_, float* dmg_reduction_, int side_, sf::RenderWindow* window_, std::vector<sf::IntRect>& vec);
 	// DESTRUKTOR
 	~Unit();
 	virtual void attack(sf::Clock* clock_);
