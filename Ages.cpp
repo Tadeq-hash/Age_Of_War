@@ -123,7 +123,7 @@ void Age::initAnimationsRects()
 		sf::IntRect stay1 = sf::IntRect(12, 190, 26, 40);
 		sf::IntRect stay2 = sf::IntRect(162, 190, 26, 40);
 		sf::IntRect stay3 = sf::IntRect(312, 190, 26, 40);
-		sf::IntRect stay4 = sf::IntRect(462, 90, 26, 40);
+		sf::IntRect stay4 = sf::IntRect(462, 190, 26, 40);
 		sf::IntRect stay5 = sf::IntRect(612, 190, 26, 40);
 		sf::IntRect stay6 = sf::IntRect(762, 190, 26, 40);
 
