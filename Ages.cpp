@@ -7,7 +7,7 @@
 AgeOfKnights::AgeOfKnights(sf::RenderWindow* window_){
 	std::cout << "Tworze ere Rycerzy" << std::endl;
 	window = window_;
-	warrior_texture.loadFromFile("textures/Warrior_Age_Of_Knights.png");
+	warrior_texture.loadFromFile("textures/Warrior_Medieval.png");
 	archer_texture.loadFromFile("textures/Archer_Age_Of_Knights.png");
 	boss_texture.loadFromFile("textures/Boss_Age_Of_Knights.png");
 };
