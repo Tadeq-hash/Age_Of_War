@@ -220,6 +220,13 @@ void Game::update_units(std::vector<Unit*> units, std::vector<Unit*> enemies, sf
     this->move(enemies, clock_);
     interface->player->checkDeads();
     secondInterface->player->checkDeads();
+    for (int n = 0; n < units.size(); n++) {
+        units[n]->Animate();
+    }
+    for (int n = 0; n < enemies.size(); n++) {
+        enemies[n]->Animate();
+    }
+
 }
 
 
@@ -270,9 +277,13 @@ void Game::move(std::vector<Unit*> units, sf::Clock* clock_) {
             }
             if (spaceForMove) {
                 units[i]->sprite.move(sf::Vector2f(time.asSeconds() * units[i]->getSpeed() * wsp * units[i]->side, 0));
+                units[i]->moving = true;
+                units[i]->clockMove.restart();
             }
             else {
-
+                if (units[i]->clockMove.getElapsedTime().asSeconds() >= 0.05) {
+                    units[i]->moving = false;
+                }
             }
         }
     } 

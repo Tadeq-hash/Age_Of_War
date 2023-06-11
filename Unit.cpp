@@ -63,6 +63,34 @@ void Unit::move(sf::Clock* clock_) {
 
 }
 
+void Unit::Animate()
+{
+	if (attacking) {
+		AnimateAtack();
+	}
+	else if (moving) {
+		AnimateMove();
+	}
+	else {
+		AnimateIdle();
+	}
+}
+
+void Unit::AnimateAtack()
+{
+	std::cout << "Animuje Atak\n";
+}
+
+void Unit::AnimateMove()
+{
+	std::cout << "Animuje Ruch\n";
+}
+
+void Unit::AnimateIdle()
+{
+	std::cout << "Animuje Stanie\n";
+}
+
 int Unit::getSpeed() {
 	return speed;
 }

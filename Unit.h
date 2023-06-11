@@ -59,6 +59,14 @@ public:
 	~Unit();
 	virtual void attack(sf::Clock* clock_);
 	void move(sf::Clock* clock_);
+
+
+	void Animate();
+	void AnimateAtack();
+	void AnimateMove();
+	void AnimateIdle();
+
+
 	//void update();
 	void draw(sf::RenderWindow* window_);
 	int return_hp();
