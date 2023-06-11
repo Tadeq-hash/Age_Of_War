@@ -17,9 +17,6 @@ AgeOfKnights::AgeOfKnights(sf::RenderWindow* window_){
 
 // -> TWORZENIE JEDNOSTEK
 
-
-
-
 //Wojownik
 std::unique_ptr<Unit> AgeOfKnights::MakeWarrior(int side_) {
 	int max_hp = 50;
@@ -30,6 +27,7 @@ std::unique_ptr<Unit> AgeOfKnights::MakeWarrior(int side_) {
 	float dmg_reduction = 0.9;
 	
 	//std::cout << "Wywoluje wojownika ze statami z ery Rycerzy" << std::endl;
+	std::cout << this->warrior_move_rects.size() << "\n";
 	Warrior warrior(&warrior_texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction, side_, window, warrior_idle_rects, warrior_move_rects, warrior_attack_rects, warrior_die_rects);
 	return std::make_unique<Unit>(warrior);
 };

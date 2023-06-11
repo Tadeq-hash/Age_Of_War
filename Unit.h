@@ -39,10 +39,6 @@ class Unit
 
 
 public:
-	
-	//ANIMATIONS 
-	void move_animation();
-
 
 	sf::Clock clockAttack;
 	sf::Clock clockMove;
@@ -60,7 +56,9 @@ public:
 	virtual void attack(sf::Clock* clock_);
 	void move(sf::Clock* clock_);
 
+	//ANIMATIONS
 
+	sf::Clock clock_move_animation;
 	void Animate();
 	void AnimateAtack();
 	void AnimateMove();

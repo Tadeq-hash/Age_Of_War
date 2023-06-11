@@ -4,19 +4,7 @@
 
 //4 wektory animacji
 
-void Unit::move_animation()
-{
-	
-	this->sprite.setTextureRect(this->move_rects[this->current_frame]);
-	if (this->current_frame == this->move_rects.size())
-	{
-		this->current_frame = 0;
-	}
-	else
-	{
-		this->current_frame++;
-	}
-}
+
 
 //	KONSTRUKTOR
 Unit::Unit(sf::Texture* texture_, int* max_hp_, int hp_, int* range_, int* dmg_, int* speed_, float* dmg_reduction_, int side_, sf::RenderWindow* window_, std::vector<sf::IntRect>& rects_idle, std::vector<sf::IntRect>& rects_move, std::vector<sf::IntRect>& rects_attack, std::vector<sf::IntRect>& rects_die) {
@@ -83,12 +71,37 @@ void Unit::AnimateAtack()
 
 void Unit::AnimateMove()
 {
-	std::cout << "Animuje Ruch\n";
+	
+	if (this->clock_move_animation.getElapsedTime().asSeconds()>0.2)
+	{
+		this->sprite.setTextureRect(this->move_rects[this->current_frame]);
+		std::cout << current_frame << "\n";
+		if (this->current_frame < this->move_rects.size()-1)
+		{
+			this->current_frame +=1;
+		}
+		else {
+			this->current_frame = 0;	
+		}
+		this->clock_move_animation.restart();
+	}
 }
 
 void Unit::AnimateIdle()
 {
-	std::cout << "Animuje Stanie\n";
+	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.2)
+	{
+		this->sprite.setTextureRect(this->idle_rects[this->current_frame]);
+		std::cout << current_frame << "\n";
+		if (this->current_frame < this->idle_rects.size() - 1)
+		{
+			this->current_frame += 1;
+		}
+		else {
+			this->current_frame = 0;
+		}
+		this->clock_move_animation.restart();
+	}
 }
 
 int Unit::getSpeed() {
