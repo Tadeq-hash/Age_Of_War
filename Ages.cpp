@@ -10,7 +10,8 @@ AgeOfKnights::AgeOfKnights(sf::RenderWindow* window_){
 	warrior_texture.loadFromFile("textures/Warrior_Medieval.png");
 	archer_texture.loadFromFile("textures/boss_medieval.png");
 	boss_texture.loadFromFile("textures/boss_medieval.png");
-	this->initAnimationsRects();
+	this->initAnimationsRects_Medieval();
+	
 	
 
 };
@@ -70,9 +71,10 @@ std::unique_ptr<Unit> AgeOfKnights::MakeBoss(int side_) {
 AgeOfGunpowder::AgeOfGunpowder(sf::RenderWindow* window_) {
 	std::cout << "Tworze ere Prochu" << std::endl;
 	window = window_;
-	warrior_texture.loadFromFile("textures/Warrior_Age_Of_Gunpowder.png");
+	warrior_texture.loadFromFile("textures/Warrior_Medieval.png");
 	archer_texture.loadFromFile("textures/Archer_Age_Of_Gunpowder.png");
 	boss_texture.loadFromFile("textures/Boss_Age_Of_Gunpowder.png");
+	this->initAnimationsRects_Medieval();
 }
 
 // -> TWORZENIE JEDNOSTEK
@@ -82,8 +84,8 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeWarrior(int side_) {
 	int max_hp = 80;
 	int hp = max_hp;
 	int range = 10;
-	int dmg = 9;
-	int speed = 120;
+	int dmg = 150;
+	int speed = 300;
 	float dmg_reduction = 1;
 	//std::cout << "Wywoluje wojownika ze statami z ery Prochu" << std::endl;
 	//Warrior warrior(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
@@ -116,7 +118,7 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeBoss(int side_) {
 	return std::make_unique<Unit>(Boss(&boss_texture, max_hp, hp, range, dmg, speed, dmg_reduction,side_, window, boss_idle_rects, boss_move_rects, boss_attack_rects, boss_die_rects));
 }
 
-void Age::initAnimationsRects()
+void Age::initAnimationsRects_Medieval()
 {
 		//WARRIOR
 		//Stay
@@ -251,6 +253,10 @@ void Age::initAnimationsRects()
 		this->boss_die_rects.emplace_back(dead4_b);
 
 
+}
+
+void Age::initAnimationsRects_Gunpowder()
+{
 }
 
 

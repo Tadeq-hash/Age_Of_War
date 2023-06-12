@@ -26,7 +26,8 @@ protected:
 	std::vector<sf::IntRect> boss_die_rects;
 
 
-	void initAnimationsRects();
+	void initAnimationsRects_Medieval();
+	void initAnimationsRects_Gunpowder();
 	
 
 
