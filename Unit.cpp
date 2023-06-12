@@ -7,21 +7,23 @@
 
 
 //	KONSTRUKTOR
-Unit::Unit(sf::Texture* texture_, int* max_hp_, int hp_, int* range_, int* dmg_, int* speed_, float* dmg_reduction_, int side_, sf::RenderWindow* window_, std::vector<sf::IntRect>& rects_idle, std::vector<sf::IntRect>& rects_move, std::vector<sf::IntRect>& rects_attack, std::vector<sf::IntRect>& rects_die) {
+Unit::Unit(sf::Texture* texture_, int &max_hp_, int &hp_, int &range_, int &dmg_, int &speed_, float &dmg_reduction_, int side_, sf::RenderWindow* window_, std::vector<sf::IntRect>& rects_idle, std::vector<sf::IntRect>& rects_move, std::vector<sf::IntRect>& rects_attack, std::vector<sf::IntRect>& rects_die) {
 	window = window_;
 	side = side_;
 	texture = texture_;
-	max_hp = *max_hp_;
+	max_hp = max_hp_;
 	hp = hp_;
-	range = *range_;
-	dmg = *dmg_;
-	speed = *speed_;
-	dmg_reduction = *dmg_reduction_;
+	range = range_;
+	dmg = dmg_;
+	speed = speed_;
+	std::cout << "speed: " << speed<<"\n";
+	std::cout << "health: " << hp<<"\n";
+	dmg_reduction = dmg_reduction_;
 	this->idle_rects = rects_idle;
 	this->move_rects = rects_move;
 	this->attack_rects = rects_attack;
 	this->die_rects = rects_die;
-	sprite.setOrigin(0, sprite.getGlobalBounds().height);
+	sprite.setOrigin(0,sprite.getGlobalBounds().height);
 	sprite.setTexture(*texture);
 	sprite.setScale(side*2, 2);
 	sprite.setTextureRect(idle_rects[0]);
@@ -51,22 +53,34 @@ void Unit::move(sf::Clock* clock_) {
 
 }
 
-void Unit::Animate()
+void Unit::Animate(int hp)
 {
-	if (attacking) {
-		AnimateAtack();
-	}
-	else if (moving) {
-		AnimateMove();
-	}
-	else {
-		AnimateIdle();
-	}
+	
+		if (hp >5)
+		{
+			if (attacking) {
+				AnimateAtack();
+			}
+			else if (moving) {
+				AnimateMove();
+			}
+
+			else {
+				AnimateIdle();
+			}
+		}
+		else
+		{
+			AnimateDie();
+		}
+	
+	
+
 }
 
 void Unit::AnimateAtack()
 {
-	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.2)
+	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.15)
 	{
 		this->sprite.setTextureRect(this->attack_rects[this->current_frame_attack]);
 		std::cout << current_frame_attack << "\n";
@@ -84,7 +98,7 @@ void Unit::AnimateAtack()
 void Unit::AnimateMove()
 {
 	
-	if (this->clock_move_animation.getElapsedTime().asSeconds()>0.2)
+	if (this->clock_move_animation.getElapsedTime().asSeconds()>0.15)
 	{
 		this->sprite.setTextureRect(this->move_rects[this->current_frame_move]);
 		std::cout << current_frame_move << "\n";
@@ -101,7 +115,7 @@ void Unit::AnimateMove()
 
 void Unit::AnimateIdle()
 {
-	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.2)
+	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.15)
 	{
 		this->sprite.setTextureRect(this->idle_rects[this->current_frame_idle]);
 		std::cout << current_frame_idle << "\n";
@@ -111,6 +125,24 @@ void Unit::AnimateIdle()
 		}
 		else {
 			this->current_frame_idle = 0;
+		}
+		this->clock_move_animation.restart();
+	}
+}
+
+void Unit::AnimateDie()
+{
+	std::cout << "DIEDIEDIE\n";
+	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.1)
+	{
+		this->sprite.setTextureRect(this->die_rects[this->current_frame_die]);
+		std::cout << current_frame_die << "\n";
+		if (this->current_frame_die < this->die_rects.size() - 1)
+		{
+			this->current_frame_die += 1;
+		}
+		else {
+			this->current_frame_die = 0;
 		}
 		this->clock_move_animation.restart();
 	}

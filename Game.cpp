@@ -202,7 +202,6 @@ void Game::render()
 
 
 //Funkcje do obs³ugi jednostek
-
 void Game::update_units(std::vector<Unit*> units, std::vector<Unit*> enemies, sf::Clock* clock_) {
     for (int n = 0; n < units.size(); n++) {
         units[n]->attacking = false;
@@ -221,10 +220,10 @@ void Game::update_units(std::vector<Unit*> units, std::vector<Unit*> enemies, sf
     interface->player->checkDeads();
     secondInterface->player->checkDeads();
     for (int n = 0; n < units.size(); n++) {
-        units[n]->Animate();
+        units[n]->Animate(units[n]->return_hp());
     }
     for (int n = 0; n < enemies.size(); n++) {
-        enemies[n]->Animate();
+        enemies[n]->Animate(enemies[n]->return_hp());
     }
 
 }
@@ -248,7 +247,6 @@ bool Game::attack(Unit* attacker, Unit* victim) {
     }
     return 0;
 }
-
 
 
 void Game::move(std::vector<Unit*> units, sf::Clock* clock_) {

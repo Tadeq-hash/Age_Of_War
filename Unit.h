@@ -37,6 +37,7 @@ class Unit
 	int current_frame_move = 0;
 	int current_frame_idle = 0;
 	int current_frame_attack = 0;
+	int current_frame_die = 0;
 
 
 
@@ -52,7 +53,7 @@ public:
 	sf::Sprite sprite;
 	Unit_type unit_type;
 	//	KONSTRUKTOR
-	Unit(sf::Texture* texture_, int* max_hp_, int hp_, int* range_, int* dmg_, int* speed_, float* dmg_reduction_, int side_, sf::RenderWindow* window_, std::vector<sf::IntRect>& rects_idle, std::vector<sf::IntRect>& rects_move, std::vector<sf::IntRect>& rects_attack, std::vector<sf::IntRect>& rects_die);
+	Unit(sf::Texture* texture_, int &max_hp_, int &hp_, int &range_, int &dmg_, int &speed_, float &dmg_reduction_, int side_, sf::RenderWindow* window_, std::vector<sf::IntRect>& rects_idle, std::vector<sf::IntRect>& rects_move, std::vector<sf::IntRect>& rects_attack, std::vector<sf::IntRect>& rects_die);
 	// DESTRUKTOR
 	~Unit();
 	virtual void attack(sf::Clock* clock_);
@@ -61,10 +62,11 @@ public:
 	//ANIMATIONS
 
 	sf::Clock clock_move_animation;
-	void Animate();
+	void Animate(int hp);
 	void AnimateAtack();
 	void AnimateMove();
 	void AnimateIdle();
+	void AnimateDie();
 
 
 	//void update();
@@ -89,7 +91,6 @@ public:
 	using Unit::Unit;
 
 	Unit_type unit_type = Unit_type::Warrior;
-
 	void attack();
 };
 
