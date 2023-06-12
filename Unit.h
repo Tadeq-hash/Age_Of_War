@@ -34,7 +34,9 @@ class Unit
 	std::vector<sf::IntRect> move_rects;
 	std::vector<sf::IntRect> attack_rects;
 	std::vector<sf::IntRect> die_rects;
-	int current_frame = 0;
+	int current_frame_move = 0;
+	int current_frame_idle = 0;
+	int current_frame_attack = 0;
 
 
 

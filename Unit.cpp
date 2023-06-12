@@ -21,7 +21,7 @@ Unit::Unit(sf::Texture* texture_, int* max_hp_, int hp_, int* range_, int* dmg_,
 	this->move_rects = rects_move;
 	this->attack_rects = rects_attack;
 	this->die_rects = rects_die;
-
+	sprite.setOrigin(0, sprite.getGlobalBounds().height);
 	sprite.setTexture(*texture);
 	sprite.setScale(side*2, 2);
 	sprite.setTextureRect(idle_rects[0]);
@@ -66,7 +66,19 @@ void Unit::Animate()
 
 void Unit::AnimateAtack()
 {
-	std::cout << "Animuje Atak\n";
+	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.2)
+	{
+		this->sprite.setTextureRect(this->attack_rects[this->current_frame_attack]);
+		std::cout << current_frame_attack << "\n";
+		if (this->current_frame_attack < this->attack_rects.size() - 1)
+		{
+			this->current_frame_attack += 1;
+		}
+		else {
+			this->current_frame_attack = 0;
+		}
+		this->clock_move_animation.restart();
+	}
 }
 
 void Unit::AnimateMove()
@@ -74,14 +86,14 @@ void Unit::AnimateMove()
 	
 	if (this->clock_move_animation.getElapsedTime().asSeconds()>0.2)
 	{
-		this->sprite.setTextureRect(this->move_rects[this->current_frame]);
-		std::cout << current_frame << "\n";
-		if (this->current_frame < this->move_rects.size()-1)
+		this->sprite.setTextureRect(this->move_rects[this->current_frame_move]);
+		std::cout << current_frame_move << "\n";
+		if (this->current_frame_move < this->move_rects.size()-1)
 		{
-			this->current_frame +=1;
+			this->current_frame_move +=1;
 		}
 		else {
-			this->current_frame = 0;	
+			this->current_frame_move = 0;	
 		}
 		this->clock_move_animation.restart();
 	}
@@ -91,14 +103,14 @@ void Unit::AnimateIdle()
 {
 	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.2)
 	{
-		this->sprite.setTextureRect(this->idle_rects[this->current_frame]);
-		std::cout << current_frame << "\n";
-		if (this->current_frame < this->idle_rects.size() - 1)
+		this->sprite.setTextureRect(this->idle_rects[this->current_frame_idle]);
+		std::cout << current_frame_idle << "\n";
+		if (this->current_frame_idle < this->idle_rects.size() - 1)
 		{
-			this->current_frame += 1;
+			this->current_frame_idle += 1;
 		}
 		else {
-			this->current_frame = 0;
+			this->current_frame_idle = 0;
 		}
 		this->clock_move_animation.restart();
 	}
