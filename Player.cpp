@@ -83,7 +83,7 @@ void Player::draw_units() {
 
 void Player::checkDeads() {
     for (int i = 0; i < units.size(); i++) {
-        if (units[i]->return_hp() <= 0) {
+        if (units[i]->die == true) {
             units.erase(units.begin() + i);
             i--;
         }

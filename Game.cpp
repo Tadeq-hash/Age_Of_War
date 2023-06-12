@@ -208,12 +208,14 @@ void Game::update_units(std::vector<Unit*> units, std::vector<Unit*> enemies, sf
         for (int m = 0; m < enemies.size(); m++) {
             attack(units[n], enemies[m]);
         }
+        if(units[n]->attacking == false){ units[n]->clockAttack.restart(); }
     }
     for (int n = 0; n < enemies.size(); n++) {
         enemies[n]->attacking = false;
         for (int m = 0; m < units.size(); m++) {
             attack(enemies[n], units[m]);
         }
+        if (enemies[n]->attacking == false) { enemies[n]->clockAttack.restart(); }
     }
     this->move(units, clock_);
     this->move(enemies, clock_);
@@ -236,14 +238,12 @@ bool Game::attack(Unit* attacker, Unit* victim) {
     if (rangeRec.intersects(victim->sprite.getGlobalBounds())) {
         std::cout << "Mam cie w zasiegu!!!\n";
         attacker->attacking = true;
+        std::cout << "Clock: " << attacker->clockAttack.getElapsedTime().asSeconds()<<"\n";
         if (attacker->clockAttack.getElapsedTime().asSeconds() >= attacker->getDmgDelay()) {
             victim->sufferDmg(attacker->getDmg());
-            attacker->clockAttack.restart();
             std::cout << "Zadaje dmg\n";
+            attacker->clockAttack.restart();
         }
-    }
-    else {
-        attacker->clockAttack.restart();
     }
     return 0;
 }

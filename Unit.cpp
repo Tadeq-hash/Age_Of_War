@@ -101,7 +101,7 @@ void Unit::AnimateMove()
 	if (this->clock_move_animation.getElapsedTime().asSeconds()>0.15)
 	{
 		this->sprite.setTextureRect(this->move_rects[this->current_frame_move]);
-		std::cout << current_frame_move << "\n";
+		//std::cout << current_frame_move << "\n";
 		if (this->current_frame_move < this->move_rects.size()-1)
 		{
 			this->current_frame_move +=1;
@@ -118,7 +118,7 @@ void Unit::AnimateIdle()
 	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.15)
 	{
 		this->sprite.setTextureRect(this->idle_rects[this->current_frame_idle]);
-		std::cout << current_frame_idle << "\n";
+		//std::cout << current_frame_idle << "\n";
 		if (this->current_frame_idle < this->idle_rects.size() - 1)
 		{
 			this->current_frame_idle += 1;
@@ -136,13 +136,14 @@ void Unit::AnimateDie()
 	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.1)
 	{
 		this->sprite.setTextureRect(this->die_rects[this->current_frame_die]);
-		std::cout << current_frame_die << "\n";
+		//std::cout << current_frame_die << "\n";
 		if (this->current_frame_die < this->die_rects.size() - 1)
 		{
 			this->current_frame_die += 1;
 		}
 		else {
 			this->current_frame_die = 0;
+			this->die = true;
 		}
 		this->clock_move_animation.restart();
 	}
