@@ -27,7 +27,7 @@ class Unit
 	int dmg;
 	int speed;
 	float dmg_reduction;
-	float dmg_delay = 0.5;
+	float dmg_delay = 1;
 
 	//ANIMATIONS
 	std::vector<sf::IntRect> idle_rects;
