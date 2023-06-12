@@ -9,7 +9,7 @@ AgeOfKnights::AgeOfKnights(sf::RenderWindow* window_){
 	window = window_;
 	warrior_texture.loadFromFile("textures/Warrior_Medieval.png");
 	archer_texture.loadFromFile("textures/boss_medieval.png");
-	boss_texture.loadFromFile("textures/Boss_Age_Of_Knights.png");
+	boss_texture.loadFromFile("textures/boss_medieval.png");
 	this->initAnimationsRects();
 	
 
@@ -225,12 +225,12 @@ void Age::initAnimationsRects()
 
 		//ATTACK
 
-		sf::IntRect atk1_b = sf::IntRect(63, 375, 65, 65);
-		sf::IntRect atk2_b = sf::IntRect(201, 375, 65, 65);
-		sf::IntRect atk3_b = sf::IntRect(336, 375, 65, 65);
-		sf::IntRect atk4_b = sf::IntRect(477, 375, 65, 65);
-		sf::IntRect atk5_b = sf::IntRect(598, 375, 65, 65);
-		sf::IntRect atk6_b = sf::IntRect(779, 375, 65, 65);
+		sf::IntRect atk1_b = sf::IntRect(63, 371, 86, 65);
+		sf::IntRect atk2_b = sf::IntRect(201, 371, 86, 65);
+		sf::IntRect atk3_b = sf::IntRect(336, 371, 86, 65);
+		sf::IntRect atk4_b = sf::IntRect(477, 371, 86, 65);
+		sf::IntRect atk5_b = sf::IntRect(598, 371, 86, 65);
+		sf::IntRect atk6_b = sf::IntRect(779, 371, 86, 65);
 
 		this->boss_attack_rects.emplace_back(atk1_b);
 		this->boss_attack_rects.emplace_back(atk2_b);
