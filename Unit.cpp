@@ -176,32 +176,6 @@ void Unit::attack(sf::Clock* clock_) {}
 
 void Unit::draw(sf::RenderWindow* window_) {
 	window_->draw(sprite);
-	//std::cout << "Narysowalem\n";
-	//std::cout << "Jestem na wspolrzendnych: x: " << sprite.getPosition().x << " y: " << sprite.getPosition().y << std::endl;
+	
 }
-//	-----KLASA WOJOWNIKA-----
 
-// KONSTRUKTOR
-//Warrior::Warrior() { std::cout << "Tworze wojownika" << std::endl; };
-
-// METODY	
-void Warrior::attack() {};
-
-
-//	-----KLASA £UCZNIKA-----
-
-// KONSTRUKTOR
-//Archer::Archer() { std::cout << "Tworze lucznika" << std::endl; };
-
-// METODY	
-void Archer::attack() {};
-
-
-//	-----KLASA BOSS-----
-
-
-// KONSTRUKTOR
-//Boss::Boss() { std::cout << "Tworze Bossa"<<std::endl; };
-
-// METODY
-void Boss::attack() {};

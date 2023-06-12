@@ -91,7 +91,7 @@ public:
 	using Unit::Unit;
 
 	Unit_type unit_type = Unit_type::Warrior;
-	void attack();
+
 };
 
 //	-----KLASA £UCZNIKA-----
@@ -105,7 +105,6 @@ public:
 
 	Unit_type unit_type = Unit_type::Archer;
 
-	void attack();
 };
 
 //	-----KLASA BOSS-----
@@ -119,5 +118,4 @@ public:
 
 	Unit_type unit_type = Unit_type::Boss;
 
-	void attack();
 };
