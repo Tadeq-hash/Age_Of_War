@@ -15,7 +15,7 @@ enum class Unit_type
 
 
 
-//	-- klasa abstraktyjna --
+//	-- klasa wirtualna --
 
 class Unit
 {

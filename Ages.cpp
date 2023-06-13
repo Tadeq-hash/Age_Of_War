@@ -8,7 +8,7 @@ AgeOfKnights::AgeOfKnights(sf::RenderWindow* window_){
 	std::cout << "Tworze ere Rycerzy" << std::endl;
 	window = window_;
 	warrior_texture.loadFromFile("textures/Warrior_Medieval.png");
-	archer_texture.loadFromFile("textures/boss_medieval.png");
+	archer_texture.loadFromFile("textures/archer_medieval.png");
 	boss_texture.loadFromFile("textures/boss_medieval.png");
 	this->initAnimationsRects_Medieval();
 	
@@ -120,7 +120,10 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeBoss(int side_) {
 
 void Age::initAnimationsRects_Medieval()
 {
-		//WARRIOR
+		/*
+			WARRIOR
+		*/
+
 		//Stay
 		sf::IntRect stay1 = sf::IntRect(12, 165, 65, 65);
 		sf::IntRect stay2 = sf::IntRect(162, 165, 65, 65);
@@ -180,9 +183,94 @@ void Age::initAnimationsRects_Medieval()
 		this->warrior_die_rects.emplace_back(dead5);
 		this->warrior_die_rects.emplace_back(dead6);
 		
+		/*
+			ARCHER
+		*/
+
+		//IDLE
+		sf::IntRect idle1_a = sf::IntRect(35, 28, 65, 65);
+		sf::IntRect idle2_a = sf::IntRect(135, 28, 65, 65);
+		sf::IntRect idle3_a = sf::IntRect(235, 28, 65, 65);
+		sf::IntRect idle4_a = sf::IntRect(335, 28, 65, 65);
+		sf::IntRect idle5_a = sf::IntRect(435, 28, 65, 65);
+		sf::IntRect idle6_a = sf::IntRect(535, 28, 65, 65);
+		sf::IntRect idle7_a = sf::IntRect(635, 28, 65, 65);
+		sf::IntRect idle8_a = sf::IntRect(735, 28, 65, 65);
+		sf::IntRect idle9_a = sf::IntRect(835, 28, 65, 65);
+		sf::IntRect idle10_a = sf::IntRect(935, 28, 65, 65);
+
+		this->archer_idle_rects.emplace_back(idle1_a);
+		this->archer_idle_rects.emplace_back(idle2_a);
+		this->archer_idle_rects.emplace_back(idle3_a);
+		this->archer_idle_rects.emplace_back(idle4_a);
+		this->archer_idle_rects.emplace_back(idle5_a);
+		this->archer_idle_rects.emplace_back(idle6_a);
+		this->archer_idle_rects.emplace_back(idle7_a);
+		this->archer_idle_rects.emplace_back(idle8_a);
+		this->archer_idle_rects.emplace_back(idle9_a);
+		this->archer_idle_rects.emplace_back(idle10_a);
+		
+		//RUN
+		sf::IntRect run1_a = sf::IntRect(35, 160, 65, 65);
+		sf::IntRect run2_a = sf::IntRect(133, 160, 65, 65);
+		sf::IntRect run3_a = sf::IntRect(239, 160, 65, 65);
+		sf::IntRect run4_a = sf::IntRect(342, 160, 65, 65);
+		sf::IntRect run5_a = sf::IntRect(438, 160, 65, 65);
+		sf::IntRect run6_a = sf::IntRect(533, 160, 65, 65);
+		sf::IntRect run7_a = sf::IntRect(639, 160, 65, 65);
+		sf::IntRect run8_a = sf::IntRect(743, 160, 65, 65);
+
+		this->archer_move_rects.emplace_back(run1_a);
+		this->archer_move_rects.emplace_back(run2_a);
+		this->archer_move_rects.emplace_back(run3_a);
+		this->archer_move_rects.emplace_back(run4_a);
+		this->archer_move_rects.emplace_back(run5_a);
+		this->archer_move_rects.emplace_back(run6_a);
+		this->archer_move_rects.emplace_back(run7_a);
+		this->archer_move_rects.emplace_back(run8_a);
+
+		//ATTACK
+		sf::IntRect atk1_a = sf::IntRect(41, 307, 65, 65);
+		sf::IntRect atk2_a = sf::IntRect(141, 307, 65, 65);
+		sf::IntRect atk3_a = sf::IntRect(241, 307, 65, 65);
+		sf::IntRect atk4_a = sf::IntRect(340, 307, 65, 65);
+		sf::IntRect atk5_a = sf::IntRect(436, 307, 65, 65);
+		sf::IntRect atk6_a = sf::IntRect(536, 307, 65, 65);
+
+		this->archer_attack_rects.emplace_back(atk1_a);
+		this->archer_attack_rects.emplace_back(atk2_a);
+		this->archer_attack_rects.emplace_back(atk3_a);
+		this->archer_attack_rects.emplace_back(atk4_a);
+		this->archer_attack_rects.emplace_back(atk5_a);
+		this->archer_attack_rects.emplace_back(atk6_a);
+
+		//DEAD
+		sf::IntRect dead1_a = sf::IntRect(36, 454, 65, 65);
+		sf::IntRect dead2_a = sf::IntRect(136, 454, 65, 65);
+		sf::IntRect dead3_a = sf::IntRect(316, 454, 65, 65);
+		sf::IntRect dead4_a = sf::IntRect(460, 454, 65, 65);
+		sf::IntRect dead5_a = sf::IntRect(638, 454, 65, 65);
+		sf::IntRect dead6_a = sf::IntRect(774, 454, 65, 65);
+		sf::IntRect dead7_a = sf::IntRect(945, 454, 65, 65);
+		sf::IntRect dead8_a = sf::IntRect(1073, 454, 65, 65);
+		sf::IntRect dead9_a = sf::IntRect(1205, 454, 65, 65);
+		sf::IntRect dead10_a = sf::IntRect(1361, 454, 65, 65);
+
+		this->archer_die_rects.emplace_back(dead1_a);
+		this->archer_die_rects.emplace_back(dead2_a);
+		this->archer_die_rects.emplace_back(dead3_a);
+		this->archer_die_rects.emplace_back(dead4_a);
+		this->archer_die_rects.emplace_back(dead5_a);
+		this->archer_die_rects.emplace_back(dead6_a);
+		this->archer_die_rects.emplace_back(dead7_a);
+		this->archer_die_rects.emplace_back(dead8_a);
+		this->archer_die_rects.emplace_back(dead9_a);
+		this->archer_die_rects.emplace_back(dead10_a);
 
 
-		//BOSS
+		/*
+			BOSS
+		*/
 		
 		//IDLE
 		sf::IntRect idle1 = sf::IntRect(63, 192, 65, 65);
@@ -202,7 +290,6 @@ void Age::initAnimationsRects_Medieval()
 		this->boss_idle_rects.emplace_back(idle6);
 		this->boss_idle_rects.emplace_back(idle7);
 		this->boss_idle_rects.emplace_back(idle8);
-
 
 
 		//MOVE
