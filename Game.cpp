@@ -120,6 +120,7 @@ void Game::update()
     this->PollEvents();
     this->interface->update();
     this->update_units(interface->player->units, secondInterface->player->units, &clock);
+    this->update_arrows();
     clock.restart();
 }
 
@@ -189,6 +190,7 @@ void Game::render()
 
     this->interface->player->draw_units();
     this->secondInterface->player->draw_units();
+  
 
     //-----------//
 
@@ -200,6 +202,26 @@ void Game::render()
 //-------------//
 
 
+void Game::update_arrows() {
+    interface->player->update_arrows();
+    secondInterface->player->update_arrows();
+    colision_arrows();
+    move_arrows();
+}
+
+void Game::move_arrows() {
+    sf::Time time = clock.getElapsedTime();
+    for (int i = 0; i < interface->player->arrows.size(); i++) {
+        interface->player->arrows[i]->move(time.asSeconds() * (interface->player->arrows[i]->speed) * interface->player->side, 0);
+    }
+    for (int i = 0; i < secondInterface->player->arrows.size(); i++) {
+        secondInterface->player->arrows[i]->move(time.asSeconds() * (secondInterface->player->arrows[i]->speed) * secondInterface->player->side, 0);
+    }
+}
+
+void Game::colision_arrows() {
+
+}
 
 //Funkcje do obs³ugi jednostek
 void Game::update_units(std::vector<Unit*> units, std::vector<Unit*> enemies, sf::Clock* clock_) {
@@ -228,6 +250,7 @@ void Game::update_units(std::vector<Unit*> units, std::vector<Unit*> enemies, sf
         enemies[n]->Animate(enemies[n]->return_hp());
     }
 
+
 }
 
 
@@ -236,13 +259,23 @@ bool Game::attack(Unit* attacker, Unit* victim) {
     rangeRec.width += attacker->getRange();
     if (attacker->side == -1) { rangeRec.left -= attacker->getRange(); }
     if (rangeRec.intersects(victim->sprite.getGlobalBounds())) {
-        std::cout << "Mam cie w zasiegu!!!\n";
+        //std::cout << "Mam cie w zasiegu!!!\n";
         attacker->attacking = true;
-        std::cout << "Clock: " << attacker->clockAttack.getElapsedTime().asSeconds()<<"\n";
+        //std::cout << "Clock: " << attacker->clockAttack.getElapsedTime().asSeconds()<<"\n";
         if (attacker->clockAttack.getElapsedTime().asSeconds() >= attacker->getDmgDelay()) {
-            victim->sufferDmg(attacker->getDmg());
-            std::cout << "Zadaje dmg\n";
-            attacker->clockAttack.restart();
+            if (attacker->unit_type == Unit_type::Archer) {
+                if (interface->player->side == attacker->side) {
+                    interface->player->push_arrow(attacker->MakeArrow());
+                }
+                else if (secondInterface->player->side == attacker->side) {
+                    secondInterface->player->push_arrow(attacker->MakeArrow());
+                }
+                attacker->clockAttack.restart();
+            }else{
+                 victim->sufferDmg(attacker->getDmg());
+                 std::cout << "Zadaje dmg\n";
+                 attacker->clockAttack.restart();
+            }
         }
     }
     return 0;

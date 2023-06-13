@@ -47,6 +47,12 @@ Age* Player::current_age()
     return this->age_ptr;
 }
 
+void Player::push_arrow(std::unique_ptr<Arrow> arrow_) {
+    std::cout << "Odbieram strzale\n";
+    arrows.push_back(arrow_.release());
+    std::cout << "Ilosc strzal w wektorze gracza wynosi: " << arrows.size() << std::endl;
+}
+
 
 void Player::push_unit(std::unique_ptr<Unit> unit_) {
     std::cout << "Odbieram jednostke\n";
@@ -69,6 +75,11 @@ void Player::push_unit(std::unique_ptr<Unit> unit_) {
 //    clock.restart();
 //}
 
+void Player::update_arrows() {
+    for (int i = 0; i < arrows.size(); i++) {
+        arrows[i]->Animate();
+    }
+}
 
 void Player::draw_units() {
     //std::cout << "Rysuje jednostki...\n";
@@ -76,6 +87,9 @@ void Player::draw_units() {
     //if (units.size() > 0) {
     //    std::cout << "Jednostka na 1 miejscu ma hp: " << units[0]->return_hp() << std::endl;
     //}
+    for (int i = 0; i < arrows.size(); i++) {
+        window->draw(*arrows[i]);
+    }
     for (int i = 0; i < units.size(); ++i) {
         units[i]->draw(window);
     }

@@ -6,6 +6,21 @@
 
 //  - klasa wyliczeniowa - 
 	/*Do przycisków*/
+class Arrow : public sf::Sprite {
+	sf::Texture* texture;
+
+	std::vector<sf::IntRect> frames;
+	int current_frame = 0;
+
+public:
+	int side;
+	int speed;
+	int dmg;
+	sf::Clock clock;
+	Arrow() {};
+	Arrow(sf::Texture* tex_, int side_, std::vector<sf::IntRect>& frames_);
+	void Animate();
+};
 enum class Unit_type
 {
 	Warrior,
@@ -17,7 +32,7 @@ enum class Unit_type
 
 //	-- klasa wirtualna --
 
-class Unit
+class Unit :public Arrow
 {
 	sf::RenderWindow* window;
 	sf::Texture* texture;
@@ -28,6 +43,7 @@ class Unit
 	int speed;
 	float dmg_reduction;
 	float dmg_delay = 1;
+
 
 	//ANIMATIONS
 	std::vector<sf::IntRect> idle_rects;
@@ -52,12 +68,16 @@ public:
 	bool die = 0;
 	sf::Sprite sprite;
 	Unit_type unit_type;
+	Arrow* arrow;
+
 	//	KONSTRUKTOR
 	Unit(sf::Texture* texture_, int &max_hp_, int &hp_, int &range_, int &dmg_, int &speed_, float &dmg_reduction_, int side_, sf::RenderWindow* window_, std::vector<sf::IntRect>& rects_idle, std::vector<sf::IntRect>& rects_move, std::vector<sf::IntRect>& rects_attack, std::vector<sf::IntRect>& rects_die);
 	// DESTRUKTOR
 	~Unit();
 	virtual void attack(sf::Clock* clock_);
 	void move(sf::Clock* clock_);
+	std::unique_ptr<Arrow> MakeArrow();
+
 
 	//ANIMATIONS
 
@@ -82,21 +102,7 @@ public:
 };
 
 
-class Arrow : public sf::Sprite {
-	sf::Texture* texture;
 
-	std::vector<sf::IntRect> frames;
-	int current_frame = 0;
-
-public:
-	int side;
-	int speed;
-	int dmg;
-	sf::Clock clock;
-	Arrow(){};
-	Arrow(sf::Texture* tex_, int side_, std::vector<sf::IntRect>& frames_);
-	void Animate();
-};
 	
 
 //	-----KLASA WOJOWNIKA-----
@@ -108,23 +114,19 @@ public:
 	// KONSTRUKTOR
 	using Unit::Unit;
 
-	Unit_type unit_type = Unit_type::Warrior;
 
 };
 
 //	-----KLASA £UCZNIKA-----
 
-class Archer : public Unit, public Arrow
+class Archer : public Unit
 {
 
 public:
-	Arrow* arrow;
 
 	// KONSTRUKTOR
 	using Unit::Unit;
 
-	std::unique_ptr<Arrow> MakeArrow();
-	Unit_type unit_type = Unit_type::Archer;
 
 };
 
@@ -137,6 +139,5 @@ public:
 	// KONSTRUKTOR
 	using Unit::Unit;
 
-	Unit_type unit_type = Unit_type::Boss;
 
 };
