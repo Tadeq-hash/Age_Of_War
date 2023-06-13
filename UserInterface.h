@@ -9,6 +9,9 @@
 class UserInterface
 {
 private:
+
+    sf::Clock clock_money_per_second;
+
     sf::RenderWindow* window;
     sf::Event* event;
     sf::Texture gui;
@@ -94,6 +97,7 @@ private:
     //updating hp,xp from class Player
     void update_xp_bar();
     void update_hp_bar();
+    void update_gold_per_second();
     void updateResources();
 
     /*

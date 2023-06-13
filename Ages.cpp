@@ -83,8 +83,8 @@ AgeOfGunpowder::AgeOfGunpowder(sf::RenderWindow* window_) {
 	window = window_;
 	warrior_texture.loadFromFile("textures/Warrior_Medieval.png");
 	archer_texture.loadFromFile("textures/Archer_Age_Of_Gunpowder.png");
-	boss_texture.loadFromFile("textures/Boss_Age_Of_Gunpowder.png");
-	this->initAnimationsRects_Medieval();
+	boss_texture.loadFromFile("textures/boss_cosmic.png");
+	this -> initAnimationsRects_Gunpowder();
 }
 
 
@@ -100,7 +100,7 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeWarrior(int side_) {
 	float dmg_reduction = 1;
 	//std::cout << "Wywoluje wojownika ze statami z ery Prochu" << std::endl;
 	//Warrior warrior(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
-	return move(std::make_unique<Unit>(Warrior(&warrior_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, warrior_idle_rects, warrior_move_rects, warrior_attack_rects, warrior_die_rects)));
+	return move(std::make_unique<Unit>(Warrior(&warrior_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, warrior_idle_rects_cosmic, warrior_move_rects_cosmic, warrior_attack_rects_cosmic, warrior_die_rects_cosmic)));
 };
 
 //£uznik
@@ -113,7 +113,7 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeArcher(int side_) {
 	float dmg_reduction = 1;
 	//std::cout << "Wywoluje Lucznika ze statami z ery Prochu" << std::endl;
 	//Archer archer(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
-	return std::make_unique<Unit>(Archer(&archer_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, archer_idle_rects, archer_move_rects, archer_attack_rects, archer_die_rects));
+	return std::make_unique<Unit>(Archer(&archer_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, archer_idle_rects_cosmic, archer_move_rects_cosmic, archer_attack_rects_cosmic, archer_die_rects_cosmic));
 }
 
 //Boss
@@ -122,11 +122,11 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeBoss(int side_) {
 	int hp = max_hp;
 	int range = 60;
 	int dmg = 20;
-	int speed = 10;
+	int speed = 130;
 	float dmg_reduction = 1;
 	std::cout << "Wywoluje Bossa ze statami z ery Prochu" << std::endl;
 	//Boss boss(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
-	return std::make_unique<Unit>(Boss(&boss_texture, max_hp, hp, range, dmg, speed, dmg_reduction,side_, window, boss_idle_rects, boss_move_rects, boss_attack_rects, boss_die_rects));
+	return std::make_unique<Unit>(Boss(&boss_texture, max_hp, hp, range, dmg, speed, dmg_reduction,side_, window, boss_idle_rects_cosmic, boss_move_rects_cosmic, boss_attack_rects_cosmic, boss_die_rects_cosmic));
 }
 
 void Age::initAnimationsRects_Medieval()
@@ -362,6 +362,101 @@ void Age::initAnimationsRects_Medieval()
 
 void Age::initAnimationsRects_Gunpowder()
 {
+	/*
+		BOSS
+	*/
+
+	//IDLE
+	sf::IntRect idle1 = sf::IntRect(19, 0, 65, 65);
+	sf::IntRect idle2 = sf::IntRect(94, 0, 65, 65);
+	sf::IntRect idle3 = sf::IntRect(169, 0, 65, 65);
+	sf::IntRect idle4 = sf::IntRect(244, 0, 65, 65);
+	sf::IntRect idle5 = sf::IntRect(319, 0, 65, 65);
+	sf::IntRect idle6 = sf::IntRect(394, 0, 65, 65);
+	sf::IntRect idle7 = sf::IntRect(469, 0, 65, 65);
+	sf::IntRect idle8 = sf::IntRect(544, 0, 65, 65);
+	sf::IntRect idle9 = sf::IntRect(619, 0, 65, 65);
+
+
+	this->boss_idle_rects_cosmic.emplace_back(idle1);
+	this->boss_idle_rects_cosmic.emplace_back(idle2);
+	this->boss_idle_rects_cosmic.emplace_back(idle3);
+	this->boss_idle_rects_cosmic.emplace_back(idle4);
+	this->boss_idle_rects_cosmic.emplace_back(idle5);
+	this->boss_idle_rects_cosmic.emplace_back(idle6);
+	this->boss_idle_rects_cosmic.emplace_back(idle7);
+	this->boss_idle_rects_cosmic.emplace_back(idle8);
+	this->boss_idle_rects_cosmic.emplace_back(idle9);
+
+	//RUN
+	sf::IntRect move1_b = sf::IntRect(19, 78, 65, 65);
+	sf::IntRect move2_b = sf::IntRect(94, 78, 65, 65);
+	sf::IntRect move3_b = sf::IntRect(169, 78, 65, 65);
+	sf::IntRect move4_b = sf::IntRect(244, 78, 65, 65);
+	sf::IntRect move5_b = sf::IntRect(319, 78, 65, 65);
+	sf::IntRect move6_b = sf::IntRect(394, 78, 65, 65);
+
+	this->boss_move_rects_cosmic.emplace_back(move1_b);
+	this->boss_move_rects_cosmic.emplace_back(move2_b);
+	this->boss_move_rects_cosmic.emplace_back(move3_b);
+	this->boss_move_rects_cosmic.emplace_back(move4_b);
+	this->boss_move_rects_cosmic.emplace_back(move5_b);
+	this->boss_move_rects_cosmic.emplace_back(move6_b);
+
+
+
+
+	//ATTACK
+	sf::IntRect atk1_b = sf::IntRect(19, 159, 65, 65);
+	sf::IntRect atk2_b = sf::IntRect(94, 159, 65, 65);
+	sf::IntRect atk3_b = sf::IntRect(169, 159, 65, 65);
+	sf::IntRect atk4_b = sf::IntRect(244, 159, 65, 65);
+	sf::IntRect atk5_b = sf::IntRect(319, 159, 65, 65);
+	sf::IntRect atk6_b = sf::IntRect(394, 159, 65, 65);
+	sf::IntRect atk7_b = sf::IntRect(469, 159, 65, 65);
+	sf::IntRect atk8_b = sf::IntRect(544, 159, 65, 65);
+	sf::IntRect atk9_b = sf::IntRect(619, 159, 65, 65);
+	sf::IntRect atk10_b = sf::IntRect(694, 159, 65, 65);
+	sf::IntRect atk11_b = sf::IntRect(769, 159, 65, 65);
+	sf::IntRect atk12_b = sf::IntRect(844, 159, 65, 65);
+
+
+	this->boss_attack_rects_cosmic.emplace_back(atk1_b);
+	this->boss_attack_rects_cosmic.emplace_back(atk2_b);
+	this->boss_attack_rects_cosmic.emplace_back(atk3_b);
+	this->boss_attack_rects_cosmic.emplace_back(atk4_b);
+	this->boss_attack_rects_cosmic.emplace_back(atk5_b);
+	this->boss_attack_rects_cosmic.emplace_back(atk6_b);
+	this->boss_attack_rects_cosmic.emplace_back(atk7_b);
+	this->boss_attack_rects_cosmic.emplace_back(atk8_b);
+	this->boss_attack_rects_cosmic.emplace_back(atk9_b);
+	this->boss_attack_rects_cosmic.emplace_back(atk10_b);
+	this->boss_attack_rects_cosmic.emplace_back(atk11_b);
+	this->boss_attack_rects_cosmic.emplace_back(atk12_b);
+
+	//DIE
+	sf::IntRect dead1_b = sf::IntRect(19, 319, 65, 65);
+	sf::IntRect dead2_b = sf::IntRect(94, 319, 65, 65);
+	sf::IntRect dead3_b = sf::IntRect(169, 319, 65, 65);
+	sf::IntRect dead4_b = sf::IntRect(244, 319, 65, 65);
+	sf::IntRect dead5_b = sf::IntRect(319, 319, 65, 65);
+	sf::IntRect dead6_b = sf::IntRect(394, 319, 65, 65);
+	sf::IntRect dead7_b = sf::IntRect(469, 319, 65, 65);
+	sf::IntRect dead8_b = sf::IntRect(544, 319, 65, 65);
+	sf::IntRect dead9_b = sf::IntRect(619, 319, 65, 65);
+	
+
+	this->boss_die_rects_cosmic.emplace_back(dead1_b);
+	this->boss_die_rects_cosmic.emplace_back(dead2_b);
+	this->boss_die_rects_cosmic.emplace_back(dead3_b);
+	this->boss_die_rects_cosmic.emplace_back(dead4_b);
+	this->boss_die_rects_cosmic.emplace_back(dead5_b);
+	this->boss_die_rects_cosmic.emplace_back(dead6_b);
+	this->boss_die_rects_cosmic.emplace_back(dead7_b);
+	this->boss_die_rects_cosmic.emplace_back(dead8_b);
+	this->boss_die_rects_cosmic.emplace_back(dead9_b);
+
+
 }
 
 

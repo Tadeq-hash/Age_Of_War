@@ -37,6 +37,7 @@ public:
     //CHANGING RESOURCES IN PLAYER CLASS
     void change_xp(int _xp);
     void change_hp(int _hp);
+    void change_money(int _mone);
 
     //RETURNS ACTUAL RESOURCES
     int current_gold();

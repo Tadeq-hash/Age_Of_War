@@ -13,7 +13,7 @@ Player::Player(Age* age1_, Age* age2_, sf::RenderWindow* window_, int side_)
 void Player::initVariables()
 {
     this->hp = const_hp; // it's 100, because second life of orange bar
-    this->gold_amount = 200;
+    this->gold_amount = 1000;
     this->xp = 20;
 }
 
@@ -25,6 +25,11 @@ void Player::change_xp(int _xp)
 void Player::change_hp(int _hp)
 {
     this->hp = _hp;
+}
+
+void Player::change_money(int _mone)
+{
+    this->gold_amount += _mone;
 }
 
 int Player::current_gold()

@@ -284,6 +284,11 @@ void UserInterface::update_hp_bar()
     }
 }
 
+void UserInterface::update_gold_per_second()
+{
+    this->player->change_money(1);
+}
+
 /*
     ANIMATIONS OF BUTTON 'BLOCKED', 'CONCAVE', 'CONVEX
 */
@@ -434,6 +439,13 @@ void UserInterface::update()
     this->update_xp_bar();
     this->update_hp_bar();
     this->update_all_char();
+
+    if (this->clock_money_per_second.getElapsedTime().asSeconds() > 0.25f)
+    {
+        this->update_gold_per_second();
+        this->clock_money_per_second.restart();
+    }
+   
 }
 
 
@@ -483,15 +495,18 @@ void UserInterface::pollEvents()
             if (this->buttons["warrior"].getGlobalBounds().contains(mouse_position) && this->canAfford(this->warrior_price))
             {
                 this->animate_concave_butt("warrior", "warrior_conc");
+              
 
             }
             if (this->buttons["archer"].getGlobalBounds().contains(mouse_position) && this->canAfford(this->archer_price))
             {
                 this->animate_concave_butt("archer", "archer_conc");
+               
             }
             if (this->buttons["boss"].getGlobalBounds().contains(mouse_position) && this->canAfford(this->boss_price))
             {
                 this->animate_concave_butt("boss", "boss_conc");
+              
             }
             if (this->buttons["upgrade_era"].getGlobalBounds().contains(mouse_position) && this->canUpgrade(const_xp))
             {
@@ -513,12 +528,15 @@ void UserInterface::pollEvents()
         {   //WARRIOR
             this->animate_convex_butt("warrior", "warrior_convex");
             this->INIT_Character(this->buttons, "warrior");
+            this->player->change_money(-this->warrior_price);
         }
 
         if (this->buttons["archer"].getGlobalBounds().contains(mouse_position) && this->canAfford(this->archer_price))
         {   //ARCHER
             this->animate_convex_butt("archer", "archer_convex");
             this->INIT_Character(this->buttons, "archer");
+            this->player->change_money(-this->archer_price);
+
         }
 
 
@@ -527,6 +545,7 @@ void UserInterface::pollEvents()
             //BOSS
             this->animate_convex_butt("boss", "boss_convex");
             this->INIT_Character(this->buttons, "boss");
+            this->player->change_money(-this->boss_price);
         }
 
         if (this->buttons["upgrade_era"].getGlobalBounds().contains(mouse_position) && this->canUpgrade(const_xp))
