@@ -81,6 +81,24 @@ public:
 	
 };
 
+
+class Arrow : public sf::Sprite {
+	sf::Texture* texture;
+
+	std::vector<sf::IntRect> frames;
+	int current_frame = 0;
+
+public:
+	int side;
+	int speed;
+	int dmg;
+	sf::Clock clock;
+	Arrow(){};
+	Arrow(sf::Texture* tex_, int side_, std::vector<sf::IntRect>& frames_);
+	void Animate();
+};
+	
+
 //	-----KLASA WOJOWNIKA-----
 
 class Warrior : public Unit
@@ -96,13 +114,16 @@ public:
 
 //	-----KLASA £UCZNIKA-----
 
-class Archer : public Unit
+class Archer : public Unit, public Arrow
 {
 
 public:
+	Arrow* arrow;
+
 	// KONSTRUKTOR
 	using Unit::Unit;
 
+	std::unique_ptr<Arrow> MakeArrow();
 	Unit_type unit_type = Unit_type::Archer;
 
 };

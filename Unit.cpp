@@ -180,3 +180,36 @@ void Unit::draw(sf::RenderWindow* window_) {
 	
 }
 
+
+
+Arrow::Arrow(sf::Texture* tex_, int side_, std::vector<sf::IntRect>& frames_)
+{
+	side = side_;
+	frames = frames_;
+	texture = tex_;
+	setTexture(*texture);
+	setTextureRect(frames[0]);
+}
+
+void Arrow::Animate() {
+	if (this->clock.getElapsedTime().asSeconds() > 0.15)
+	{
+		setTextureRect(frames[current_frame]);
+		//std::cout << current_frame_move << "\n";
+		if (this->current_frame < this->frames.size() - 1)
+		{
+			this->current_frame += 1;
+		}
+		else {
+			this->current_frame = 0;
+		}
+		this->clock.restart();
+	}
+}
+
+std::unique_ptr<Arrow> Archer::MakeArrow()
+{
+	Arrow arr = *arrow;
+	arr.side = Unit::side;
+	return std::make_unique<Arrow>(arr);
+}

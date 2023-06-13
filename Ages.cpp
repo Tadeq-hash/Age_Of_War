@@ -11,10 +11,19 @@ AgeOfKnights::AgeOfKnights(sf::RenderWindow* window_){
 	archer_texture.loadFromFile("textures/archer_medieval.png");
 	boss_texture.loadFromFile("textures/boss_medieval.png");
 	this->initAnimationsRects_Medieval();
-	
-	
+	this->InitArr();
+}
 
-};
+// -> TWORZENIE SZABLONU STRZA£Y
+
+
+void AgeOfKnights::InitArr()
+{
+	arr = new Arrow(&arrow_texture, 0, arrow_rects);
+	arr->speed = 40;
+	arr->dmg = 10;
+}
+;
 
 // -> TWORZENIE JEDNOSTEK
 
@@ -42,8 +51,9 @@ std::unique_ptr<Unit> AgeOfKnights::MakeArcher(int side_) {
 	int speed = 8;
 	float dmg_reduction = 1;
 	//std::cout << "Wywoluje Lucznika ze statami z ery Rycerzy" << std::endl;
-	//Archer archer(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
-	return std::make_unique<Unit>(Archer(&archer_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, archer_idle_rects, archer_move_rects, archer_attack_rects, archer_die_rects));
+	Archer archer(&archer_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, archer_idle_rects, archer_move_rects, archer_attack_rects, archer_die_rects);
+	archer.arrow = arr;
+	return std::make_unique<Unit>(archer);
 }
 
 //Boss
@@ -76,6 +86,7 @@ AgeOfGunpowder::AgeOfGunpowder(sf::RenderWindow* window_) {
 	boss_texture.loadFromFile("textures/Boss_Age_Of_Gunpowder.png");
 	this->initAnimationsRects_Medieval();
 }
+
 
 // -> TWORZENIE JEDNOSTEK
 
@@ -339,6 +350,13 @@ void Age::initAnimationsRects_Medieval()
 		this->boss_die_rects.emplace_back(dead3_b);
 		this->boss_die_rects.emplace_back(dead4_b);
 
+		//ARROW
+
+		sf::IntRect arrow1 = sf::IntRect(0, 0, 100, 100);
+		sf::IntRect arrow2 = sf::IntRect(10, 0, 100, 100);
+
+		this->arrow_rects.emplace_back(arrow1);
+		this->arrow_rects.emplace_back(arrow2);
 
 }
 

@@ -25,6 +25,7 @@ protected:
 	std::vector<sf::IntRect> boss_attack_rects;
 	std::vector<sf::IntRect> boss_die_rects;
 
+	std::vector<sf::IntRect> arrow_rects;
 
 	void initAnimationsRects_Medieval();
 	void initAnimationsRects_Gunpowder();
@@ -32,11 +33,14 @@ protected:
 
 
 protected:
+	sf::Texture arrow_texture;
 	sf::Texture warrior_texture;
 	sf::Texture archer_texture;
 	sf::Texture boss_texture;
 	sf::RenderWindow* window;
 public:
+	// -> TWORZENIE SZABLONU STRZA£Y
+
 
 	// -> TWORZENIE JEDNOSTEK
 	/*funkcje tworza jednostki z danymi texturami i statystykami dla odpowiedniej ery i zwracaja wskaznik na nie
@@ -55,8 +59,10 @@ public:
 	// KONSTRUKTOR
 	AgeOfKnights(sf::RenderWindow* window_);
 
-	// -> TWORZENIE JEDNOSTEK
+	Arrow* arr;
+	void InitArr();
 
+	// -> TWORZENIE JEDNOSTEK
 	virtual std::unique_ptr<Unit> MakeWarrior(int side_);
 	virtual std::unique_ptr<Unit> MakeArcher(int side_);
 	virtual std::unique_ptr<Unit> MakeBoss(int side_);
