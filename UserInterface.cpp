@@ -528,14 +528,22 @@ void UserInterface::pollEvents()
         {   //WARRIOR
             this->animate_convex_butt("warrior", "warrior_convex");
             this->INIT_Character(this->buttons, "warrior");
-            this->player->change_money(-this->warrior_price);
+            
+            if (this->size_of_vec < 4)
+            {
+                this->player->change_money(-this->warrior_price);
+            }
         }
 
         if (this->buttons["archer"].getGlobalBounds().contains(mouse_position) && this->canAfford(this->archer_price))
         {   //ARCHER
             this->animate_convex_butt("archer", "archer_convex");
             this->INIT_Character(this->buttons, "archer");
-            this->player->change_money(-this->archer_price);
+      
+            if (this->size_of_vec < 4)
+            {
+                this->player->change_money(-this->archer_price);
+            }
 
         }
 
@@ -545,7 +553,12 @@ void UserInterface::pollEvents()
             //BOSS
             this->animate_convex_butt("boss", "boss_convex");
             this->INIT_Character(this->buttons, "boss");
-            this->player->change_money(-this->boss_price);
+            
+            if (this->size_of_vec < 4)
+            {
+                this->player->change_money(-this->boss_price);
+            }
+
         }
 
         if (this->buttons["upgrade_era"].getGlobalBounds().contains(mouse_position) && this->canUpgrade(const_xp))
