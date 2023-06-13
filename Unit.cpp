@@ -16,8 +16,8 @@ Unit::Unit(sf::Texture* texture_, int &max_hp_, int &hp_, int &range_, int &dmg_
 	range = range_;
 	dmg = dmg_;
 	speed = speed_;
-	std::cout << "speed: " << speed<<"\n";
-	std::cout << "health: " << hp<<"\n";
+	//std::cout << "speed: " << speed<<"\n";
+	//std::cout << "health: " << hp<<"\n";
 	dmg_reduction = dmg_reduction_;
 	this->idle_rects = rects_idle;
 	this->move_rects = rects_move;
@@ -83,7 +83,7 @@ void Unit::AnimateAtack()
 	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.15)
 	{
 		this->sprite.setTextureRect(this->attack_rects[this->current_frame_attack]);
-		std::cout << current_frame_attack << "\n";
+		//std::cout << current_frame_attack << "\n";
 		if (this->current_frame_attack < this->attack_rects.size() - 1)
 		{
 			this->current_frame_attack += 1;
@@ -132,7 +132,7 @@ void Unit::AnimateIdle()
 
 void Unit::AnimateDie()
 {
-	std::cout << "DIEDIEDIE\n";
+	//std::cout << "DIEDIEDIE\n";
 	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.1)
 	{
 		this->sprite.setTextureRect(this->die_rects[this->current_frame_die]);
@@ -207,9 +207,11 @@ void Arrow::Animate() {
 	}
 }
 
-std::unique_ptr<Arrow> Archer::MakeArrow()
+std::unique_ptr<Arrow> Unit::MakeArrow()
 {
 	Arrow arr = *arrow;
 	arr.side = Unit::side;
+	arr.setPosition(sprite.getGlobalBounds().left + ((side + 1) / (2))*(-55) + 95, sprite.getGlobalBounds().top + 70);
+	arr.setScale(2 * side, 2);
 	return std::make_unique<Arrow>(arr);
 }

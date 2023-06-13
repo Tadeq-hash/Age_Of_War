@@ -33,6 +33,7 @@ public:
 
     //Wektor wskaŸników posiadanych jednostek
     std::vector<Unit*> units;
+    std::vector<Arrow*> arrows;
 
     //CHANGING RESOURCES IN PLAYER CLASS
     void change_xp(int _xp);
@@ -45,6 +46,8 @@ public:
     int current_hp();
     Age* current_age();
 
+    void update_arrows();
+    void push_arrow(std::unique_ptr<Arrow> arrow_);
     void push_unit(std::unique_ptr<Unit> unit_);
     //void update_units();
     void draw_units();

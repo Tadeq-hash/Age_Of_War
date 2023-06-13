@@ -10,6 +10,7 @@ AgeOfKnights::AgeOfKnights(sf::RenderWindow* window_){
 	warrior_texture.loadFromFile("textures/Warrior_Medieval.png");
 	archer_texture.loadFromFile("textures/archer_medieval.png");
 	boss_texture.loadFromFile("textures/boss_medieval.png");
+	arrow_texture.loadFromFile("textures/arrow.png");
 	this->initAnimationsRects_Medieval();
 	this->InitArr();
 }
@@ -20,7 +21,7 @@ AgeOfKnights::AgeOfKnights(sf::RenderWindow* window_){
 void AgeOfKnights::InitArr()
 {
 	arr = new Arrow(&arrow_texture, 0, arrow_rects);
-	arr->speed = 40;
+	arr->speed = 300;
 	arr->dmg = 10;
 }
 ;
@@ -33,7 +34,7 @@ std::unique_ptr<Unit> AgeOfKnights::MakeWarrior(int side_) {
 	int hp = max_hp;
 	int range = 5;
 	int dmg = 7;
-	int speed = 20;
+	int speed = 40;
 	float dmg_reduction = 0.9;
 	
 	//std::cout << "Wywoluje wojownika ze statami z ery Rycerzy" << std::endl;
@@ -48,11 +49,12 @@ std::unique_ptr<Unit> AgeOfKnights::MakeArcher(int side_) {
 	int hp = max_hp;
 	int range = 300;
 	int dmg = 5;
-	int speed = 8;
+	int speed = 20;
 	float dmg_reduction = 1;
 	//std::cout << "Wywoluje Lucznika ze statami z ery Rycerzy" << std::endl;
 	Archer archer(&archer_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, archer_idle_rects, archer_move_rects, archer_attack_rects, archer_die_rects);
 	archer.arrow = arr;
+	archer.unit_type = Unit_type::Archer;
 	return std::make_unique<Unit>(archer);
 }
 
@@ -352,8 +354,8 @@ void Age::initAnimationsRects_Medieval()
 
 		//ARROW
 
-		sf::IntRect arrow1 = sf::IntRect(0, 0, 100, 100);
-		sf::IntRect arrow2 = sf::IntRect(10, 0, 100, 100);
+		sf::IntRect arrow1 = sf::IntRect(1, 1, 22, 3);
+		sf::IntRect arrow2 = sf::IntRect(25, 1, 22, 3);
 
 		this->arrow_rects.emplace_back(arrow1);
 		this->arrow_rects.emplace_back(arrow2);
