@@ -169,7 +169,7 @@ bool InitCharacter::isSpaceForRespawn() {
 		break;
 	}
 	for (int i = 0; i < player->units.size(); i++) {
-		if (player->units[i]->sprite.getGlobalBounds().intersects(rect_)) {
+		if (player->units[i]->sprite.getGlobalBounds().intersects(rect_) && player->units[i]->unit_type != Unit_type::Base) {
 			return false;
 		}
 	}
