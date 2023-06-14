@@ -10,43 +10,48 @@ class Game
 private:
 
     /*
-      #GAME SETUP
+      ENTRY PRIVATE GAME SETUP
     */
     sf::RenderWindow* window;
     sf::Event* event;
     sf::VideoMode video_size;
     sf::Clock clock;
-
+    
     void InitVariables();
-    void InitWindow();
-    void PollEvents();
     void LoadTextures();
     void LoadFonts();
+    void InitWindow();
+    void PollEvents();
 
-    
-
+private:
 
     /*
-      #TEXTURES
+       BACKGROUND 
     */
-
-
-
-    //background
-private:
     sf::Texture *medieval_background_tex;
     sf::Texture *cosmic_background_tex;
     sf::Sprite *background_sprite;
 
     void InitBackground();
 
-    /*
-        #CLASS USER_INTERFACE INCLUDING BUTTONS
-    */
-    UserInterface* secondInterface;
+private:
 
+    /*
+      AGE TEXTURES
+    */
+
+    AgeOfKnights* age_of_knights;
+    AgeOfGunpowder* age_of_gunpowder;
+
+private:
+
+    /*
+        USER INTERFACE 
+    */
 
     UserInterface* interface;
+    UserInterface* secondInterface;
+   
     sf::Texture* interface_tex;
     sf::Font* digitals;
 
@@ -56,36 +61,41 @@ private:
     void initAges();
 
     /*
-        #VARIABULES
+        TEMP
     */
 
     bool Bot = true;
+
 public:
 
-    //Constructor / Destructor
+    /*
+        CONSTRUCTOR & DESTRUCTOR
+    */
     Game(bool bot_);
     ~Game();
 
 
-    //  ! ! ! !  //
-    // GAME LOOP //
+    /*
+        GAME LOOP
+    */
     void update();
     void render();
     bool getWindowIsOpen();
-    //  ! ! ! !  //
 
 
-    ////Age Textures
-    AgeOfKnights* age_of_knights;
-    AgeOfGunpowder* age_of_gunpowder;
+  
 
-    //Funkcje do obs³ugi jednostek
+    /*
+        UNITS
+    */
     void update_units(std::vector<Unit*> units, std::vector<Unit*> enemies, sf::Clock* clock_);
     void move(std::vector<Unit*> units, sf::Clock* clock_);
     bool attack(Unit* atacker, Unit* victim);
     void update_arrows();
     void move_arrows();
     void colision_arrows();
+    
+    //BOT TESTING   
     void testOnelyMakeBotWarrior();
     void testOnelyMakeBotArcher();
     void testOnelyMakeBotBoss();

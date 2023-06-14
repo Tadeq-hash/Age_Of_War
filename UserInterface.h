@@ -26,14 +26,14 @@ private:
     
 
     /*
-        #BUTTONS
+        BUTTONS
     */
 
     //Map of buttons
     std::map<std::string, sf::Sprite> buttons;
     std::map<std::string, sf::IntRect> buttons_animation_rects;
 
-    //Setup of buttons
+    //BUTTONS SETUP
     void initButtons();          //creating buttons
     void init_animation_rects(); //rects from texture
 
@@ -45,7 +45,7 @@ private:
     bool canUpgrade(int xp_);  //checking if you have enough xp to click button
 
     /*
-        #INTERFACE BACKGROUND *ONLY SPRITE*
+        INTERFACE BACKGROUND *ONLY SPRITE*
     */
     sf::Sprite user_info;
     void init_user_info();
@@ -55,8 +55,6 @@ private:
     */
     void changeAgeBackground();
     
-
-
     /*
         #MONEY
     */
@@ -75,15 +73,15 @@ private:
 
 
     /*
-        #PLAYER RESOURCES / XP & GOLD AMOUNT & HP *Uploading from class Player*
+        PLAYER RESOURCES
     */
 
     sf::Text current_gold;
-    int curr_gold; //taking from class player
-    int curr_xp;   //taking from class player
-    int curr_hp;   //taking from class player
-    bool second_life; //second hp bar
-    int side; //side on the screen
+    int curr_gold; 
+    int curr_xp;   
+    int curr_hp;   
+    bool second_life; 
+    int side;
 
     //xp_bar
     sf::Sprite xp_sprite;
@@ -92,7 +90,7 @@ private:
     sf::Sprite hp_sprite_red;
     sf::Sprite hp_sprite_orange;
 
-    //xp&hp_rects
+    //xp & hp_rects
     sf::IntRect xp_rect;
     sf::IntRect hp_rect_red;
     sf::IntRect hp_rect_orange;
@@ -116,7 +114,7 @@ private:
 
 
     /*
-        !!! INIT CHARACTER !!!
+        INIT CHARACTER QUEUE
     */
     const int max_of_queue = 3;
     std::vector<InitCharacter*> num_of_char_queue;
@@ -125,11 +123,6 @@ private:
 
     //UPDATING LOADING QUEUE, REMOVING CHARACTER, CLEAN IT , CHAOS IN CODE
     void update_all_char();
-
-    /*
-      #Class meth
-    */
-
 
 public:
     Player* player;

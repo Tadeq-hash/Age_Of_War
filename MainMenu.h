@@ -1,64 +1,72 @@
 #ifndef MAINMENU_H
 #define MAINMENU_H
-
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-
 #define max_buttons 4
-
 
 class MainMenu {
 
 private:
-    bool Bot = 0;
-    int MainMenuSelected;
     sf::VideoMode video_mode_size;
     sf::RenderWindow* window;
     sf::Event event;
 
-    //BUTTONS AND FONT
+    bool Bot;
+    int MainMenuSelected;
+
+    /*
+        MENU BUTTONS & FONT
+    */
     sf::Font font;
     sf::Text M_M_Text[max_buttons];
 
-
+    /*
+        PRIVATE METHODS
+    */
     void pollEvents();
     void initVariables();
     void initWindow();
     void loadButtons();
 public:
 
-    //CONSTRUCTOR / DESTRUCTOR
+    /*
+        CONSTRUCTOR & DESTRUCTOR
+    */
     MainMenu();
     ~MainMenu();
 
-    // NAVIGATIN ON MENU //
+    
+    /*
+        MENU ACTIONS
+    */
     void MoveUp();
     void MoveDown();
     int MainMenuPressed();
 
 
-    //-----ENTER FROM MENU----//
-    //GAME
+    /*
+        GAME
+    */
     void Game_run();
-    //
-    //OPTIONS TODO
+    
+    /*
+        OPTIONS
+    */
     void Options_run();
-    //
-    //CREDTIS TODO
+    
+    /*
+        CREDITS
+    */
     void Credits_run();
-    //----------------------//
-
-
-    //----MAIN MENU LOOP----//
+  
+    /*
+        MAIN MENU LOOP
+    */
     bool getWindowIsOpen();
     void update();
     void render();
     void draw(sf::RenderWindow& window);
-    //---------------------//
-
-
-
 };
 
 #endif // MAINMENU_H
