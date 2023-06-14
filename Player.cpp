@@ -112,3 +112,8 @@ void Player::checkDeads() {
     }
 }
 
+void Player::updatePlayerHp()
+{
+    hp = units[0]->return_hp();
+}
+

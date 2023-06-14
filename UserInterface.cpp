@@ -271,6 +271,8 @@ void UserInterface::update_xp_bar()
 //TO THINK ABOUT LOCATION OF HP & XP, METHOD TO REPAIR IN LATER TIME
 void UserInterface::update_hp_bar()
 {
+    player->updatePlayerHp();
+    curr_hp = player->current_hp();
     if (this->curr_hp > 0 && !this->second_life)
     {
         this->hp_sprite_red.setTextureRect(sf::IntRect(72, 22, this->curr_hp - 1, 3));

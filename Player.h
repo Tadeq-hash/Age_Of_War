@@ -53,6 +53,8 @@ public:
     //void update_units();
     void draw_units();
     void checkDeads();
+
+    void updatePlayerHp();
 };
 
 #endif // PLAYER_H
