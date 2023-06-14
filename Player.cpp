@@ -7,7 +7,10 @@ Player::Player(Age* age1_, Age* age2_, sf::RenderWindow* window_, int side_)
     age2 = age2_;
     age_ptr = age1;
     window = window_;
+    side = side_;
     this->side = side_;
+    baza = new Base(window,side);
+    units.push_back(baza);
 }
 
 void Player::initVariables()

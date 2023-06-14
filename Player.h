@@ -22,7 +22,7 @@ private:
     Age* age2;
     sf::RenderWindow* window;
 
-
+    Base* baza;
     void initVariables();
 public:
     int side;

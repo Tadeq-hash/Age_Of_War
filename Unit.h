@@ -25,7 +25,8 @@ enum class Unit_type
 {
 	Warrior,
 	Archer,
-	Boss
+	Boss,
+	Base
 };
 
 
@@ -34,6 +35,7 @@ enum class Unit_type
 
 class Unit :public Arrow
 {
+protected:
 	sf::RenderWindow* window;
 	sf::Texture* texture;
 	int max_hp;
@@ -71,6 +73,7 @@ public:
 	Arrow* arrow;
 
 	//	KONSTRUKTOR
+	Unit() {};
 	Unit(sf::Texture* texture_, int &max_hp_, int &hp_, int &range_, int &dmg_, int &speed_, float &dmg_reduction_, int side_, sf::RenderWindow* window_, std::vector<sf::IntRect>& rects_idle, std::vector<sf::IntRect>& rects_move, std::vector<sf::IntRect>& rects_attack, std::vector<sf::IntRect>& rects_die, float scale);
 	// DESTRUKTOR
 	~Unit();
@@ -139,5 +142,16 @@ public:
 	// KONSTRUKTOR
 	using Unit::Unit;
 
+
+};
+
+class Base : public Unit 
+{
+
+
+public:
+	sf::Texture First_era;
+	sf::Texture Second_era;
+	Base(sf::RenderWindow* window_, float side_);
 
 };

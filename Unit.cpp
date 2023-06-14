@@ -215,3 +215,26 @@ std::unique_ptr<Arrow> Unit::MakeArrow()
 	arr.setScale(2 * side, 2);
 	return std::make_unique<Arrow>(arr);
 }
+
+Base::Base(sf::RenderWindow* window_, float side_)
+{
+	unit_type = Unit_type::Base;
+	window = window_;
+	side = side_;
+	max_hp = 500;
+	hp = max_hp;
+	range = 0;
+	dmg = 0;
+	speed = 0;
+	dmg_reduction = 1;
+	dmg_delay = 1;
+	this->idle_rects.push_back(sf::IntRect(0, 0, 1400, 1000));
+	this->move_rects.push_back(sf::IntRect(0, 0, 1400, 1000));
+	this->attack_rects.push_back(sf::IntRect(0, 0, 1400, 1000));
+	this->die_rects.push_back(sf::IntRect(0, 0, 1400, 1000));
+	First_era.loadFromFile("textures/Base_Age_Of_Knight.jpg");
+	Second_era.loadFromFile("textures/Base_Age_Of_Knight.jpg");
+	sprite.setTexture(First_era);
+	sprite.setScale(0.4, 0.4);
+	sprite.setPosition(10 + ((1-side)/2)*1330, 600);
+}

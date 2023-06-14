@@ -330,7 +330,7 @@ void Game::move(std::vector<Unit*> units, sf::Clock* clock_) {
 
             for (int j = 0; j < units.size(); ++j) {
                 if (units[i] != units[j]) {
-                    if (rec.intersects(units[j]->sprite.getGlobalBounds())) {
+                    if (rec.intersects(units[j]->sprite.getGlobalBounds()) && units[j]->unit_type != Unit_type::Base) {
                         spaceForMove = 0;
                         //std::cout << j<< "\n";
                     }
