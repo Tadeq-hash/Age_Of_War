@@ -23,6 +23,7 @@ void AgeOfKnights::InitArr()
 	arr = new Arrow(&arrow_texture, 0, arrow_rects);
 	arr->speed = 300;
 	arr->dmg = 10;
+	
 }
 ;
 
@@ -36,10 +37,11 @@ std::unique_ptr<Unit> AgeOfKnights::MakeWarrior(int side_) {
 	int dmg = 7;
 	int speed = 40;
 	float dmg_reduction = 0.9;
+	float scale = 2;
 	
 	//std::cout << "Wywoluje wojownika ze statami z ery Rycerzy" << std::endl;
 	std::cout << this->warrior_move_rects.size() << "\n";
-	Warrior warrior(&warrior_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, warrior_idle_rects, warrior_move_rects, warrior_attack_rects, warrior_die_rects);
+	Warrior warrior(&warrior_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, warrior_idle_rects, warrior_move_rects, warrior_attack_rects, warrior_die_rects, scale);
 	return std::make_unique<Unit>(warrior);
 };
 
@@ -51,8 +53,10 @@ std::unique_ptr<Unit> AgeOfKnights::MakeArcher(int side_) {
 	int dmg = 5;
 	int speed = 20;
 	float dmg_reduction = 1;
+	float scale = 2.2;
+
 	//std::cout << "Wywoluje Lucznika ze statami z ery Rycerzy" << std::endl;
-	Archer archer(&archer_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, archer_idle_rects, archer_move_rects, archer_attack_rects, archer_die_rects);
+	Archer archer(&archer_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, archer_idle_rects, archer_move_rects, archer_attack_rects, archer_die_rects, scale);
 	archer.arrow = arr;
 	archer.unit_type = Unit_type::Archer;
 	return std::make_unique<Unit>(archer);
@@ -66,7 +70,9 @@ std::unique_ptr<Unit> AgeOfKnights::MakeBoss(int side_) {
 	int dmg = 15;
 	int speed = 20;
 	float dmg_reduction = 0.7;
-	Boss boss(&boss_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, boss_idle_rects, boss_move_rects, boss_attack_rects, boss_die_rects);
+	float scale = 2;
+
+	Boss boss(&boss_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, boss_idle_rects, boss_move_rects, boss_attack_rects, boss_die_rects, scale);
 	std::cout << "Wywoluje Bossa ze statami z ery Rycerzy" << std::endl;
 	//Boss boss(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
 	std::unique_ptr<Unit> unit = move(std::make_unique<Unit>(boss));
@@ -83,8 +89,8 @@ std::unique_ptr<Unit> AgeOfKnights::MakeBoss(int side_) {
 AgeOfGunpowder::AgeOfGunpowder(sf::RenderWindow* window_) {
 	std::cout << "Tworze ere Prochu" << std::endl;
 	window = window_;
-	warrior_texture.loadFromFile("textures/Warrior_Medieval.png");
-	archer_texture.loadFromFile("textures/Archer_Age_Of_Gunpowder.png");
+	warrior_texture.loadFromFile("textures/warrior_cosmic.png");
+	archer_texture.loadFromFile("textures/archer_cosmic.png");
 	boss_texture.loadFromFile("textures/boss_cosmic.png");
 	this -> initAnimationsRects_Gunpowder();
 }
@@ -97,12 +103,13 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeWarrior(int side_) {
 	int max_hp = 80;
 	int hp = max_hp;
 	int range = 10;
-	int dmg = 150;
-	int speed = 300;
+	int dmg = 15;
+	int speed = 40;
 	float dmg_reduction = 1;
+	float scale = 2.5;
 	//std::cout << "Wywoluje wojownika ze statami z ery Prochu" << std::endl;
 	//Warrior warrior(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
-	return move(std::make_unique<Unit>(Warrior(&warrior_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, warrior_idle_rects_cosmic, warrior_move_rects_cosmic, warrior_attack_rects_cosmic, warrior_die_rects_cosmic)));
+	return move(std::make_unique<Unit>(Warrior(&warrior_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, warrior_idle_rects_cosmic, warrior_move_rects_cosmic, warrior_attack_rects_cosmic, warrior_die_rects_cosmic,scale)));
 };
 
 //£uznik
@@ -111,11 +118,12 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeArcher(int side_) {
 	int hp = max_hp;
 	int range = 75;
 	int dmg = 8;
-	int speed = 10;
+	int speed = 40;
 	float dmg_reduction = 1;
+	float scale = 2.4;
 	//std::cout << "Wywoluje Lucznika ze statami z ery Prochu" << std::endl;
 	//Archer archer(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
-	return std::make_unique<Unit>(Archer(&archer_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, archer_idle_rects_cosmic, archer_move_rects_cosmic, archer_attack_rects_cosmic, archer_die_rects_cosmic));
+	return std::make_unique<Unit>(Archer(&archer_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, archer_idle_rects_cosmic, archer_move_rects_cosmic, archer_attack_rects_cosmic, archer_die_rects_cosmic,scale));
 }
 
 //Boss
@@ -126,9 +134,11 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeBoss(int side_) {
 	int dmg = 20;
 	int speed = 130;
 	float dmg_reduction = 1;
+	float scale = 2.5;
 	std::cout << "Wywoluje Bossa ze statami z ery Prochu" << std::endl;
+
 	//Boss boss(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
-	return std::make_unique<Unit>(Boss(&boss_texture, max_hp, hp, range, dmg, speed, dmg_reduction,side_, window, boss_idle_rects_cosmic, boss_move_rects_cosmic, boss_attack_rects_cosmic, boss_die_rects_cosmic));
+	return std::make_unique<Unit>(Boss(&boss_texture, max_hp, hp, range, dmg, speed, dmg_reduction,side_, window, boss_idle_rects_cosmic, boss_move_rects_cosmic, boss_attack_rects_cosmic, boss_die_rects_cosmic,scale));
 }
 
 void Age::initAnimationsRects_Medieval()
@@ -365,7 +375,7 @@ void Age::initAnimationsRects_Medieval()
 void Age::initAnimationsRects_Gunpowder()
 {
 	/*
-		BOSS
+		BOSS COSMIC
 	*/
 
 	//IDLE
@@ -458,6 +468,191 @@ void Age::initAnimationsRects_Gunpowder()
 	this->boss_die_rects_cosmic.emplace_back(dead8_b);
 	this->boss_die_rects_cosmic.emplace_back(dead9_b);
 
+	/*
+		ARCHER COSMIC
+	*/
+
+	sf::IntRect idle1_a = sf::IntRect(181, 272, 65, 65);
+	sf::IntRect idle2_a = sf::IntRect(246, 272, 65, 65);
+	sf::IntRect idle3_a = sf::IntRect(311, 272, 65, 65);
+	sf::IntRect idle4_a = sf::IntRect(376, 272, 65, 65);
+
+
+	this->archer_idle_rects_cosmic.emplace_back(idle1_a);
+	this->archer_idle_rects_cosmic.emplace_back(idle2_a);
+	this->archer_idle_rects_cosmic.emplace_back(idle3_a);
+	this->archer_idle_rects_cosmic.emplace_back(idle4_a);
+
+
+	//RUN
+	sf::IntRect run1_a = sf::IntRect(181, 77, 65, 65);
+	sf::IntRect run2_a = sf::IntRect(246, 77, 65, 65);
+	sf::IntRect run3_a = sf::IntRect(311, 77, 65, 65);
+	sf::IntRect run4_a = sf::IntRect(376, 77, 65, 65);
+	sf::IntRect run5_a = sf::IntRect(441, 77, 65, 65);
+	sf::IntRect run6_a = sf::IntRect(506, 77, 65, 65);
+	sf::IntRect run7_a = sf::IntRect(571, 77, 65, 65);
+	sf::IntRect run8_a = sf::IntRect(636, 77, 65, 65);
+	
+
+	this->archer_move_rects_cosmic.emplace_back(run1_a);
+	this->archer_move_rects_cosmic.emplace_back(run2_a);
+	this->archer_move_rects_cosmic.emplace_back(run3_a);
+	this->archer_move_rects_cosmic.emplace_back(run4_a);
+	this->archer_move_rects_cosmic.emplace_back(run5_a);
+	this->archer_move_rects_cosmic.emplace_back(run6_a);
+	this->archer_move_rects_cosmic.emplace_back(run7_a);
+	this->archer_move_rects_cosmic.emplace_back(run8_a);
+	
+
+	//ATTACK
+	sf::IntRect atk1_a = sf::IntRect(181, 207, 65, 65);
+	sf::IntRect atk2_a = sf::IntRect(246, 207, 65, 65);
+	sf::IntRect atk3_a = sf::IntRect(311, 207, 65, 65);
+	sf::IntRect atk4_a = sf::IntRect(376, 207, 65, 65);
+	sf::IntRect atk5_a = sf::IntRect(441, 207, 65, 65);
+	sf::IntRect atk6_a = sf::IntRect(506, 207, 65, 65);
+	sf::IntRect atk7_a = sf::IntRect(571, 207, 65, 65);
+
+
+	this->archer_attack_rects_cosmic.emplace_back(atk1_a);
+	this->archer_attack_rects_cosmic.emplace_back(atk2_a);
+	this->archer_attack_rects_cosmic.emplace_back(atk3_a);
+	this->archer_attack_rects_cosmic.emplace_back(atk4_a);
+	this->archer_attack_rects_cosmic.emplace_back(atk5_a);
+	this->archer_attack_rects_cosmic.emplace_back(atk6_a);
+	this->archer_attack_rects_cosmic.emplace_back(atk7_a);
+
+
+	//DEAD
+	sf::IntRect dead1_a = sf::IntRect(181, 142, 65, 65);
+	sf::IntRect dead2_a = sf::IntRect(246, 142, 65, 65);
+	sf::IntRect dead3_a = sf::IntRect(311, 142, 65, 65);
+	sf::IntRect dead4_a = sf::IntRect(376, 142, 65, 65);
+	sf::IntRect dead5_a = sf::IntRect(441, 142, 65, 65);
+	sf::IntRect dead6_a = sf::IntRect(506, 142, 65, 65);
+	sf::IntRect dead7_a = sf::IntRect(571, 142, 65, 65);
+	sf::IntRect dead8_a = sf::IntRect(636, 142, 65, 65);
+
+
+	this->archer_die_rects_cosmic.emplace_back(dead1_a);
+	this->archer_die_rects_cosmic.emplace_back(dead2_a);
+	this->archer_die_rects_cosmic.emplace_back(dead3_a);
+	this->archer_die_rects_cosmic.emplace_back(dead4_a);
+	this->archer_die_rects_cosmic.emplace_back(dead5_a);
+	this->archer_die_rects_cosmic.emplace_back(dead6_a);
+	this->archer_die_rects_cosmic.emplace_back(dead7_a);
+	this->archer_die_rects_cosmic.emplace_back(dead8_a);
+
+	/*
+	  WARRIOR SKELETON
+	*/
+	//IDLE
+	
+	sf::IntRect stay1 = sf::IntRect(20, 289, 65, 65);
+	sf::IntRect stay2 = sf::IntRect(85, 289, 65, 65);
+	sf::IntRect stay3 = sf::IntRect(150, 289, 65, 65);
+	sf::IntRect stay4 = sf::IntRect(215, 289, 65, 65);
+
+	this->warrior_idle_rects_cosmic.emplace_back(stay1);
+	this->warrior_idle_rects_cosmic.emplace_back(stay2);
+	this->warrior_idle_rects_cosmic.emplace_back(stay3);
+	this->warrior_idle_rects_cosmic.emplace_back(stay4);
+
+
+
+	//RUN
+	sf::IntRect run1 = sf::IntRect(20, 195, 65, 65);
+	sf::IntRect run2 = sf::IntRect(85, 195, 65, 65);
+	sf::IntRect run3 = sf::IntRect(150, 195, 65, 65);
+	sf::IntRect run4 = sf::IntRect(215, 195, 65, 65);
+	sf::IntRect run5 = sf::IntRect(280, 195, 65, 65);
+	sf::IntRect run6 = sf::IntRect(345, 195, 65, 65);
+	sf::IntRect run7 = sf::IntRect(410, 195, 65, 65);
+	sf::IntRect run8 = sf::IntRect(475, 195, 65, 65);
+	sf::IntRect run9 = sf::IntRect(540, 195, 65, 65);
+	sf::IntRect run10 = sf::IntRect(605, 195, 65, 65);
+	sf::IntRect run11 = sf::IntRect(670, 195, 65, 65);
+	sf::IntRect run12 = sf::IntRect(735, 195, 65, 65);
+	
+
+
+	this->warrior_move_rects_cosmic.emplace_back(run1);
+	this->warrior_move_rects_cosmic.emplace_back(run2);
+	this->warrior_move_rects_cosmic.emplace_back(run3);
+	this->warrior_move_rects_cosmic.emplace_back(run4);
+	this->warrior_move_rects_cosmic.emplace_back(run5);
+	this->warrior_move_rects_cosmic.emplace_back(run6);
+	this->warrior_move_rects_cosmic.emplace_back(run7);
+	this->warrior_move_rects_cosmic.emplace_back(run8);
+	this->warrior_move_rects_cosmic.emplace_back(run9);
+	this->warrior_move_rects_cosmic.emplace_back(run10);
+	this->warrior_move_rects_cosmic.emplace_back(run11);
+	this->warrior_move_rects_cosmic.emplace_back(run12);
+
+
+
+
+	//ATTACK
+	sf::IntRect atk1 = sf::IntRect(20, 22, 65, 65);
+	sf::IntRect atk2 = sf::IntRect(85, 22, 65, 65);
+	sf::IntRect atk3 = sf::IntRect(150, 22, 65, 65);
+	sf::IntRect atk4 = sf::IntRect(215, 22, 65, 65);
+	sf::IntRect atk5 = sf::IntRect(280, 22, 65, 65);
+	sf::IntRect atk6 = sf::IntRect(345, 22, 65, 65);
+	sf::IntRect atk7 = sf::IntRect(410, 22, 65, 65);
+	sf::IntRect atk8 = sf::IntRect(475, 22, 65, 65);
+	sf::IntRect atk9 = sf::IntRect(540, 22, 65, 65);
+	sf::IntRect atk10 = sf::IntRect(605, 22, 65, 65);
+	sf::IntRect atk11 = sf::IntRect(670, 22, 65, 65);
+	sf::IntRect atk12 = sf::IntRect(735, 22, 65, 65);
+	sf::IntRect atk13 = sf::IntRect(800, 22, 65, 65);
+	
+
+	this->warrior_attack_rects_cosmic.emplace_back(atk1);
+	this->warrior_attack_rects_cosmic.emplace_back(atk2);
+	this->warrior_attack_rects_cosmic.emplace_back(atk3);
+	this->warrior_attack_rects_cosmic.emplace_back(atk4);
+	this->warrior_attack_rects_cosmic.emplace_back(atk5);
+	this->warrior_attack_rects_cosmic.emplace_back(atk6);
+	this->warrior_attack_rects_cosmic.emplace_back(atk7);
+	this->warrior_attack_rects_cosmic.emplace_back(atk8);
+	this->warrior_attack_rects_cosmic.emplace_back(atk9);
+	this->warrior_attack_rects_cosmic.emplace_back(atk10);
+	this->warrior_attack_rects_cosmic.emplace_back(atk11);
+	this->warrior_attack_rects_cosmic.emplace_back(atk12);
+	this->warrior_attack_rects_cosmic.emplace_back(atk13);
+
+
+	//DEATH
+	sf::IntRect dead1 = sf::IntRect(20, 105, 65, 65);
+	sf::IntRect dead2 = sf::IntRect(85, 105, 65, 65);
+	sf::IntRect dead3 = sf::IntRect(150, 105, 65, 65);
+	sf::IntRect dead4 = sf::IntRect(215, 105, 65, 65);
+	sf::IntRect dead5 = sf::IntRect(280, 105, 65, 65);
+	sf::IntRect dead6 = sf::IntRect(345, 105, 65, 65);
+	sf::IntRect dead7 = sf::IntRect(410, 105, 65, 65);
+	sf::IntRect dead8 = sf::IntRect(475, 105, 65, 65);
+	sf::IntRect dead9 = sf::IntRect(540, 105, 65, 65);
+	sf::IntRect dead10 = sf::IntRect(605, 105, 65, 65);
+	sf::IntRect dead11 = sf::IntRect(670, 105, 65, 65);
+	sf::IntRect dead12 = sf::IntRect(735, 105, 65, 65);
+	sf::IntRect dead13 = sf::IntRect(800, 105, 65, 65);
+	
+
+	this->warrior_die_rects_cosmic.emplace_back(dead1);
+	this->warrior_die_rects_cosmic.emplace_back(dead2);
+	this->warrior_die_rects_cosmic.emplace_back(dead3);
+	this->warrior_die_rects_cosmic.emplace_back(dead4);
+	this->warrior_die_rects_cosmic.emplace_back(dead5);
+	this->warrior_die_rects_cosmic.emplace_back(dead6);
+	this->warrior_die_rects_cosmic.emplace_back(dead7);
+	this->warrior_die_rects_cosmic.emplace_back(dead8);
+	this->warrior_die_rects_cosmic.emplace_back(dead9);
+	this->warrior_die_rects_cosmic.emplace_back(dead10);
+	this->warrior_die_rects_cosmic.emplace_back(dead11);
+	this->warrior_die_rects_cosmic.emplace_back(dead12);
+	this->warrior_die_rects_cosmic.emplace_back(dead13);
 
 }
 

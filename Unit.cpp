@@ -7,7 +7,7 @@
 
 
 //	KONSTRUKTOR
-Unit::Unit(sf::Texture* texture_, int &max_hp_, int &hp_, int &range_, int &dmg_, int &speed_, float &dmg_reduction_, int side_, sf::RenderWindow* window_, std::vector<sf::IntRect>& rects_idle, std::vector<sf::IntRect>& rects_move, std::vector<sf::IntRect>& rects_attack, std::vector<sf::IntRect>& rects_die) {
+Unit::Unit(sf::Texture* texture_, int &max_hp_, int &hp_, int &range_, int &dmg_, int &speed_, float &dmg_reduction_, int side_, sf::RenderWindow* window_, std::vector<sf::IntRect>& rects_idle, std::vector<sf::IntRect>& rects_move, std::vector<sf::IntRect>& rects_attack, std::vector<sf::IntRect>& rects_die, float scale) {
 	window = window_;
 	side = side_;
 	texture = texture_;
@@ -25,7 +25,7 @@ Unit::Unit(sf::Texture* texture_, int &max_hp_, int &hp_, int &range_, int &dmg_
 	this->die_rects = rects_die;
 	sprite.setOrigin(0,sprite.getGlobalBounds().height);
 	sprite.setTexture(*texture);
-	sprite.setScale(side*2, 2);
+	sprite.setScale(side*scale, scale);
 	sprite.setTextureRect(idle_rects[0]);
 	sprite.setPosition(sf::Vector2f(((side - 1) / (-2))*(window->getSize().x  - 100) + 50, 987 - sprite.getGlobalBounds().height));
 }
