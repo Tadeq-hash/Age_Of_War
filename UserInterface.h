@@ -6,12 +6,12 @@
 #include "Player.h"
 #include "InitCharacter.h"
 
-class UserInterface
+class UserInterface 
 {
 private:
 
     sf::Clock clock_money_per_second;
-
+    
     sf::RenderWindow* window;
     sf::Event* event;
     sf::Texture gui;
@@ -20,6 +20,11 @@ private:
 
     Age* age1;
     Age* age2;
+    
+    sf::Texture *cosmic_era_tex;
+    sf::Sprite *background_sprite;
+    
+
     /*
         #BUTTONS
     */
@@ -27,6 +32,7 @@ private:
     //Map of buttons
     std::map<std::string, sf::Sprite> buttons;
     std::map<std::string, sf::IntRect> buttons_animation_rects;
+
     //Setup of buttons
     void initButtons();          //creating buttons
     void init_animation_rects(); //rects from texture
@@ -43,6 +49,12 @@ private:
     */
     sf::Sprite user_info;
     void init_user_info();
+
+    /*
+        GAME BACKGROUND
+    */
+    void changeAgeBackground();
+    
 
 
     /*
@@ -100,6 +112,9 @@ private:
     void update_gold_per_second();
     void updateResources();
 
+    //update background
+
+
     /*
         !!! INIT CHARACTER !!!
     */
@@ -119,7 +134,7 @@ private:
 public:
     Player* player;
     //constructor & destructor
-    UserInterface(sf::Texture* texture, sf::RenderWindow* window_, sf::Event* event_, sf::Font* font_, Age* age1_, Age* age2_, int side_);
+    UserInterface(sf::Texture* texture, sf::RenderWindow* window_, sf::Event* event_, sf::Font* font_, Age* age1_, Age* age2_, int side_, sf::Sprite *sprite, sf::Texture *tex);
     ~UserInterface();
 
     void drawInterface();

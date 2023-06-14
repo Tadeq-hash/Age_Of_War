@@ -92,6 +92,7 @@ AgeOfGunpowder::AgeOfGunpowder(sf::RenderWindow* window_) {
 	warrior_texture.loadFromFile("textures/warrior_cosmic.png");
 	archer_texture.loadFromFile("textures/archer_cosmic.png");
 	boss_texture.loadFromFile("textures/boss_cosmic.png");
+
 	this -> initAnimationsRects_Gunpowder();
 }
 

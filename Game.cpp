@@ -9,17 +9,29 @@ void Game::InitVariables()
     this->event = nullptr;
     this->interface_tex = nullptr;
     this->secondInterface = nullptr;
+    this->medieval_background_tex = nullptr;
+    this->cosmic_background_tex = nullptr;
     this->interface = nullptr;
     this->window = nullptr;
     this->digitals = nullptr;
     this->video_size = this->video_size.getDesktopMode();
+    this->background_sprite = new sf::Sprite();
+    this->cosmic_background_tex = new sf::Texture();
+    this->medieval_background_tex = new sf::Texture();
 }
 
 //TEXTURES
 void Game::LoadTextures()
 {
     //background tex
-    if (!medieval_back_tex.loadFromFile("textures/background_medieval.png"))
+    
+
+    if (!medieval_background_tex->loadFromFile("textures/background_medieval.png"))
+    {
+        std::cout << "Couldn't load texture 'background'\n";
+    }
+
+    if (!cosmic_background_tex->loadFromFile("textures/cosmic_background.png"))
     {
         std::cout << "Couldn't load texture 'background'\n";
     }
@@ -44,6 +56,8 @@ void Game::LoadFonts()
         std::cout << "couldn't load font\n";
     }
 }
+
+
 
 //WINDOW
 void Game::InitWindow()
@@ -85,12 +99,12 @@ bool Game::getWindowIsOpen()
 //BACKGROUND
 void Game::InitBackground()
 {
-    this->medieval_back_sprite.setTexture(this->medieval_back_tex);
+    this->background_sprite->setTexture(*medieval_background_tex);
 }
 //BUTTONS
 void Game::initButtons()
 {
-    this->interface = new UserInterface(this->interface_tex, this->window, this->event, this->digitals, age_of_knights, age_of_gunpowder, 1);
+    this->interface = new UserInterface(this->interface_tex, this->window, this->event, this->digitals, age_of_knights, age_of_gunpowder, 1, this->background_sprite, this->cosmic_background_tex);
 }
 
 void Game::drawInterface()
@@ -103,7 +117,7 @@ void Game::drawInterface()
 void Game::initBot()
 {
     if (Bot) {
-        this->secondInterface = new UserInterface(this->interface_tex, this->window, this->event, this->digitals, age_of_knights, age_of_gunpowder, -1);
+        this->secondInterface = new UserInterface(this->interface_tex, this->window, this->event, this->digitals, age_of_knights, age_of_gunpowder, -1, this->background_sprite, this->cosmic_background_tex);
     }
 }
 
@@ -181,7 +195,7 @@ void Game::render()
     //--DRAWINGS--//
 
     //Background
-    this->window->draw(this->medieval_back_sprite);
+    this->window->draw(*this->background_sprite);
 
     //Buttons
     this->drawInterface();

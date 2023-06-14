@@ -23,6 +23,8 @@ private:
     void LoadTextures();
     void LoadFonts();
 
+    
+
 
     /*
       #TEXTURES
@@ -32,8 +34,9 @@ private:
 
     //background
 private:
-    sf::Texture medieval_back_tex;
-    sf::Sprite medieval_back_sprite;
+    sf::Texture *medieval_background_tex;
+    sf::Texture *cosmic_background_tex;
+    sf::Sprite *background_sprite;
 
     void InitBackground();
 

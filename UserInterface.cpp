@@ -2,9 +2,11 @@
 #include <iostream>
 #include <string>
 
+
+
 //--CONSTRUCTOR & DESTRUCTOR--//
 
-UserInterface::UserInterface(sf::Texture* texture, sf::RenderWindow* window_, sf::Event* event_, sf::Font* font_, Age* age1_, Age* age2_,int side_)
+UserInterface::UserInterface(sf::Texture* texture, sf::RenderWindow* window_, sf::Event* event_, sf::Font* font_, Age* age1_, Age* age2_,int side_, sf::Sprite* sprite, sf::Texture* tex)
 {
     this->side = side_;
     this->gui = *texture;
@@ -13,6 +15,8 @@ UserInterface::UserInterface(sf::Texture* texture, sf::RenderWindow* window_, sf
     this->event = event_;
     this->age1 = age1_;
     this->age2 = age2_;
+    this->background_sprite = sprite;
+    this->cosmic_era_tex = tex;
 
     initPlayer();
     initResources();
@@ -20,6 +24,8 @@ UserInterface::UserInterface(sf::Texture* texture, sf::RenderWindow* window_, sf
     initButtons();
     init_user_info();
     init_prices();
+
+    
 
 }
 
@@ -127,6 +133,10 @@ void UserInterface::init_prices()
 
 }
 
+void UserInterface::changeAgeBackground()
+{
+    this->background_sprite->setTexture(*this->cosmic_era_tex);
+}
 
 /*
     #INITS RESOURCES XP & GOLD & HP
@@ -569,6 +579,8 @@ void UserInterface::pollEvents()
             if (player->age_ptr == age1) {
                 player->age_ptr = age2;
             }
+            changeAgeBackground();
+            
         }
 
 
