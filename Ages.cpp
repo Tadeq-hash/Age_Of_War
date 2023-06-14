@@ -117,7 +117,7 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeWarrior(int side_) {
 std::unique_ptr<Unit> AgeOfGunpowder::MakeArcher(int side_) {
 	int max_hp = 45;
 	int hp = max_hp;
-	int range = 75;
+	int range = 600;
 	int dmg = 8;
 	int speed = 40;
 	float dmg_reduction = 1;

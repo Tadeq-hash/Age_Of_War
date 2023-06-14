@@ -237,15 +237,17 @@ void Game::colision_arrows() {
                 secondInterface->player->units[j]->sufferDmg(interface->player->arrows[i]->dmg);
                 interface->player->arrows.erase(interface->player->arrows.begin() + i);
                 i--;
+                break;
             }
         }
     }
-    for (int i = 0; i < secondInterface->player->arrows.size(); i++) {
+   for (int i = 0; i < secondInterface->player->arrows.size(); i++) {
         for (int j = 0; j < interface->player->units.size(); j++) {
             if (secondInterface->player->arrows[i]->getGlobalBounds().intersects(interface->player->units[j]->sprite.getGlobalBounds())) {
                 interface->player->units[j]->sufferDmg(secondInterface->player->arrows[i]->dmg);
                 secondInterface->player->arrows.erase(secondInterface->player->arrows.begin() + i);
                 i--;
+                break;
             }
         }
     }
