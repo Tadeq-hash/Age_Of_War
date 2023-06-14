@@ -43,9 +43,6 @@ void Game::LoadTextures()
     {
         std::cout << "Coulnd't load texture 'GUI'\n";
     }
-
-
-
 }
 //FONTS
 void Game::LoadFonts()
@@ -234,7 +231,24 @@ void Game::move_arrows() {
 }
 
 void Game::colision_arrows() {
-
+    for (int i = 0; i < interface->player->arrows.size(); i++) {
+        for (int j = 0; j < secondInterface->player->units.size(); j++) {
+            if (interface->player->arrows[i]->getGlobalBounds().intersects(secondInterface->player->units[j]->sprite.getGlobalBounds())) {
+                secondInterface->player->units[j]->sufferDmg(interface->player->arrows[i]->dmg);
+                interface->player->arrows.erase(interface->player->arrows.begin() + i);
+                i--;
+            }
+        }
+    }
+    for (int i = 0; i < secondInterface->player->arrows.size(); i++) {
+        for (int j = 0; j < interface->player->units.size(); j++) {
+            if (secondInterface->player->arrows[i]->getGlobalBounds().intersects(interface->player->units[j]->sprite.getGlobalBounds())) {
+                interface->player->units[j]->sufferDmg(secondInterface->player->arrows[i]->dmg);
+                secondInterface->player->arrows.erase(secondInterface->player->arrows.begin() + i);
+                i--;
+            }
+        }
+    }
 }
 
 //Funkcje do obs³ugi jednostek
