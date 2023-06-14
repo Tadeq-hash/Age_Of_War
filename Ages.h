@@ -66,6 +66,7 @@ protected:
 	sf::Texture boss_texture;
 	sf::RenderWindow* window;
 public:
+	sf::Texture base_texture;
 	// -> TWORZENIE SZABLONU STRZA£Y
 
 

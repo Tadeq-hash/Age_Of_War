@@ -98,7 +98,7 @@ void Player::draw_units() {
     for (int i = 0; i < arrows.size(); i++) {
         window->draw(*arrows[i]);
     }
-    for (int i = 0; i < units.size(); ++i) {
+    for (int i = units.size()-1; i >= 0 ; --i) {
         units[i]->draw(window);
     }
 }
@@ -109,6 +109,17 @@ void Player::checkDeads() {
             units.erase(units.begin() + i);
             i--;
         }
+        else if (units[i]->unit_type == Unit_type::Base) {
+            if (units[i]->return_hp() <= 0) {
+                units.erase(units.begin() + i);
+                i--;
+            }
+        }
     }
+}
+
+void Player::updatePlayerHp()
+{
+    hp = units[0]->return_hp();
 }
 
