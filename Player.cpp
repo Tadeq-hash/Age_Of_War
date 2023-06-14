@@ -109,6 +109,12 @@ void Player::checkDeads() {
             units.erase(units.begin() + i);
             i--;
         }
+        else if (units[i]->unit_type == Unit_type::Base) {
+            if (units[i]->return_hp() <= 0) {
+                units.erase(units.begin() + i);
+                i--;
+            }
+        }
     }
 }
 

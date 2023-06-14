@@ -72,7 +72,6 @@ void Unit::Animate(int hp)
 		else
 		{
 			AnimateDie();
-			if (unit_type == Unit_type::Base) { die = true; }
 		}
 	
 	
