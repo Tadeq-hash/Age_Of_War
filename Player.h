@@ -18,13 +18,14 @@ private:
     sf::Clock clock;
 
     //Wskaünik na aktualnπ Ere
-    Age* age1;
-    Age* age2;
+ 
     sf::RenderWindow* window;
 
     Base* baza;
     void initVariables();
 public:
+    Age* age1;
+    Age* age2;
     int side;
     Age* age_ptr;
 

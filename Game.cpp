@@ -274,10 +274,14 @@ void Game::update_units(std::vector<Unit*> units, std::vector<Unit*> enemies, sf
     interface->player->checkDeads();
     secondInterface->player->checkDeads();
     for (int n = 0; n < units.size(); n++) {
-        units[n]->Animate(units[n]->return_hp());
+        if (units[n]->unit_type != Unit_type::Base) {
+            units[n]->Animate(units[n]->return_hp());
+        }
     }
     for (int n = 0; n < enemies.size(); n++) {
-        enemies[n]->Animate(enemies[n]->return_hp());
+        if (enemies[n]->unit_type != Unit_type::Base) {
+            enemies[n]->Animate(enemies[n]->return_hp());
+        }
     }
 
 

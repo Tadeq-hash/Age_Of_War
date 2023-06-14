@@ -578,6 +578,7 @@ void UserInterface::pollEvents()
             std::cout << "Welcome to the new era \n";
             if (player->age_ptr == age1) {
                 player->age_ptr = age2;
+                player->units[0]->sprite.setTexture(player->age2->base_texture);
             }
             changeAgeBackground();
             
