@@ -232,9 +232,9 @@ Base::Base(sf::RenderWindow* window_, float side_)
 	this->move_rects.push_back(sf::IntRect(0, 0, 1400, 1000));
 	this->attack_rects.push_back(sf::IntRect(0, 0, 1400, 1000));
 	this->die_rects.push_back(sf::IntRect(0, 0, 1400, 1000));
-	First_era.loadFromFile("textures/Base_Age_Of_Knight.jpg");
-	Second_era.loadFromFile("textures/Base_Age_Of_Knight.jpg");
+	First_era.loadFromFile("textures/castle.png");
+	Second_era.loadFromFile("textures/castle.png");
 	sprite.setTexture(First_era);
-	sprite.setScale(0.4, 0.4);
-	sprite.setPosition(10 + ((1-side)/2)*1330, 600);
+	sprite.setScale(10, 10);
+	sprite.setPosition(10 + ((1-side)/2)*1660, 590);
 }

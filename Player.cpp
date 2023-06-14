@@ -98,7 +98,7 @@ void Player::draw_units() {
     for (int i = 0; i < arrows.size(); i++) {
         window->draw(*arrows[i]);
     }
-    for (int i = 0; i < units.size(); ++i) {
+    for (int i = units.size()-1; i >= 0 ; --i) {
         units[i]->draw(window);
     }
 }

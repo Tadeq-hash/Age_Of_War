@@ -7,7 +7,7 @@
 AgeOfKnights::AgeOfKnights(sf::RenderWindow* window_){
 	std::cout << "Tworze ere Rycerzy" << std::endl;
 	window = window_;
-	base_texture.loadFromFile("textures/Base_Age_Of_Knight.jpg");
+	base_texture.loadFromFile("textures/castle.png");
 	warrior_texture.loadFromFile("textures/Warrior_Medieval.png");
 	archer_texture.loadFromFile("textures/archer_medieval.png");
 	boss_texture.loadFromFile("textures/boss_medieval.png");
@@ -90,7 +90,7 @@ std::unique_ptr<Unit> AgeOfKnights::MakeBoss(int side_) {
 AgeOfGunpowder::AgeOfGunpowder(sf::RenderWindow* window_) {
 	std::cout << "Tworze ere Prochu" << std::endl;
 	window = window_;
-	base_texture.loadFromFile("textures/Base_Age_Of_Knight.jpg");
+	base_texture.loadFromFile("textures/blueTower.png");
 	arrow_texture.loadFromFile("textures/projectile.png");
 	warrior_texture.loadFromFile("textures/warrior_cosmic.png");
 	archer_texture.loadFromFile("textures/archer_cosmic.png");

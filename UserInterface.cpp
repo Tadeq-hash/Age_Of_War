@@ -578,7 +578,11 @@ void UserInterface::pollEvents()
             std::cout << "Welcome to the new era \n";
             if (player->age_ptr == age1) {
                 player->age_ptr = age2;
-                player->units[0]->sprite.setTexture(player->age2->base_texture);
+                player->units[0]->sprite.setTexture(player->age_ptr->base_texture);
+                player->units[0]->sprite.setScale(4, 4);
+                player->units[0]->sprite.setTextureRect(sf::IntRect(0, 0, 68, 88));
+                player->units[0]->sprite.setPosition(player->units[0]->sprite.getGlobalBounds().left, player->units[0]->sprite.getGlobalBounds().top + 50);
+                //player->units[0]->sprite.setTextureRect(sf::IntRect(0, 0, player->units[0]->sprite.getGlobalBounds().width, player->units[0]->sprite.getGlobalBounds().height));
             }
             changeAgeBackground();
             
