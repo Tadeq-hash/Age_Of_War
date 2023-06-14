@@ -89,15 +89,25 @@ std::unique_ptr<Unit> AgeOfKnights::MakeBoss(int side_) {
 AgeOfGunpowder::AgeOfGunpowder(sf::RenderWindow* window_) {
 	std::cout << "Tworze ere Prochu" << std::endl;
 	window = window_;
+	arrow_texture.loadFromFile("textures/projectile.png");
 	warrior_texture.loadFromFile("textures/warrior_cosmic.png");
 	archer_texture.loadFromFile("textures/archer_cosmic.png");
 	boss_texture.loadFromFile("textures/boss_cosmic.png");
 
 	this -> initAnimationsRects_Gunpowder();
+	this-> InitArr();
 }
 
 
 // -> TWORZENIE JEDNOSTEK
+
+void AgeOfGunpowder::InitArr()
+{
+	arr = new Arrow(&arrow_texture, 0, arrow_rects);
+	arr->speed = 500;
+	arr->dmg = 12;
+
+}
 
 //Wojownik
 std::unique_ptr<Unit> AgeOfGunpowder::MakeWarrior(int side_) {
@@ -123,8 +133,10 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeArcher(int side_) {
 	float dmg_reduction = 1;
 	float scale = 2.4;
 	//std::cout << "Wywoluje Lucznika ze statami z ery Prochu" << std::endl;
-	//Archer archer(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
-	return std::make_unique<Unit>(Archer(&archer_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, archer_idle_rects_cosmic, archer_move_rects_cosmic, archer_attack_rects_cosmic, archer_die_rects_cosmic,scale));
+	Archer archer(&archer_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, archer_idle_rects_cosmic, archer_move_rects_cosmic, archer_attack_rects_cosmic, archer_die_rects_cosmic, scale);
+	archer.arrow = arr;
+	archer.unit_type = Unit_type::Archer;
+	return std::make_unique<Unit>(archer);
 }
 
 //Boss
@@ -655,6 +667,10 @@ void Age::initAnimationsRects_Gunpowder()
 	this->warrior_die_rects_cosmic.emplace_back(dead12);
 	this->warrior_die_rects_cosmic.emplace_back(dead13);
 
+
+	sf::IntRect arrow1 = sf::IntRect(0, 0, 40, 5);
+
+	this->arrow_rects.emplace_back(arrow1);
 }
 
 

@@ -54,10 +54,12 @@ protected:
 
 	void initAnimationsRects_Medieval();
 	void initAnimationsRects_Gunpowder();
-	
+	virtual void InitArr() = 0;
+
 
 
 protected:
+	Arrow* arr;
 	sf::Texture arrow_texture;
 	sf::Texture warrior_texture;
 	sf::Texture archer_texture;
@@ -84,8 +86,7 @@ public:
 	// KONSTRUKTOR
 	AgeOfKnights(sf::RenderWindow* window_);
 
-	Arrow* arr;
-	void InitArr();
+	virtual void InitArr();
 
 	// -> TWORZENIE JEDNOSTEK
 	virtual std::unique_ptr<Unit> MakeWarrior(int side_);
@@ -100,6 +101,7 @@ class AgeOfGunpowder :public Age
 
 public:
 	// KONSTRUKTOR
+	virtual void InitArr();
 	AgeOfGunpowder(sf::RenderWindow* window_);
 
 	virtual std::unique_ptr<Unit> MakeWarrior(int side_);

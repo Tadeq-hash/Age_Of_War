@@ -211,7 +211,7 @@ std::unique_ptr<Arrow> Unit::MakeArrow()
 {
 	Arrow arr = *arrow;
 	arr.side = Unit::side;
-	arr.setPosition(sprite.getGlobalBounds().left + ((side + 1) / (2))*(-55) + 95, sprite.getGlobalBounds().top + 70);
+	arr.setPosition(sprite.getGlobalBounds().left + ((side + 1) / (2))*(-55) + 95, sprite.getGlobalBounds().top + 85);
 	arr.setScale(2 * side, 2);
 	return std::make_unique<Arrow>(arr);
 }
