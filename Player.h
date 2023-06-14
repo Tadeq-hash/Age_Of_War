@@ -46,7 +46,7 @@ public:
     int current_hp();
     Age* current_age();
 
-    void update_arrows();
+    void update_arrows(); 
     void push_arrow(std::unique_ptr<Arrow> arrow_);
     void push_unit(std::unique_ptr<Unit> unit_);
     //void update_units();
