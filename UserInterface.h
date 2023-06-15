@@ -80,15 +80,18 @@ private:
     int curr_gold; 
     int curr_xp;   
     int curr_hp;   
-    bool second_life; 
+    //bool second_life; 
     int side;
+    
 
     //xp_bar
     sf::Sprite xp_sprite;
 
     //hp_double_bar
+    
     sf::Sprite hp_sprite_red;
-    sf::Sprite hp_sprite_orange;
+    //sf::Sprite hp_sprite_orange;
+    sf::IntRect anim_rect;
 
     //xp & hp_rects
     sf::IntRect xp_rect;

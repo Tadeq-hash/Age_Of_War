@@ -143,7 +143,8 @@ void UserInterface::changeAgeBackground()
 */
 void UserInterface::initResources()
 {
-    this->second_life = false;
+    //this->second_life = false;
+   
     this->init_gold_amount();
     this->init_xp_bar();
     this->init_hp_bar();
@@ -180,10 +181,10 @@ void UserInterface::init_hp_bar()
     this->hp_sprite_red.setTextureRect(this->hp_rect_red);
 
     //orange bar
-    this->hp_sprite_orange.setPosition(117, 9);
+   /* this->hp_sprite_orange.setPosition(117, 9);
     this->hp_sprite_orange.setTexture(this->gui);
     this->hp_sprite_orange.setScale(4.5, 4.7);
-    this->hp_sprite_orange.setTextureRect(this->hp_rect_orange);
+    this->hp_sprite_orange.setTextureRect(this->hp_rect_orange);*/
 }
 
 /*
@@ -273,27 +274,28 @@ void UserInterface::update_hp_bar()
 {
     player->updatePlayerHp();
     curr_hp = player->current_hp();
-    if (this->curr_hp > 0 && !this->second_life)
+    if (this->curr_hp > 0 )
     {
-        this->hp_sprite_red.setTextureRect(sf::IntRect(72, 22, this->curr_hp - 1, 3));
+        anim_rect = sf::IntRect(72, 22, (this->curr_hp / 10) - 1, 3);
+        this->hp_sprite_red.setTextureRect(anim_rect);
 
     }
 
-    else if (this->curr_hp == 0 && !this->second_life)
+ /*   else if (!this->second_life && this->anim_rect.width < 0)
     {
         this->second_life = true;
-        this->curr_hp = 50;
+        this->curr_hp = player->current_hp();
     }
 
     else if (this->curr_hp > 0 && this->second_life)
     {
-        this->hp_sprite_orange.setTextureRect(sf::IntRect(6, 22, this->curr_hp - 1, 3));
+        this->hp_sprite_orange.setTextureRect(sf::IntRect(6, 22, (this->curr_hp/5) - 1, 3));
 
     }
     else
     {
 
-    }
+    }*/
 }
 
 void UserInterface::update_gold_per_second()
@@ -423,7 +425,7 @@ void UserInterface::drawInterface()
 
     this->window->draw(this->xp_sprite);
 
-    this->window->draw(this->hp_sprite_orange);
+    //this->window->draw(this->hp_sprite_orange);
 
     this->window->draw(this->hp_sprite_red);
 
@@ -435,10 +437,7 @@ void UserInterface::drawInterface()
             charc->drawButton();
             this->num_of_char_queue[0]->bar_init();
         }
-
     }
-
-
 }
 
 /*
