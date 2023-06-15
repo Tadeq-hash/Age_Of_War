@@ -78,13 +78,13 @@ private:
     /*
         PLAYER RESOURCES
     */
-
+    
     sf::Text current_gold;
     int curr_gold; 
     int curr_xp;   
     int curr_hp;   
-    //bool second_life; 
     int side;
+    bool last_era;
     
     //xp_bar
     sf::Sprite xp_sprite;

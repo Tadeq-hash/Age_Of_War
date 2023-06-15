@@ -110,7 +110,10 @@ void InitCharacter::bar_setup()
 void InitCharacter::bar_animation()
 {
 	this->cooldown_animation.setTexture(this->bar_texture);
-	this->cooldown_animation.setTextureRect(sf::IntRect(190, 51, 1, this->clock.getElapsedTime().asMilliseconds() / 11));
+	if (this->clock.getElapsedTime().asMilliseconds() < 2505)
+	{
+		this->cooldown_animation.setTextureRect(sf::IntRect(190, 51, 1, this->clock.getElapsedTime().asMilliseconds() / 11));
+	}
 	this->cooldown_animation.setPosition(360, 5);
 	this->cooldown_animation.setScale(5, 0.45);
 

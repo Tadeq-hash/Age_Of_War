@@ -50,6 +50,8 @@ void UserInterface::initPlayer()
 
 void UserInterface::init_animation_rects()
 {
+    this->last_era = 0;
+
     //convex (default)
     this->buttons_animation_rects["exit_convex"] = sf::IntRect(1, 81, 14, 14);
     this->buttons_animation_rects["warrior_convex"] = sf::IntRect(71, 178, 14, 14);
@@ -331,7 +333,7 @@ void UserInterface::button_blocked_animation()
     {
         this->buttons["boss"].setTextureRect(this->buttons_animation_rects["boss_convex"]);
     }
-    if (!this->canUpgrade(const_xp))
+    if (!this->canUpgrade(const_xp) || last_era)
     {
         this->buttons["upgrade_era"].setTextureRect(this->buttons_animation_rects["upgrade_blocked"]);
     }
@@ -516,7 +518,7 @@ void UserInterface::pollEvents()
                 this->animate_concave_butt("boss", "boss_conc");
               
             }
-            if (this->buttons["upgrade_era"].getGlobalBounds().contains(mouse_position) && this->canUpgrade(const_xp))
+            if (this->buttons["upgrade_era"].getGlobalBounds().contains(mouse_position) && this->canUpgrade(const_xp) && !last_era)
             {
                 this->animate_concave_butt("upgrade_era", "upgrade_conc");
             }
@@ -569,11 +571,12 @@ void UserInterface::pollEvents()
 
         }
 
-        if (this->buttons["upgrade_era"].getGlobalBounds().contains(mouse_position) && this->canUpgrade(const_xp))
+        if (this->buttons["upgrade_era"].getGlobalBounds().contains(mouse_position) && this->canUpgrade(const_xp) && !last_era)
         {
             //UPGRADE
             this->animate_convex_butt("upgrade_era", "upgrade_convex");
             std::cout << "Welcome to the new era \n";
+            last_era = 1;
             if (player->age_ptr == age1) {
                 player->age_ptr = age2;
                 player->units[0]->sprite.setTexture(player->age_ptr->base_texture);
@@ -583,7 +586,7 @@ void UserInterface::pollEvents()
                 //player->units[0]->sprite.setTextureRect(sf::IntRect(0, 0, player->units[0]->sprite.getGlobalBounds().width, player->units[0]->sprite.getGlobalBounds().height));
             }
             changeAgeBackground();
-            
+            this->buttons["upgrade_era"].setTextureRect(this->buttons_animation_rects["upgrade_blocked"]);
         }
 
 

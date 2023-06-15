@@ -98,7 +98,7 @@ void Unit::AnimateAtack()
 void Unit::AnimateMove()
 {
 	
-	if (this->clock_move_animation.getElapsedTime().asSeconds()>0.15f)
+	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.15f)
 	{
 		this->sprite.setTextureRect(this->move_rects[this->current_frame_move]);
 		//std::cout << current_frame_move << "\n";
