@@ -17,13 +17,19 @@ Unit::Unit(sf::Texture* texture_, int &max_hp_, int &hp_, int &range_, int &dmg_
 	range = range_;
 	dmg = dmg_;
 	speed = speed_;
-	//std::cout << "speed: " << speed<<"\n";
-	//std::cout << "health: " << hp<<"\n";
 	dmg_reduction = dmg_reduction_;
+
+	/*
+		RECTS
+	*/
 	this->idle_rects = rects_idle;
 	this->move_rects = rects_move;
 	this->attack_rects = rects_attack;
 	this->die_rects = rects_die;
+
+	/*
+		UNIT SETUP
+	*/
 	sprite.setOrigin(0,sprite.getGlobalBounds().height);
 	sprite.setTexture(*texture);
 	sprite.setScale(side*scale, scale);
@@ -32,16 +38,10 @@ Unit::Unit(sf::Texture* texture_, int &max_hp_, int &hp_, int &range_, int &dmg_
 }
 
 // DESTRUKTOR
-Unit::~Unit() {
-	//std::cout << "Umieram\n";
-}
 
-//void Unit::update() {
-//	if (hp <= 0) {
-//		std::cout << "Umieram \n";
-//		
-//	}
-//}
+Unit::~Unit() {	
+
+}
 
 void Unit::move(sf::Clock* clock_) {
 	//Wspolczynnik szybkosci pozwalajacy szybciej przeprowadzac symulacje
@@ -56,7 +56,6 @@ void Unit::move(sf::Clock* clock_) {
 
 void Unit::Animate(int hp)
 {
-	
 		if (hp >5)
 		{
 			if (attacking) {
@@ -81,7 +80,7 @@ void Unit::Animate(int hp)
 
 void Unit::AnimateAtack()
 {
-	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.15)
+	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.15f)
 	{
 		this->sprite.setTextureRect(this->attack_rects[this->current_frame_attack]);
 		//std::cout << current_frame_attack << "\n";
@@ -99,7 +98,7 @@ void Unit::AnimateAtack()
 void Unit::AnimateMove()
 {
 	
-	if (this->clock_move_animation.getElapsedTime().asSeconds()>0.15)
+	if (this->clock_move_animation.getElapsedTime().asSeconds()>0.15f)
 	{
 		this->sprite.setTextureRect(this->move_rects[this->current_frame_move]);
 		//std::cout << current_frame_move << "\n";
@@ -116,7 +115,7 @@ void Unit::AnimateMove()
 
 void Unit::AnimateIdle()
 {
-	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.15)
+	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.15f)
 	{
 		this->sprite.setTextureRect(this->idle_rects[this->current_frame_idle]);
 		//std::cout << current_frame_idle << "\n";
@@ -134,7 +133,7 @@ void Unit::AnimateIdle()
 void Unit::AnimateDie()
 {
 	//std::cout << "DIEDIEDIE\n";
-	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.1)
+	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.15f)
 	{
 		this->sprite.setTextureRect(this->die_rects[this->current_frame_die]);
 		//std::cout << current_frame_die << "\n";
