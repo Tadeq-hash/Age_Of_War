@@ -54,8 +54,10 @@ private:
     /*
         GAME BACKGROUND
     */
+public:
     void changeAgeBackground();
-    
+private:
+
     /*
         #MONEY
     */

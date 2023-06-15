@@ -42,7 +42,7 @@ std::unique_ptr<Unit> AgeOfKnights::MakeWarrior(int side_) {
 	int value = 50;
 	
 	//std::cout << "Wywoluje wojownika ze statami z ery Rycerzy" << std::endl;
-	std::cout << this->warrior_move_rects.size() << "\n";
+	//std::cout << this->warrior_move_rects.size() << "\n";
 	Warrior warrior(&warrior_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, warrior_idle_rects, warrior_move_rects, warrior_attack_rects, warrior_die_rects, scale, value);
 	return std::make_unique<Unit>(warrior);
 };
@@ -77,10 +77,10 @@ std::unique_ptr<Unit> AgeOfKnights::MakeBoss(int side_) {
 	int value = 150;
 
 	Boss boss(&boss_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, boss_idle_rects, boss_move_rects, boss_attack_rects, boss_die_rects, scale, value);
-	std::cout << "Wywoluje Bossa ze statami z ery Rycerzy" << std::endl;
+	//std::cout << "Wywoluje Bossa ze statami z ery Rycerzy" << std::endl;
 	//Boss boss(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
 	std::unique_ptr<Unit> unit = move(std::make_unique<Unit>(boss));
-	std::cout << "stworzony uinique_ptr, teraz zwracam\n";
+	//std::cout << "stworzony uinique_ptr, teraz zwracam\n";
 	return move(unit);
 }
 
@@ -156,7 +156,7 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeBoss(int side_) {
 	float dmg_reduction = 1;
 	float scale = 2.5;
 	int value = 150;
-	std::cout << "Wywoluje Bossa ze statami z ery Prochu" << std::endl;
+	//std::cout << "Wywoluje Bossa ze statami z ery Prochu" << std::endl;
 
 	//Boss boss(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
 	return std::make_unique<Unit>(Boss(&boss_texture, max_hp, hp, range, dmg, speed, dmg_reduction,side_, window, boss_idle_rects_cosmic, boss_move_rects_cosmic, boss_attack_rects_cosmic, boss_die_rects_cosmic,scale, value));

@@ -24,9 +24,6 @@ UserInterface::UserInterface(sf::Texture* texture, sf::RenderWindow* window_, sf
     initButtons();
     init_user_info();
     init_prices();
-
-    
-
 }
 
 UserInterface::~UserInterface()
@@ -466,13 +463,13 @@ void UserInterface::INIT_Character(std::map<std::string, sf::Sprite> buttons, st
     this->size_of_vec = this->num_of_char_queue.size() + 1;
     if (this->num_of_char_queue.size() < max_of_queue)
     {
-        std::cout << "Respawning" << charac << "\n";
+        //std::cout << "Respawning" << charac << "\n";
         InitCharacter* character = new InitCharacter(charac, this->buttons[charac], this->window, this->num_of_char_queue.size(), this->gui, player);
         this->num_of_char_queue.emplace_back(character);
     }
     else
     {
-        std::cout << "Queue is full \n";
+        //std::cout << "Queue is full \n";
     }
 
 }

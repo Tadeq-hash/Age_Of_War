@@ -48,7 +48,7 @@ void Unit::move(sf::Clock* clock_) {
 	int wsp = 5;
 	sf::Time time = clock_->getElapsedTime();
 	if (false) {
-		std::cout << time.asSeconds() << " speed: " << speed << std::endl;
+		//std::cout << time.asSeconds() << " speed: " << speed << std::endl;
 	}
 	sprite.move(sf::Vector2f(time.asSeconds() * speed * wsp, 0));
 

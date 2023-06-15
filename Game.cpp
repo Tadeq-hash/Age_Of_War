@@ -14,6 +14,7 @@ void Game::InitVariables()
     this->secondInterface = nullptr;
     this->window = nullptr;
     this->digitals = nullptr;
+    this->Bot_Algorythm = nullptr;
 
     //INIT POINTERS
     this->background_sprite = new sf::Sprite();
@@ -122,8 +123,8 @@ Game::Game(bool bot_)
     this->InitWindow();
     this->initAges();
     this->LoadFonts();
-    this->initBot();
     this->initButtons();
+    this->initBot();
 }
 
 Game::~Game()
@@ -169,6 +170,7 @@ void Game::initBot()
     if (Bot) {
         this->secondInterface = new UserInterface(this->interface_tex, this->window, this->event, this->digitals, age_of_knights, age_of_gunpowder, -1, this->background_sprite, this->cosmic_background_tex);
     }
+    Bot_Algorythm = new BotAlgorythm(interface, secondInterface);
 }
 /*
     INIT AGES
@@ -188,9 +190,11 @@ void Game::update()
 {
     this->PollEvents();
     this->interface->update();
+    this->secondInterface->update();
     this->update_units(interface->player->units, secondInterface->player->units, &clock);
     
     this->update_arrows();
+    this->Bot_Algorythm->update();
     clock.restart();
 }
 
@@ -295,7 +299,7 @@ bool Game::attack(Unit* attacker, Unit* victim) {
                 attacker->clockAttack.restart();
             }else{
                  victim->sufferDmg(attacker->getDmg());
-                 std::cout << "Zadaje dmg\n";
+                 //std::cout << "Zadaje dmg\n";
                  attacker->clockAttack.restart();
             }
         }

@@ -76,7 +76,7 @@ void Player::push_arrow(std::unique_ptr<Arrow> arrow_) {
 void Player::push_unit(std::unique_ptr<Unit> unit_) {
     //std::cout << "Odbieram jednostke\n";
     units.push_back(unit_.release());
-    //std::cout << "Ilosc jednostek w wektorze gracza wynosi: " << units.size() << std::endl;
+    std::cout << "Ilosc jednostek w wektorze gracza wynosi: " << units.size() << std::endl;
 }
 
 
@@ -123,7 +123,7 @@ void Player::checkDeads(Player *player_2) {
             player_2->change_xp(3);
             units.erase(units.begin() + i);
             i--;
-
+            std::cout << player_2->current_xp() << "\n";
         }
         else if (units[i]->unit_type == Unit_type::Base) {
             if (units[i]->return_hp() <= 0) {

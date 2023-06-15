@@ -2,6 +2,7 @@
 #define GAME_H
 #include "MainMenu.h"
 #include "UserInterface.h"
+#include "BotAlgorythm.h"
 #include <SFML/Graphics.hpp>
 
 
@@ -69,7 +70,7 @@ private:
     */
 
     bool Bot = true;
-
+    BotAlgorythm* Bot_Algorythm;
 public:
 
    

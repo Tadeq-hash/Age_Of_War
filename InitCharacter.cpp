@@ -35,15 +35,15 @@ InitCharacter::~InitCharacter()
 	switch (unit_type)
 	{
 	case Unit_type::Warrior:
-		std::cout << "Tworze Warrior..." << std::endl;
+		//std::cout << "Tworze Warrior..." << std::endl;
 		player->push_unit(move(player->current_age()->MakeWarrior(player->side)));
 		break;
 	case Unit_type::Archer:
-		std::cout << "Tworze Archer..." << std::endl;
+		//std::cout << "Tworze Archer..." << std::endl;
 		player->push_unit(move(player->current_age()->MakeArcher(player->side)));
 		break;
 	case Unit_type::Boss:
-		std::cout << "Tworze Boss..." << std::endl;
+		//std::cout << "Tworze Boss..." << std::endl;
 		player->push_unit(move(player->current_age()->MakeBoss(player->side)));
 		//std::cout << "Jednostka przekazana do wektora\n";
 		break;
@@ -132,7 +132,7 @@ void InitCharacter::update(std::vector<InitCharacter*>& vec, int size)
 	//std::cout<<clock.getElapsedTime().asMilliseconds()<<"\n";
 	if (clock.getElapsedTime().asMilliseconds() > cooldown * 1000 && isSpaceForRespawn())
 	{
-		std::cout << "Niszcze \n";
+		//std::cout << "Niszcze \n";
 		vec.erase(vec.begin());
 		this->vec_size--;
 		delete this;
