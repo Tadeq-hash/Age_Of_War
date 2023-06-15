@@ -34,8 +34,8 @@ void AgeOfKnights::InitArr()
 std::unique_ptr<Unit> AgeOfKnights::MakeWarrior(int side_) {
 	int max_hp = 50;
 	int hp = max_hp;
-	int range = 5;
-	int dmg = 7;
+	int range = 0;
+	int dmg = 14;
 	int speed = 40;
 	float dmg_reduction = 0.9;
 	float scale = 2;
@@ -51,7 +51,7 @@ std::unique_ptr<Unit> AgeOfKnights::MakeWarrior(int side_) {
 std::unique_ptr<Unit> AgeOfKnights::MakeArcher(int side_) {
 	int max_hp = 35;
 	int hp = max_hp;
-	int range = 500;
+	int range = 400;
 	int dmg = 5;
 	int speed = 20;
 	float dmg_reduction = 1;
@@ -69,7 +69,7 @@ std::unique_ptr<Unit> AgeOfKnights::MakeArcher(int side_) {
 std::unique_ptr<Unit> AgeOfKnights::MakeBoss(int side_) {
 	int max_hp = 200;
 	int hp = max_hp;
-	int range = 12;
+	int range = 0;
 	int dmg = 15;
 	int speed = 20;
 	float dmg_reduction = 0.7;
@@ -118,7 +118,7 @@ void AgeOfGunpowder::InitArr()
 std::unique_ptr<Unit> AgeOfGunpowder::MakeWarrior(int side_) {
 	int max_hp = 80;
 	int hp = max_hp;
-	int range = 10;
+	int range = 0;
 	int dmg = 15;
 	int speed = 40;
 	float dmg_reduction = 1;
@@ -133,7 +133,7 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeWarrior(int side_) {
 std::unique_ptr<Unit> AgeOfGunpowder::MakeArcher(int side_) {
 	int max_hp = 45;
 	int hp = max_hp;
-	int range = 600;
+	int range = 500;
 	int dmg = 8;
 	int speed = 40;
 	float dmg_reduction = 1;
@@ -150,7 +150,7 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeArcher(int side_) {
 std::unique_ptr<Unit> AgeOfGunpowder::MakeBoss(int side_) {
 	int max_hp = 200;
 	int hp = max_hp;
-	int range = 60;
+	int range = 0;
 	int dmg = 20;
 	int speed = 130;
 	float dmg_reduction = 1;
