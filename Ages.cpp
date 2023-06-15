@@ -113,7 +113,7 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeWarrior(int side_) {
 	int hp = max_hp;
 	int range = 0;
 	int dmg = 20;
-	int speed = 4;
+	int speed = 40;
 	float dmg_reduction = 1;
 	float scale = 2.5;
 	int value = 50;
