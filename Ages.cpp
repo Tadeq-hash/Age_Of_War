@@ -93,7 +93,7 @@ std::unique_ptr<Unit> AgeOfKnights::MakeBoss(int side_) {
 AgeOfGunpowder::AgeOfGunpowder(sf::RenderWindow* window_) {
 	std::cout << "Tworze ere Prochu" << std::endl;
 	window = window_;
-	base_texture.loadFromFile("textures/blueTower.png");
+	base_texture.loadFromFile("textures/redTower.png");
 	arrow_texture.loadFromFile("textures/projectile.png");
 	warrior_texture.loadFromFile("textures/warrior_cosmic.png");
 	archer_texture.loadFromFile("textures/archer_cosmic.png");

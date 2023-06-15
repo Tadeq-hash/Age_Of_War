@@ -25,9 +25,9 @@ void BotAlgorythm::checkXp()
 		if (bot->age_ptr == bot->age1) {
 			bot->age_ptr = bot->age2;
 			bot->units[0]->sprite.setTexture(bot->age_ptr->base_texture);
-			bot->units[0]->sprite.setScale(4, 4);
-			bot->units[0]->sprite.setTextureRect(sf::IntRect(0, 0, 68, 88));
-			bot->units[0]->sprite.setPosition(bot->units[0]->sprite.getGlobalBounds().left - 280, bot->units[0]->sprite.getGlobalBounds().top + 50);
+			bot->units[0]->sprite.setScale(9.5 * -1, 8.5);
+			bot->units[0]->sprite.setTextureRect(sf::IntRect(0, 0, 23, 40));
+			bot->units[0]->sprite.setPosition(-10 + ((1 +1) / 2) * 1940, 648);
 			std::cout << bot->units[0]->sprite.getPosition().x << " " << bot->units[0]->sprite.getPosition().y << "\n";
 			BotInterface->changeAgeBackground();
 		}

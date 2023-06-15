@@ -240,6 +240,6 @@ Base::Base(sf::RenderWindow* window_, float side_)
 	First_era.loadFromFile("textures/castle.png");
 	Second_era.loadFromFile("textures/castle.png");
 	sprite.setTexture(First_era);
-	sprite.setScale(10*side, 10);
-	sprite.setPosition(-10+((1-side)/2)*1945, 590);
+	sprite.setScale(9.5*side, 8.5);
+	sprite.setPosition(-10+((1-side)/2)*1940, 648);
 }
