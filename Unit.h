@@ -4,11 +4,13 @@
 #include <memory>
 #include <vector>
 
-//  - klasa wyliczeniowa - 
-	/*Do przycisków*/
+/*
+	ARROW FOR ARCHERS
+*/
 class Arrow : public sf::Sprite {
-	sf::Texture* texture;
 
+private:
+	sf::Texture* texture;
 	std::vector<sf::IntRect> frames;
 	int current_frame = 0;
 
@@ -21,6 +23,10 @@ public:
 	Arrow(sf::Texture* tex_, int side_, std::vector<sf::IntRect>& frames_);
 	void Animate();
 };
+
+/*
+	ENUM
+*/
 enum class Unit_type
 {
 	Warrior,
@@ -29,15 +35,17 @@ enum class Unit_type
 	Base
 };
 
-
-
-//	-- klasa wirtualna --
+/*
+	VIRTUAL CLASS
+*/
 
 class Unit :public Arrow
 {
 protected:
+
 	sf::RenderWindow* window;
 	sf::Texture* texture;
+
 	int max_hp;
 	float hp;
 	int range;
@@ -46,8 +54,9 @@ protected:
 	float dmg_reduction;
 	float dmg_delay = 1;
 
-
-	//ANIMATIONS
+	/*
+		ANIMATIONS
+	*/
 	std::vector<sf::IntRect> idle_rects;
 	std::vector<sf::IntRect> move_rects;
 	std::vector<sf::IntRect> attack_rects;
@@ -64,26 +73,33 @@ public:
 	sf::Clock clockAttack;
 	sf::Clock clockMove;
 	sf::Clock clockDie;
+
 	float side;
 	bool attacking = 0;
 	bool moving = 0;
 	bool die = 0;
+
 	sf::Sprite sprite;
 	Unit_type unit_type;
 	Arrow* arrow;
 
-	//	KONSTRUKTOR
+	/*
+		CONSTRUCTORS & DESTRUCTOR
+	*/
 	Unit() {};
 	Unit(sf::Texture* texture_, int &max_hp_, int &hp_, int &range_, int &dmg_, int &speed_, float &dmg_reduction_, int side_, sf::RenderWindow* window_, std::vector<sf::IntRect>& rects_idle, std::vector<sf::IntRect>& rects_move, std::vector<sf::IntRect>& rects_attack, std::vector<sf::IntRect>& rects_die, float scale);
-	// DESTRUKTOR
+	
 	~Unit();
+
+	/*
+		ACTION METHODS
+	*/
 	virtual void attack(sf::Clock* clock_);
 	void move(sf::Clock* clock_);
 	std::unique_ptr<Arrow> MakeArrow();
 
 
 	//ANIMATIONS
-
 	sf::Clock clock_move_animation;
 	void Animate(int hp);
 	void AnimateAtack();
@@ -91,9 +107,7 @@ public:
 	void AnimateIdle();
 	void AnimateDie();
 
-
-	//void update();
-	void draw(sf::RenderWindow* window_);
+	//SETTINGS
 	int return_hp();
 	int getSpeed();
 	int getRange();
@@ -101,57 +115,51 @@ public:
 	int getDmgRed();
 	float getDmgDelay();
 	void sufferDmg(int sufferDmg_);
+
+	//DRAW
+	void draw(sf::RenderWindow* window_);
 	
 };
 
-
-
-	
-
-//	-----KLASA WOJOWNIKA-----
-
+/*
+	WARRIOR
+*/
 class Warrior : public Unit
 {
-
 public:
-	// KONSTRUKTOR
+	//CONSTRUCTOR
 	using Unit::Unit;
-
-
 };
 
-//	-----KLASA £UCZNIKA-----
-
+/*
+	ARCHER
+*/
 class Archer : public Unit
 {
-
 public:
-
-	// KONSTRUKTOR
+	//CONSTRUCTOR
 	using Unit::Unit;
-
-
 };
 
-//	-----KLASA BOSS-----
-
+/*
+	BOSS
+*/
 class Boss : public Unit
 {
-
 public:
-	// KONSTRUKTOR
+	//CONSTRUCTOR
 	using Unit::Unit;
-
-
 };
 
+/*
+	BASE
+*/
 class Base : public Unit 
 {
-
-
-public:
+private:
 	sf::Texture First_era;
 	sf::Texture Second_era;
+public:
 	Base(sf::RenderWindow* window_, float side_);
 
 };

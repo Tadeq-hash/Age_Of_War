@@ -33,7 +33,6 @@ protected:
 	/*
 		COSMIC ERA
 	*/
-
 	std::vector<sf::IntRect> warrior_idle_rects_cosmic;
 	std::vector<sf::IntRect> warrior_move_rects_cosmic;
 	std::vector<sf::IntRect> warrior_attack_rects_cosmic;
@@ -51,60 +50,76 @@ protected:
 
 	std::vector<sf::IntRect> fireball_rects;
 
-
+	/*
+		ANIMATIONS METH
+	*/
 	void initAnimationsRects_Medieval();
 	void initAnimationsRects_Gunpowder();
+	
+	/*
+		OTHER
+	*/
 	virtual void InitArr() = 0;
 
 
 
 protected:
+
+	/*
+		TEXTURES OF UNITS
+	*/
 	Arrow* arr;
 	sf::Texture arrow_texture;
 	sf::Texture warrior_texture;
 	sf::Texture archer_texture;
 	sf::Texture boss_texture;
 	sf::RenderWindow* window;
+	
 public:
 	sf::Texture base_texture;
-	// -> TWORZENIE SZABLONU STRZA£Y
 
-
-	// -> TWORZENIE JEDNOSTEK
-	/*funkcje tworza jednostki z danymi texturami i statystykami dla odpowiedniej ery i zwracaja wskaznik na nie
-	aby zaoszczêdziæ pamiêci */
+	/*
+		MAKING UNITS
+	*/
 	virtual std::unique_ptr<Unit> MakeWarrior(int side_) = 0;
 	virtual std::unique_ptr<Unit> MakeArcher(int side_) = 0;
 	virtual std::unique_ptr<Unit> MakeBoss(int side_) = 0;
 	~Age() { std::cout << "Niszcze Ere\n"; }
 };
 
-//	-----AGE OF KNIGHTS-----
+/*
+	AGE OF KNIGHTS
+*/
 
-class AgeOfKnights :public Age
+class AgeOfKnights : public Age
 {
 public:
-	// KONSTRUKTOR
-	AgeOfKnights(sf::RenderWindow* window_);
-
 	virtual void InitArr();
 
-	// -> TWORZENIE JEDNOSTEK
+	//Constructor
+	AgeOfKnights(sf::RenderWindow* window_);
+
+	//Making units
 	virtual std::unique_ptr<Unit> MakeWarrior(int side_);
 	virtual std::unique_ptr<Unit> MakeArcher(int side_);
 	virtual std::unique_ptr<Unit> MakeBoss(int side_);
 };
 
-//	-----AGE OF GUNPOWDER-----
+/*
+	AGE OF FUTURE
+*/
 
-class AgeOfGunpowder :public Age
+class AgeOfGunpowder : public Age
 {
 
 public:
-	// KONSTRUKTOR
+	
 	virtual void InitArr();
+	
+	//Constructor
 	AgeOfGunpowder(sf::RenderWindow* window_);
 
+	//Making units
 	virtual std::unique_ptr<Unit> MakeWarrior(int side_);
 	virtual std::unique_ptr<Unit> MakeArcher(int side_);
 	virtual std::unique_ptr<Unit> MakeBoss(int side_);

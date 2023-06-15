@@ -27,7 +27,7 @@ Unit::Unit(sf::Texture* texture_, int &max_hp_, int &hp_, int &range_, int &dmg_
 	sprite.setTexture(*texture);
 	sprite.setScale(side*scale, scale);
 	sprite.setTextureRect(idle_rects[0]);
-	sprite.setPosition(sf::Vector2f(((side - 1) / (-2))*(window->getSize().x  - 100) + 50, 987 - sprite.getGlobalBounds().height));
+	sprite.setPosition(sf::Vector2f(((side - 1) / (-2))*(window->getSize().x-420) + 210, 987 - sprite.getGlobalBounds().height));
 }
 
 // DESTRUKTOR
@@ -235,6 +235,6 @@ Base::Base(sf::RenderWindow* window_, float side_)
 	First_era.loadFromFile("textures/castle.png");
 	Second_era.loadFromFile("textures/castle.png");
 	sprite.setTexture(First_era);
-	sprite.setScale(10, 10);
-	sprite.setPosition(10 + ((1-side)/2)*1660, 590);
+	sprite.setScale(10*side, 10);
+	sprite.setPosition(-10+((1-side)/2)*1945, 590);
 }

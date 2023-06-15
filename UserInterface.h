@@ -126,7 +126,10 @@ private:
 
 public:
     Player* player;
-    //constructor & destructor
+    
+    /*
+        CONSTRUCTOR & DESTRUCTOR
+    */
     UserInterface(sf::Texture* texture, sf::RenderWindow* window_, sf::Event* event_, sf::Font* font_, Age* age1_, Age* age2_, int side_, sf::Sprite *sprite, sf::Texture *tex);
     ~UserInterface();
 

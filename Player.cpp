@@ -2,22 +2,32 @@
 
 Player::Player(Age* age1_, Age* age2_, sf::RenderWindow* window_, int side_)
 {
-    this->initVariables();
+    
     age1 = age1_;
     age2 = age2_;
     age_ptr = age1;
     window = window_;
     side = side_;
     this->side = side_;
-    baza = new Base(window,side);
-    units.push_back(baza);
+    this->initVariables();
+    
 }
+
+//Player::~Player()
+//{
+//    delete this->age1;
+//    delete this->age2;
+//    delete this->age_ptr;
+//}
 
 void Player::initVariables()
 {
     this->hp = const_hp; // it's 100, because second life of orange bar
     this->gold_amount = 1000;
     this->xp = 20;
+
+    baza = new Base(window, side);
+    units.push_back(baza);
 }
 
 void Player::change_xp(int _xp)

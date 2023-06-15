@@ -9,30 +9,36 @@
 class Player
 {
 private:
+    sf::RenderWindow* window;
+
     //GOLD & HP & XP
     int gold_amount;
     int hp;
     int xp;
 
-    //Zegar
+    //Clock
     sf::Clock clock;
-
-    //Wskaünik na aktualnπ Ere
- 
-    sf::RenderWindow* window;
-
+    
+    //Base
     Base* baza;
+
+    //Other
     void initVariables();
+
 public:
+    /*
+        POINTERS
+    */
     Age* age1;
     Age* age2;
-    int side;
     Age* age_ptr;
+    int side;
 
     //CONSTRUCTOR
     Player(Age* age1, Age* age2, sf::RenderWindow* window_,int side_);
+    //~Player();
 
-    //Wektor wskaünikÛw posiadanych jednostek
+    //UNITS & ARROW VECTORS
     std::vector<Unit*> units;
     std::vector<Arrow*> arrows;
 
@@ -46,15 +52,16 @@ public:
     int current_xp();
     int current_hp();
     Age* current_age();
+    void updatePlayerHp();
 
+    //ARROWS
     void update_arrows(); 
     void push_arrow(std::unique_ptr<Arrow> arrow_);
     void push_unit(std::unique_ptr<Unit> unit_);
-    //void update_units();
+    
+    //UNITS
     void draw_units();
-    void checkDeads();
-
-    void updatePlayerHp();
+    void checkDeads(); 
 };
 
 #endif // PLAYER_H

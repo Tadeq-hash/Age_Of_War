@@ -65,6 +65,7 @@ void Game::LoadFonts()
 */
 void Game::InitWindow()
 {
+
     this->window = new sf::RenderWindow(this->video_size, "Age_Of_War");
     this->event = new sf::Event();
     this->window->setFramerateLimit(120);
@@ -117,9 +118,9 @@ Game::Game(bool bot_)
     //this->Bot = bot_;
     this->InitVariables();
     this->LoadTextures();
-    this->initAges();
     this->InitBackground();
     this->InitWindow();
+    this->initAges();
     this->LoadFonts();
     this->initBot();
     this->initButtons();
@@ -225,7 +226,6 @@ void Game::render()
 
 void Game::drawInterface()
 {
-
     this->interface->drawInterface();
 }
 
