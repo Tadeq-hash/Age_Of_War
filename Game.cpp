@@ -67,7 +67,7 @@ void Game::LoadFonts()
 void Game::InitWindow()
 {
 
-    this->window = new sf::RenderWindow(this->video_size, "Age_Of_War");
+    this->window = new sf::RenderWindow(this->video_size, "Age_Of_War", sf::Style::Fullscreen);
     this->event = new sf::Event();
     this->window->setFramerateLimit(120);
 }
