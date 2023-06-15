@@ -159,12 +159,28 @@ void Game::CheckGameConditions()
 
 void Game::GameWon()
 {
+    EndFont.loadFromFile("fonts/Pixelmania.ttf");
+    EndText.setFont(EndFont);
+    EndText.setFillColor(sf::Color(102, 203, 108));
+    EndText.setCharacterSize(100);
+    EndText.setString("GAME WON");
+    EndText.setPosition(window->getSize().x / 2 - EndText.getGlobalBounds().width / 2, window->getSize().y / 2 - EndText.getGlobalBounds().height / 2);
+    window->draw(EndText);
+    window->display();
     std::cout << "Game Won!!!\n";
     Game_End = true;
 }
 
 void Game::GameLost()
 {
+    EndFont.loadFromFile("fonts/Pixelmania.ttf");
+    EndText.setFont(EndFont);
+    EndText.setFillColor(sf::Color(203, 102, 102));
+    EndText.setCharacterSize(100);
+    EndText.setString("GAME LOST");
+    EndText.setPosition(window->getSize().x / 2 - EndText.getGlobalBounds().width / 2, window->getSize().y / 2 - EndText.getGlobalBounds().height / 2);
+    window->draw(EndText);
+    window->display();
     std::cout << "Game Lost :(( \n";
     Game_End = true;
 }
@@ -213,11 +229,10 @@ void Game::update()
     this->interface->update();
     this->secondInterface->update();
     this->update_units(interface->player->units, secondInterface->player->units, &clock);
-    
+
     this->update_arrows();
     this->Bot_Algorythm->update();
     clock.restart();
-    CheckGameConditions();
 }
 
 /*

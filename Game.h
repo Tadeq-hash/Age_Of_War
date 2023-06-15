@@ -56,6 +56,8 @@ private:
 
     sf::Texture* interface_tex;
     sf::Font* digitals;
+    sf::Font EndFont;
+    sf::Text EndText;
 
     UserInterface* interface;
     UserInterface* secondInterface;

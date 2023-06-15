@@ -236,6 +236,9 @@ void MainMenu::Game_run()
 
         //Render
         game.render();
+
+        //Checking End Conditions
+        game.CheckGameConditions();
     }
     this->window->setVisible(1);
 }
