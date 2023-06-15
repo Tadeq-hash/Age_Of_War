@@ -285,19 +285,33 @@ void Game::update_units(std::vector<Unit*> units, std::vector<Unit*> enemies, sf
     for (int n = 0; n < units.size(); n++) {
         units[n]->attacking = false;
         for (int m = 0; m < enemies.size(); m++) {
-            attack(units[n], enemies[m]);
+            if (units[n]->unit_type == Unit_type::Archer) {
+                if (!units[n]->moving) {
+                    attack(units[n], enemies[m]);
+                }
+            }
+            else {
+                attack(units[n], enemies[m]);
+            }
         }
         if(units[n]->attacking == false){ units[n]->clockAttack.restart(); }
     }
     for (int n = 0; n < enemies.size(); n++) {
         enemies[n]->attacking = false;
         for (int m = 0; m < units.size(); m++) {
-            attack(enemies[n], units[m]);
+            if (enemies[n]->unit_type == Unit_type::Archer) {
+                if (!enemies[n]->moving) {
+                    attack(enemies[n], units[m]);
+                }
+            }
+            else {
+                attack(enemies[n], units[m]);
+            }
         }
         if (enemies[n]->attacking == false) { enemies[n]->clockAttack.restart(); }
     }
-    this->move(units, clock_);
-    this->move(enemies, clock_);
+    this->move(units, enemies, clock_);
+    this->move(enemies, units, clock_);
 
     interface->player->checkDeads(secondInterface->player);
     secondInterface->player->checkDeads(interface->player);
@@ -349,11 +363,50 @@ bool Game::attack(Unit* attacker, Unit* victim) {
 }
 
 //Move units
-void Game::move(std::vector<Unit*> units, sf::Clock* clock_) {
+void Game::move(std::vector<Unit*> units, std::vector<Unit*> enemies, sf::Clock* clock_) {
     bool spaceForMove = 1;
 
     for (int i = 0; i < units.size(); ++i) {
-        if (units[i]->attacking == false) {
+        if (units[i]->unit_type == Unit_type::Archer) {
+            //Wspolczynnik szybkosci pozwalajacy szybciej przeprowadzac symulacje
+            int wsp = 5;
+            sf::Time time = clock_->getElapsedTime();
+            if (false) {
+                std::cout << time.asSeconds() << " speed: " << units[i]->getSpeed() << std::endl;
+            }
+            spaceForMove = 1;
+            sf::FloatRect rec = units[i]->sprite.getGlobalBounds();
+            rec.left += units[i]->getSpeed() * time.asSeconds() * wsp * units[i]->side;
+
+
+            for (int j = 0; j < units.size(); ++j) {
+                if (units[i] != units[j]) {
+                    if (rec.intersects(units[j]->sprite.getGlobalBounds()) && units[j]->unit_type != Unit_type::Base) {
+                        spaceForMove = 0;
+                        //std::cout << j<< "\n";
+                    }
+                }
+            }
+            for (int j = 0; j < enemies.size(); ++j) {
+                    if (rec.intersects(enemies[j]->sprite.getGlobalBounds())) {
+                        spaceForMove = 0;
+                        //std::cout << j<< "\n";
+                    }
+            }
+            if (spaceForMove) {
+                units[i]->sprite.move(sf::Vector2f(time.asSeconds() * units[i]->getSpeed() * wsp * units[i]->side, 0));
+                units[i]->moving = true;
+                units[i]->clockMove.restart();
+            }
+            else {
+                if (units[i]->clockMove.getElapsedTime().asSeconds() >= 0.05) {
+                    units[i]->moving = false;
+                }
+            }
+
+
+        }
+        else if (units[i]->attacking == false) {
             //Wspolczynnik szybkosci pozwalajacy szybciej przeprowadzac symulacje
             int wsp = 5;
             sf::Time time = clock_->getElapsedTime();

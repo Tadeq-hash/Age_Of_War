@@ -102,7 +102,7 @@ public:
         UNITS
     */
     void update_units(std::vector<Unit*> units, std::vector<Unit*> enemies, sf::Clock* clock_);
-    void move(std::vector<Unit*> units, sf::Clock* clock_);
+    void move(std::vector<Unit*> units,std::vector<Unit*> enemies, sf::Clock* clock_);
     bool attack(Unit* atacker, Unit* victim);
     void update_arrows();
     void move_arrows();
