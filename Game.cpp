@@ -95,19 +95,6 @@ void Game::PollEvents()
                 this->window->close();
             }
         }
-
-        //TESTING BOTS (TEMP)
-        if (this->event->type == sf::Event::KeyPressed) {
-            if (event->key.code == sf::Keyboard::W) {
-                this->testOnelyMakeBotWarrior();
-            }
-            if (event->key.code == sf::Keyboard::A) {
-                this->testOnelyMakeBotArcher();
-            }
-            if (event->key.code == sf::Keyboard::B) {
-                this->testOnelyMakeBotBoss();
-            }
-        }
     }
 }
 
@@ -163,11 +150,12 @@ void Game::GameWon()
     EndText.setFont(EndFont);
     EndText.setFillColor(sf::Color(102, 203, 108));
     EndText.setCharacterSize(100);
+    EndText.setOutlineThickness(2);
+    EndText.setOutlineColor(sf::Color::Red);
     EndText.setString("GAME WON");
     EndText.setPosition(window->getSize().x / 2 - EndText.getGlobalBounds().width / 2, window->getSize().y / 2 - EndText.getGlobalBounds().height / 2);
     window->draw(EndText);
     window->display();
-    std::cout << "Game Won!!!\n";
     Game_End = true;
 }
 
@@ -177,11 +165,12 @@ void Game::GameLost()
     EndText.setFont(EndFont);
     EndText.setFillColor(sf::Color(203, 102, 102));
     EndText.setCharacterSize(100);
+    EndText.setOutlineThickness(2);
+    EndText.setOutlineColor(sf::Color::Red);
     EndText.setString("GAME LOST");
     EndText.setPosition(window->getSize().x / 2 - EndText.getGlobalBounds().width / 2, window->getSize().y / 2 - EndText.getGlobalBounds().height / 2);
     window->draw(EndText);
     window->display();
-    std::cout << "Game Lost :(( \n";
     Game_End = true;
 }
 
@@ -337,12 +326,11 @@ void Game::update_units(std::vector<Unit*> units, std::vector<Unit*> enemies, sf
 //Attack
 bool Game::attack(Unit* attacker, Unit* victim) {
     sf::FloatRect rangeRec = attacker->sprite.getGlobalBounds();
-    rangeRec.width += attacker->getRange();
-    if (attacker->side == -1) { rangeRec.left -= attacker->getRange(); }
+    rangeRec.width += attacker->getRange()-30;
+    if (attacker->side == -1) { rangeRec.left -= attacker->getRange()-30; }
     if (rangeRec.intersects(victim->sprite.getGlobalBounds())) {
-        //std::cout << "Mam cie w zasiegu!!!\n";
+
         attacker->attacking = true;
-        //std::cout << "Clock: " << attacker->clockAttack.getElapsedTime().asSeconds()<<"\n";
         if (attacker->clockAttack.getElapsedTime().asSeconds() >= attacker->getDmgDelay()) {
             if (attacker->unit_type == Unit_type::Archer) {
                 if (interface->player->side == attacker->side) {
@@ -354,7 +342,6 @@ bool Game::attack(Unit* attacker, Unit* victim) {
                 attacker->clockAttack.restart();
             }else{
                  victim->sufferDmg(attacker->getDmg());
-                 //std::cout << "Zadaje dmg\n";
                  attacker->clockAttack.restart();
             }
         }
@@ -371,9 +358,7 @@ void Game::move(std::vector<Unit*> units, std::vector<Unit*> enemies, sf::Clock*
             //Wspolczynnik szybkosci pozwalajacy szybciej przeprowadzac symulacje
             int wsp = 5;
             sf::Time time = clock_->getElapsedTime();
-            if (false) {
-                std::cout << time.asSeconds() << " speed: " << units[i]->getSpeed() << std::endl;
-            }
+  
             spaceForMove = 1;
             sf::FloatRect rec = units[i]->sprite.getGlobalBounds();
             rec.left += units[i]->getSpeed() * time.asSeconds() * wsp * units[i]->side;
@@ -383,14 +368,12 @@ void Game::move(std::vector<Unit*> units, std::vector<Unit*> enemies, sf::Clock*
                 if (units[i] != units[j]) {
                     if (rec.intersects(units[j]->sprite.getGlobalBounds()) && units[j]->unit_type != Unit_type::Base) {
                         spaceForMove = 0;
-                        //std::cout << j<< "\n";
                     }
                 }
             }
             for (int j = 0; j < enemies.size(); ++j) {
                     if (rec.intersects(enemies[j]->sprite.getGlobalBounds())) {
                         spaceForMove = 0;
-                        //std::cout << j<< "\n";
                     }
             }
             if (spaceForMove) {
@@ -410,9 +393,6 @@ void Game::move(std::vector<Unit*> units, std::vector<Unit*> enemies, sf::Clock*
             //Wspolczynnik szybkosci pozwalajacy szybciej przeprowadzac symulacje
             int wsp = 5;
             sf::Time time = clock_->getElapsedTime();
-            if (false) {
-                std::cout << time.asSeconds() << " speed: " << units[i]->getSpeed() << std::endl;
-            }
             spaceForMove = 1;
             sf::FloatRect rec = units[i]->sprite.getGlobalBounds();
             rec.left += units[i]->getSpeed() * time.asSeconds() * wsp * units[i]->side;
@@ -422,7 +402,6 @@ void Game::move(std::vector<Unit*> units, std::vector<Unit*> enemies, sf::Clock*
                 if (units[i] != units[j]) {
                     if (rec.intersects(units[j]->sprite.getGlobalBounds()) && units[j]->unit_type != Unit_type::Base) {
                         spaceForMove = 0;
-                        //std::cout << j<< "\n";
                     }
                 }
             }
@@ -487,17 +466,3 @@ void Game::colision_arrows() {
     }
 }
 
-/*
-    TEMP TESTS
-*/
-void Game::testOnelyMakeBotWarrior() {
-    secondInterface->player->push_unit(std::move(secondInterface->player->current_age()->MakeWarrior(secondInterface->player->side)));
-}
-
-void Game::testOnelyMakeBotArcher() {
-    secondInterface->player->push_unit(std::move(secondInterface->player->current_age()->MakeArcher(secondInterface->player->side)));
-}
-
-void Game::testOnelyMakeBotBoss() {
-    secondInterface->player->push_unit(std::move(secondInterface->player->current_age()->MakeBoss(secondInterface->player->side)));
-}

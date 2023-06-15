@@ -142,8 +142,6 @@ void UserInterface::changeAgeBackground()
 */
 void UserInterface::initResources()
 {
-    //this->second_life = false;
-   
     this->init_gold_amount();
     this->init_xp_bar();
     this->init_hp_bar();
@@ -190,24 +188,23 @@ void UserInterface::init_xp_bar()
 
 void UserInterface::init_hp_bar()
 {
-
-  
-    this->hp_rect_red = sf::IntRect(72, 22, 49, 3); //red bar
+    this->hp_rect_red = sf::IntRect(72, 22, 49, 3); // red bar
     this->hp_sprite_red.setTexture(this->gui);
     this->hp_sprite_red.setTextureRect(this->hp_rect_red);
-    
+
     if (this->side == 1)
     {
         this->hp_sprite_red.setScale(4.5, 4.7);
-        this->hp_sprite_red.setPosition(117, 9);
+        this->hp_sprite_red.setPosition(117, 9); // Player's hp_bar position
     }
-    if (this->side == -1)
+    else if (this->side == -1)
     {
+
         this->hp_sprite_red.setScale(-4.5, 4.7);
-        this->hp_sprite_red.setPosition(1500, 9);
+        this->hp_sprite_red.setPosition(1803, 9); // Enemy's hp_bar position
     }
-    
 }
+
 
 /*
     #INIT BUTTONS (SETTINGS, DEFAULTS)
@@ -291,7 +288,7 @@ void UserInterface::update_xp_bar()
         this->xp_sprite.setTextureRect(this->xp_rect);
     }
 }
-//TO THINK ABOUT LOCATION OF HP & XP, METHOD TO REPAIR IN LATER TIME
+
 void UserInterface::update_hp_bar()
 {
     player->updatePlayerHp();
@@ -303,21 +300,6 @@ void UserInterface::update_hp_bar()
 
     }
 
- /*   else if (!this->second_life && this->anim_rect.width < 0)
-    {
-        this->second_life = true;
-        this->curr_hp = player->current_hp();
-    }
-
-    else if (this->curr_hp > 0 && this->second_life)
-    {
-        this->hp_sprite_orange.setTextureRect(sf::IntRect(6, 22, (this->curr_hp/5) - 1, 3));
-
-    }
-    else
-    {
-
-    }*/
 }
 
 void UserInterface::update_gold_per_second()
@@ -441,7 +423,7 @@ void UserInterface::drawInterface()
         this->window->draw(this->user_info);
         this->window->draw(this->gold);
         this->window->draw(this->xp_sprite);
-    
+        this->window->draw(this->hp_sprite_red);
 
         if (this->side==1)
         {
@@ -460,16 +442,6 @@ void UserInterface::drawInterface()
                 this->window->draw(coin);
             }
 
-
-
-
-
-
-            //this->window->draw(this->hp_sprite_orange);
-
-            this->window->draw(this->hp_sprite_red);
-
-            //drawing buttons in queue from class InitCharacter
             if (this->num_of_char_queue.size() >= 0)
             {
                 for (const auto& charc : this->num_of_char_queue)
@@ -511,10 +483,6 @@ void UserInterface::INIT_Character(std::map<std::string, sf::Sprite> buttons, st
         InitCharacter* character = new InitCharacter(charac, this->buttons[charac], this->window, this->num_of_char_queue.size(), this->gui, player);
         this->num_of_char_queue.emplace_back(character);
     }
-    else
-    {
-        //std::cout << "Queue is full \n";
-    }
 
 }
 
@@ -527,7 +495,6 @@ void UserInterface::update_all_char()
     {
         character->update(num_of_char_queue, this->num_of_char_queue.size());
     }
-
 }
 
 //BUTTON EVENTS LOOP
@@ -625,7 +592,6 @@ void UserInterface::pollEvents()
                 player->units[0]->sprite.setScale(9.5 , 8.5);
                 player->units[0]->sprite.setTextureRect(sf::IntRect(0, 0, 23, 40));
                 player->units[0]->sprite.setPosition(-10 + ((1 - side) / 2) * 1940, 648);
-                //player->units[0]->sprite.setTextureRect(sf::IntRect(0, 0, player->units[0]->sprite.getGlobalBounds().width, player->units[0]->sprite.getGlobalBounds().height));
             }
             changeAgeBackground();
             this->buttons["upgrade_era"].setTextureRect(this->buttons_animation_rects["upgrade_blocked"]);

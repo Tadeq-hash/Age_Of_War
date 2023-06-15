@@ -68,9 +68,6 @@ public:
 	*/
 	void bar_init();
 	
-	/*
-		DRAW
-	*/
 
 	/*
 		UPDATE

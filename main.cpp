@@ -5,6 +5,8 @@
 int main()
 {
 
+    std::cout << "Age of War\n\nCreated by:\n@Tadeusz Bugalski\n@Wojciech Ciesiolka\n";
+
     //RENDERING MAIN MENU WINDOW
     MainMenu menu;
 

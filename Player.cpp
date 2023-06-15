@@ -13,18 +13,22 @@ Player::Player(Age* age1_, Age* age2_, sf::RenderWindow* window_, int side_)
     
 }
 
-//Player::~Player()
-//{
-//    delete this->age1;
-//    delete this->age2;
-//    delete this->age_ptr;
-//}
-
 void Player::initVariables()
 {
-    this->hp = const_hp; // it's 100, because second life of orange bar
-    this->gold_amount = 1000;
-    this->xp = 0;
+    //PLAYER RESOURCES
+    if (this->side == 1)
+    {
+        this->hp = 500;
+        this->gold_amount = 500;
+        this->xp = 0;
+    }
+    //ENEMY RESOURCES
+    if (this->side == -1)
+    {
+        this->hp = 500;
+        this->gold_amount = 275;
+        this->xp = 0;
+    }
 
     isAlive = 1;
     baza = new Base(window, side);
@@ -67,32 +71,14 @@ Age* Player::current_age()
 }
 
 void Player::push_arrow(std::unique_ptr<Arrow> arrow_) {
-    //std::cout << "Odbieram strzale\n";
     arrows.push_back(arrow_.release());
-    //std::cout << "Ilosc strzal w wektorze gracza wynosi: " << arrows.size() << std::endl;
 }
 
 
 void Player::push_unit(std::unique_ptr<Unit> unit_) {
-    //std::cout << "Odbieram jednostke\n";
     units.push_back(unit_.release());
-    std::cout << "Ilosc jednostek w wektorze gracza wynosi: " << units.size() << std::endl;
 }
 
-
-//void Player::update_units() {
-//    for (int i = 0; i < units.size(); ++i) {
-//        units[i]->move(&clock);
-//        //Unit* unitptr = units[i].get();
-//    }
-//    for (int i = 0; i < units.size(); ++i) {
-//        units[i]->attack(&clock);
-//    }
-//    for (int i = 0; i < units.size(); ++i) {
-//        //units[i]->update();
-//    }
-//    clock.restart();
-//}
 
 void Player::update_arrows() {
     for (int i = 0; i < arrows.size(); i++) {
@@ -101,18 +87,12 @@ void Player::update_arrows() {
 }
 
 void Player::draw_units() {
-    //std::cout << "Rysuje jednostki...\n";
-    //
-    //if (units.size() > 0) {
-    //    std::cout << "Jednostka na 1 miejscu ma hp: " << units[0]->return_hp() << std::endl;
-    //}
     for (int i = 0; i < arrows.size(); i++) {
         window->draw(*arrows[i]);
     }
     for (int i = units.size() - 1; i >= 0; --i) {
         units[i]->draw(window);
-    }
-    
+    }  
 }
 
 void Player::checkDeads(Player *player_2) {
@@ -123,7 +103,6 @@ void Player::checkDeads(Player *player_2) {
             player_2->change_xp(3);
             units.erase(units.begin() + i);
             i--;
-            std::cout << player_2->current_xp() << "\n";
         }
     }
 }

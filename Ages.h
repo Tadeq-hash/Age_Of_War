@@ -1,126 +1,83 @@
 #pragma once
 #include "Unit.h"
 
+class Age {
+protected:
+    std::vector<sf::IntRect> warrior_idle_rects;
+    std::vector<sf::IntRect> warrior_move_rects;
+    std::vector<sf::IntRect> warrior_attack_rects;
+    std::vector<sf::IntRect> warrior_die_rects;
 
-//Klasa abstrakcyjna do tworzenia wskaŸników na ere
+    std::vector<sf::IntRect> archer_idle_rects;
+    std::vector<sf::IntRect> archer_move_rects;
+    std::vector<sf::IntRect> archer_attack_rects;
+    std::vector<sf::IntRect> archer_die_rects;
 
-//Przechowuje statystyki ka¿dego typu jednostki oraz tekstury wyj¹tkowe dla ery
-class Age
-{
+    std::vector<sf::IntRect> boss_idle_rects;
+    std::vector<sf::IntRect> boss_move_rects;
+    std::vector<sf::IntRect> boss_attack_rects;
+    std::vector<sf::IntRect> boss_die_rects;
 
+    std::vector<sf::IntRect> arrow_rects;
+
+    std::vector<sf::IntRect> warrior_idle_rects_cosmic;
+    std::vector<sf::IntRect> warrior_move_rects_cosmic;
+    std::vector<sf::IntRect> warrior_attack_rects_cosmic;
+    std::vector<sf::IntRect> warrior_die_rects_cosmic;
+
+    std::vector<sf::IntRect> archer_idle_rects_cosmic;
+    std::vector<sf::IntRect> archer_move_rects_cosmic;
+    std::vector<sf::IntRect> archer_attack_rects_cosmic;
+    std::vector<sf::IntRect> archer_die_rects_cosmic;
+
+    std::vector<sf::IntRect> boss_idle_rects_cosmic;
+    std::vector<sf::IntRect> boss_move_rects_cosmic;
+    std::vector<sf::IntRect> boss_attack_rects_cosmic;
+    std::vector<sf::IntRect> boss_die_rects_cosmic;
+
+    std::vector<sf::IntRect> fireball_rects;
+
+    void initAnimationsRects_Medieval();
+    void initAnimationsRects_Gunpowder();
+
+    virtual void InitArr() = 0;
 
 protected:
-	/*
-		MEDIEVAL ERA
-	*/
-	std::vector<sf::IntRect> warrior_idle_rects;
-	std::vector<sf::IntRect> warrior_move_rects;
-	std::vector<sf::IntRect> warrior_attack_rects;
-	std::vector<sf::IntRect> warrior_die_rects;
+    Arrow* arr;
+    sf::Texture arrow_texture;
+    sf::Texture warrior_texture;
+    sf::Texture archer_texture;
+    sf::Texture boss_texture;
+    sf::RenderWindow* window;
 
-	std::vector<sf::IntRect> archer_idle_rects;
-	std::vector<sf::IntRect> archer_move_rects;
-	std::vector<sf::IntRect> archer_attack_rects;
-	std::vector<sf::IntRect> archer_die_rects;
-
-	std::vector<sf::IntRect> boss_idle_rects;
-	std::vector<sf::IntRect> boss_move_rects;
-	std::vector<sf::IntRect> boss_attack_rects;
-	std::vector<sf::IntRect> boss_die_rects;
-
-	std::vector<sf::IntRect> arrow_rects;
-
-	/*
-		COSMIC ERA
-	*/
-	std::vector<sf::IntRect> warrior_idle_rects_cosmic;
-	std::vector<sf::IntRect> warrior_move_rects_cosmic;
-	std::vector<sf::IntRect> warrior_attack_rects_cosmic;
-	std::vector<sf::IntRect> warrior_die_rects_cosmic;
-
-	std::vector<sf::IntRect> archer_idle_rects_cosmic;
-	std::vector<sf::IntRect> archer_move_rects_cosmic;
-	std::vector<sf::IntRect> archer_attack_rects_cosmic;
-	std::vector<sf::IntRect> archer_die_rects_cosmic;
-
-	std::vector<sf::IntRect> boss_idle_rects_cosmic;
-	std::vector<sf::IntRect> boss_move_rects_cosmic;
-	std::vector<sf::IntRect> boss_attack_rects_cosmic;
-	std::vector<sf::IntRect> boss_die_rects_cosmic;
-
-	std::vector<sf::IntRect> fireball_rects;
-
-	/*
-		ANIMATIONS METH
-	*/
-	void initAnimationsRects_Medieval();
-	void initAnimationsRects_Gunpowder();
-	
-	/*
-		OTHER
-	*/
-	virtual void InitArr() = 0;
-
-
-
-protected:
-
-	/*
-		TEXTURES OF UNITS
-	*/
-	Arrow* arr;
-	sf::Texture arrow_texture;
-	sf::Texture warrior_texture;
-	sf::Texture archer_texture;
-	sf::Texture boss_texture;
-	sf::RenderWindow* window;
-	
 public:
-	sf::Texture base_texture;
+    sf::Texture base_texture;
 
-	/*
-		MAKING UNITS
-	*/
-	virtual std::unique_ptr<Unit> MakeWarrior(int side_) = 0;
-	virtual std::unique_ptr<Unit> MakeArcher(int side_) = 0;
-	virtual std::unique_ptr<Unit> MakeBoss(int side_) = 0;
-	~Age() { std::cout << "Niszcze Ere\n"; }
+    virtual std::unique_ptr<Unit> MakeWarrior(int side_) = 0;
+    virtual std::unique_ptr<Unit> MakeArcher(int side_) = 0;
+    virtual std::unique_ptr<Unit> MakeBoss(int side_) = 0;
+
+    virtual ~Age() {};
 };
 
-/*
-	AGE OF KNIGHTS
-*/
-
-class AgeOfKnights : public Age
-{
+class AgeOfKnights : public Age {
 public:
-	virtual void InitArr();
+    void InitArr() override;
 
-	//Constructor
-	AgeOfKnights(sf::RenderWindow* window_);
+    AgeOfKnights(sf::RenderWindow* window_);
 
-	//Making units
-	virtual std::unique_ptr<Unit> MakeWarrior(int side_);
-	virtual std::unique_ptr<Unit> MakeArcher(int side_);
-	virtual std::unique_ptr<Unit> MakeBoss(int side_);
+    std::unique_ptr<Unit> MakeWarrior(int side_) override;
+    std::unique_ptr<Unit> MakeArcher(int side_) override;
+    std::unique_ptr<Unit> MakeBoss(int side_) override;
 };
 
-/*
-	AGE OF FUTURE
-*/
-
-class AgeOfGunpowder : public Age
-{
-
+class AgeOfGunpowder : public Age {
 public:
-	
-	virtual void InitArr();
-	
-	//Constructor
-	AgeOfGunpowder(sf::RenderWindow* window_);
+    void InitArr() override;
 
-	//Making units
-	virtual std::unique_ptr<Unit> MakeWarrior(int side_);
-	virtual std::unique_ptr<Unit> MakeArcher(int side_);
-	virtual std::unique_ptr<Unit> MakeBoss(int side_);
+    AgeOfGunpowder(sf::RenderWindow* window_);
+
+    std::unique_ptr<Unit> MakeWarrior(int side_) override;
+    std::unique_ptr<Unit> MakeArcher(int side_) override;
+    std::unique_ptr<Unit> MakeBoss(int side_) override;
 };

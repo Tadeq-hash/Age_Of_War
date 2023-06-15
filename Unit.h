@@ -38,7 +38,6 @@ enum class Unit_type
 /*
 	VIRTUAL CLASS
 */
-
 class Unit :public Arrow
 {
 protected:

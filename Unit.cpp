@@ -48,7 +48,7 @@ void Unit::move(sf::Clock* clock_) {
 	int wsp = 5;
 	sf::Time time = clock_->getElapsedTime();
 	if (false) {
-		//std::cout << time.asSeconds() << " speed: " << speed << std::endl;
+
 	}
 	sprite.move(sf::Vector2f(time.asSeconds() * speed * wsp, 0));
 
@@ -73,9 +73,6 @@ void Unit::Animate(int hp)
 		{
 			AnimateDie();
 		}
-	
-	
-
 }
 
 void Unit::AnimateAtack()
@@ -83,7 +80,6 @@ void Unit::AnimateAtack()
 	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.15f)
 	{
 		this->sprite.setTextureRect(this->attack_rects[this->current_frame_attack]);
-		//std::cout << current_frame_attack << "\n";
 		if (this->current_frame_attack < this->attack_rects.size() - 1)
 		{
 			this->current_frame_attack += 1;
@@ -101,7 +97,6 @@ void Unit::AnimateMove()
 	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.15f)
 	{
 		this->sprite.setTextureRect(this->move_rects[this->current_frame_move]);
-		//std::cout << current_frame_move << "\n";
 		if (this->current_frame_move < this->move_rects.size()-1)
 		{
 			this->current_frame_move +=1;
@@ -118,7 +113,6 @@ void Unit::AnimateIdle()
 	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.15f)
 	{
 		this->sprite.setTextureRect(this->idle_rects[this->current_frame_idle]);
-		//std::cout << current_frame_idle << "\n";
 		if (this->current_frame_idle < this->idle_rects.size() - 1)
 		{
 			this->current_frame_idle += 1;
@@ -132,11 +126,10 @@ void Unit::AnimateIdle()
 
 void Unit::AnimateDie()
 {
-	//std::cout << "DIEDIEDIE\n";
+
 	if (this->clock_move_animation.getElapsedTime().asSeconds() > 0.15f)
 	{
 		this->sprite.setTextureRect(this->die_rects[this->current_frame_die]);
-		//std::cout << current_frame_die << "\n";
 		if (this->current_frame_die < this->die_rects.size() - 1)
 		{
 			this->current_frame_die += 1;
@@ -200,7 +193,6 @@ void Arrow::Animate() {
 	if (this->clock.getElapsedTime().asSeconds() > 0.15)
 	{
 		setTextureRect(frames[current_frame]);
-		//std::cout << current_frame_move << "\n";
 		if (this->current_frame < this->frames.size() - 1)
 		{
 			this->current_frame += 1;

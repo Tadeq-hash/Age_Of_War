@@ -1,181 +1,144 @@
 #include "InitCharacter.h"
 
-void InitCharacter::InitVariables()
-{
-	this->clock.restart();
-	this->cooldown = 2.5f;
+void InitCharacter::InitVariables() {
+    clock.restart();
+    cooldown = 2.5f;
 }
 
-//DRAWING
-void InitCharacter::drawButton()
-{
-	this->_window->draw(this->character_sprite);
+// DRAWING
+void InitCharacter::drawButton() {
+    _window->draw(character_sprite);
 }
 
-//CONSTRUCTOR
-InitCharacter::InitCharacter(std::string _character, sf::Sprite _character_sprite, sf::RenderWindow* window, int size, sf::Texture _tex, Player* player_)
-{
-	this->bar_texture = _tex;
-	this->vec_size = size;
-	this->_window = window;
-	this->character = _character;
-	this->character_sprite = _character_sprite;
-	this->player = player_;
-	this->InitVariables();
-	this->sprite_setup();
-	this->bar_setup();
-	this->stringToEnumClass();
-}
-//DESTRUCTOR
-InitCharacter::~InitCharacter()
-{
-	Unit* unit = 0;
-	//std::cout << "OBIEKT WYJEBANY Z WEKTORA, TERAZ TWORZE POSTAÆ :)" << std::endl;;
-	//tutaj wstawiam tworzenie postaci
-	switch (unit_type)
-	{
-	case Unit_type::Warrior:
-		//std::cout << "Tworze Warrior..." << std::endl;
-		player->push_unit(move(player->current_age()->MakeWarrior(player->side)));
-		break;
-	case Unit_type::Archer:
-		//std::cout << "Tworze Archer..." << std::endl;
-		player->push_unit(move(player->current_age()->MakeArcher(player->side)));
-		break;
-	case Unit_type::Boss:
-		//std::cout << "Tworze Boss..." << std::endl;
-		player->push_unit(move(player->current_age()->MakeBoss(player->side)));
-		//std::cout << "Jednostka przekazana do wektora\n";
-		break;
-	}
+// CONSTRUCTOR
+InitCharacter::InitCharacter(std::string character, sf::Sprite character_sprite, sf::RenderWindow* window, int size, sf::Texture tex, Player* player_) {
+    bar_texture = tex;
+    vec_size = size;
+    _window = window;
+    this->character = character;
+    this->character_sprite = character_sprite;
+    player = player_;
+    InitVariables();
+    sprite_setup();
+    bar_setup();
+    stringToEnumClass();
 }
 
+// DESTRUCTOR
+InitCharacter::~InitCharacter() {
+    Unit* unit = nullptr;
 
-void InitCharacter::sprite_setup()
-{
-	this->character_sprite.setScale(2, 2);
-	this->character_sprite.setColor(sf::Color::Green);
-
-
+    switch (unit_type) {
+    case Unit_type::Warrior:
+        player->push_unit(std::move(player->current_age()->MakeWarrior(player->side)));
+        break;
+    case Unit_type::Archer:
+        player->push_unit(std::move(player->current_age()->MakeArcher(player->side)));
+        break;
+    case Unit_type::Boss:
+        player->push_unit(std::move(player->current_age()->MakeBoss(player->side)));
+        break;
+    }
 }
 
-//BUTTON SETUPS
-void InitCharacter::setupButtons(std::vector<InitCharacter*>& vec, int size)
-{
-	if (size == 1)
-	{
-		vec[0]->setposition_0();
-
-	}
-	if (size == 2)
-	{
-		vec[0]->setposition_0();
-		vec[1]->setposition_1();
-	}
-	if (size == 3)
-	{
-		vec[0]->setposition_0();
-		vec[1]->setposition_1();
-		vec[2]->setposition_2();
-	}
+void InitCharacter::sprite_setup() {
+    character_sprite.setScale(2, 2);
+    character_sprite.setColor(sf::Color::Green);
 }
 
-void InitCharacter::setposition_0()
-{
-
-	this->character_sprite.setPosition(375, 5);
+// BUTTON SETUPS
+void InitCharacter::setupButtons(std::vector<InitCharacter*>& vec, int size) {
+    if (size == 1) {
+        vec[0]->setposition_0();
+    }
+    if (size == 2) {
+        vec[0]->setposition_0();
+        vec[1]->setposition_1();
+    }
+    if (size == 3) {
+        vec[0]->setposition_0();
+        vec[1]->setposition_1();
+        vec[2]->setposition_2();
+    }
 }
 
-void InitCharacter::setposition_1()
-{
-	this->character_sprite.setPosition(375, 35);
-	clock.restart();
+void InitCharacter::setposition_0() {
+    character_sprite.setPosition(375, 5);
 }
 
-void InitCharacter::setposition_2()
-{
-	this->character_sprite.setPosition(375, 65);
-	clock.restart();
+void InitCharacter::setposition_1() {
+    character_sprite.setPosition(375, 35);
+    clock.restart();
 }
 
-void InitCharacter::bar_setup()
-{
-	this->cooldown_bar.setTexture(this->bar_texture);
-	this->cooldown_bar.setTextureRect(sf::IntRect(184, 50, 3, 250));
-	this->cooldown_bar.setScale(5, 0.45);
-	this->cooldown_bar.setPosition(355, 0);
-
+void InitCharacter::setposition_2() {
+    character_sprite.setPosition(375, 65);
+    clock.restart();
 }
 
-void InitCharacter::bar_animation()
-{
-	this->cooldown_animation.setTexture(this->bar_texture);
-	if (this->clock.getElapsedTime().asMilliseconds() < 2505)
-	{
-		this->cooldown_animation.setTextureRect(sf::IntRect(190, 51, 1, this->clock.getElapsedTime().asMilliseconds() / 11));
-	}
-	this->cooldown_animation.setPosition(360, 5);
-	this->cooldown_animation.setScale(5, 0.45);
-
-
+void InitCharacter::bar_setup() {
+    cooldown_bar.setTexture(bar_texture);
+    cooldown_bar.setTextureRect(sf::IntRect(184, 50, 3, 250));
+    cooldown_bar.setScale(5, 0.45);
+    cooldown_bar.setPosition(355, 0);
 }
 
-void InitCharacter::bar_init()
-{
-	this->_window->draw(this->cooldown_bar);
-	this->_window->draw(this->cooldown_animation);
+void InitCharacter::bar_animation() {
+    cooldown_animation.setTexture(bar_texture);
+    if (clock.getElapsedTime().asMilliseconds() < 2505) {
+        cooldown_animation.setTextureRect(sf::IntRect(190, 51, 1, clock.getElapsedTime().asMilliseconds() / 11));
+    }
+    cooldown_animation.setPosition(360, 5);
+    cooldown_animation.setScale(5, 0.45);
 }
 
-//REMOVING OBJECT AFTER TIME
-void InitCharacter::update(std::vector<InitCharacter*>& vec, int size)
-{
-
-	this->setupButtons(vec, size);
-	this->bar_animation();
-	//std::cout<<clock.getElapsedTime().asMilliseconds()<<"\n";
-	if (clock.getElapsedTime().asMilliseconds() > cooldown * 1000 && isSpaceForRespawn())
-	{
-		//std::cout << "Niszcze \n";
-		vec.erase(vec.begin());
-		this->vec_size--;
-		delete this;
-	}
+void InitCharacter::bar_init() {
+    _window->draw(cooldown_bar);
+    _window->draw(cooldown_animation);
 }
 
+// REMOVING OBJECT AFTER TIME
+void InitCharacter::update(std::vector<InitCharacter*>& vec, int size) {
+    setupButtons(vec, size);
+    bar_animation();
+    if (clock.getElapsedTime().asMilliseconds() > cooldown * 1000 && isSpaceForRespawn()) {
+        vec.erase(vec.begin());
+        vec_size--;
+        delete this;
+    }
+}
 
-//zamiana stringa w enum class
+// Zamiana stringa w enum class
 void InitCharacter::stringToEnumClass() {
-	if (character == "warrior") {
-		unit_type = Unit_type::Warrior;
-	}
-	else if (character == "archer") {
-		unit_type = Unit_type::Archer;
-	}
-	else if (character == "boss") {
-		unit_type = Unit_type::Boss;
-	}
+    if (character == "warrior") {
+        unit_type = Unit_type::Warrior;
+    }
+    else if (character == "archer") {
+        unit_type = Unit_type::Archer;
+    }
+    else if (character == "boss") {
+        unit_type = Unit_type::Boss;
+    }
 }
 
-//Definiowanie miejsca dla spawnu
+// Definiowanie miejsca dla spawnu
 bool InitCharacter::isSpaceForRespawn() {
-	sf::Rect<float> rect_;
-	switch (unit_type)
-	{  
-	case Unit_type::Warrior:
-		rect_ = player->age_ptr->MakeWarrior(player->side)->sprite.getGlobalBounds(); 
-		break;
-	case Unit_type::Archer:
-		rect_ = player->age_ptr->MakeArcher(player->side)->sprite.getGlobalBounds();
-		break;
-	case Unit_type::Boss:
-		rect_ = player->age_ptr->MakeBoss(player->side)->sprite.getGlobalBounds();
-		break;
-	}
-	for (int i = 0; i < player->units.size(); i++) {
-		if (player->units[i]->sprite.getGlobalBounds().intersects(rect_) && player->units[i]->unit_type != Unit_type::Base) {
-			return false;
-		}
-	}
-	return true;
+    sf::Rect<float> rect_;
+    switch (unit_type) {
+    case Unit_type::Warrior:
+        rect_ = player->age_ptr->MakeWarrior(player->side)->sprite.getGlobalBounds();
+        break;
+    case Unit_type::Archer:
+        rect_ = player->age_ptr->MakeArcher(player->side)->sprite.getGlobalBounds();
+        break;
+    case Unit_type::Boss:
+        rect_ = player->age_ptr->MakeBoss(player->side)->sprite.getGlobalBounds();
+        break;
+    }
+    for (int i = 0; i < player->units.size(); i++) {
+        if (player->units[i]->sprite.getGlobalBounds().intersects(rect_) && player->units[i]->unit_type != Unit_type::Base) {
+            return false;
+        }
+    }
+    return true;
 }
-
