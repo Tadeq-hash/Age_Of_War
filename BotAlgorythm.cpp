@@ -7,12 +7,17 @@ BotAlgorythm::BotAlgorythm(UserInterface* PlayerInterface_, UserInterface* BotIn
 	BotInterface = BotInterface_;
 	player = PlayerInterface->player;
 	bot = BotInterface->player;
+	
+	
+
 }
 
 void BotAlgorythm::update()
 {
+	
 	checkXp();
 	makeUnits();
+	
 	//std::cout << "Bot: Gold: " << bot->current_gold() << "\n";
 	//std::cout << "Bot: Xp: " << bot->current_xp() << "\n";
 }
@@ -32,6 +37,7 @@ void BotAlgorythm::checkXp()
 			BotInterface->changeAgeBackground();
 		}
 	}
+
 }
 
 void BotAlgorythm::makeUnits()
@@ -134,3 +140,5 @@ void BotAlgorythm::TakeGold(Unit_type unit_type)
 		break;
 	}
 }
+
+

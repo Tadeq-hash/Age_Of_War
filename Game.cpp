@@ -182,6 +182,8 @@ void Game::InitBackground()
 void Game::initButtons()
 {
     this->interface = new UserInterface(this->interface_tex, this->window, this->event, this->digitals, age_of_knights, age_of_gunpowder, 1, this->background_sprite, this->cosmic_background_tex);
+    this->secondInterface = new UserInterface(this->interface_tex, this->window, this->event, this->digitals, age_of_knights, age_of_gunpowder, -1, this->background_sprite, this->cosmic_background_tex);
+    
 }
 
 /*
@@ -189,9 +191,6 @@ void Game::initButtons()
 */
 void Game::initBot()
 {
-    if (Bot) {
-        this->secondInterface = new UserInterface(this->interface_tex, this->window, this->event, this->digitals, age_of_knights, age_of_gunpowder, -1, this->background_sprite, this->cosmic_background_tex);
-    }
     Bot_Algorythm = new BotAlgorythm(interface, secondInterface);
 }
 /*
@@ -240,6 +239,7 @@ void Game::render()
 
         //user interface
         this->drawInterface();
+        
 
         //units
         this->interface->player->draw_units();
@@ -257,6 +257,7 @@ void Game::render()
 void Game::drawInterface()
 {
     this->interface->drawInterface();
+    this->secondInterface->drawInterface();
 }
 
 /*

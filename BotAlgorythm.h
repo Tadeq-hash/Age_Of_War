@@ -16,5 +16,6 @@ public:
 	bool isSpaceForRespawn(Unit_type unit_type);
 	bool EnoughtGold(Unit_type unit_type);
 	void TakeGold(Unit_type unit_type);
+
 };
 

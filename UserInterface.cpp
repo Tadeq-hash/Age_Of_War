@@ -22,7 +22,7 @@ UserInterface::UserInterface(sf::Texture* texture, sf::RenderWindow* window_, sf
     initResources();
     init_animation_rects();
     initButtons();
-    init_user_info();
+    init_user_info(0);
     init_prices();
 }
 
@@ -151,10 +151,19 @@ void UserInterface::initResources()
 
 void UserInterface::init_gold_amount()
 {
+
     this->gold.setCharacterSize(15);
     this->gold.setFont(this->font);
     this->gold.setFillColor(sf::Color::White);
-    this->gold.setPosition(162, 78);
+    if (this->side==1)
+    {
+        this->gold.setPosition(162, 78);
+    }
+    if(this->side==-1)
+    {
+        this->gold.setPosition(1920 - 225, 78);
+    }
+    
     this->gold.setString(std::to_string(this->curr_gold));
 }
 
@@ -163,27 +172,41 @@ void UserInterface::init_xp_bar()
     this->xp_rect = sf::IntRect(72, 6, this->curr_xp, 3);
     this->xp_sprite.setTexture(this->gui);
     this->xp_sprite.setTextureRect(this->xp_rect);
-    this->xp_sprite.setPosition(117, 36);
-    this->xp_sprite.setScale(4.5, 4.7);
+    
+    if (this->side == 1)
+    {
+        this->xp_sprite.setPosition(117, 36);
+        this->xp_sprite.setScale(4.5, 4.7);
+    }
+    
+    if (this->side == -1)
+    {
+        this->xp_sprite.setPosition(1803, 36);
+        this->xp_sprite.setScale(-4.5, 4.7);
+    }
+    
+    
 }
 
 void UserInterface::init_hp_bar()
 {
 
-    this->hp_rect_orange = sf::IntRect(6, 22, 49, 3); //orange bar
+  
     this->hp_rect_red = sf::IntRect(72, 22, 49, 3); //red bar
-
-    //red bar
-    this->hp_sprite_red.setPosition(117, 9);
     this->hp_sprite_red.setTexture(this->gui);
-    this->hp_sprite_red.setScale(4.5, 4.7);
     this->hp_sprite_red.setTextureRect(this->hp_rect_red);
-
-    //orange bar
-   /* this->hp_sprite_orange.setPosition(117, 9);
-    this->hp_sprite_orange.setTexture(this->gui);
-    this->hp_sprite_orange.setScale(4.5, 4.7);
-    this->hp_sprite_orange.setTextureRect(this->hp_rect_orange);*/
+    
+    if (this->side == 1)
+    {
+        this->hp_sprite_red.setScale(4.5, 4.7);
+        this->hp_sprite_red.setPosition(117, 9);
+    }
+    if (this->side == -1)
+    {
+        this->hp_sprite_red.setScale(-4.5, 4.7);
+        this->hp_sprite_red.setPosition(1500, 9);
+    }
+    
 }
 
 /*
@@ -389,12 +412,23 @@ bool UserInterface::canUpgrade(int xp_)
 /*
     #INITS ONLY BACKGROUND OF INTERFACE
 */
-void UserInterface::init_user_info()
+void UserInterface::init_user_info(bool bot_)
 {
+    
     this->user_info.setTexture(this->gui);
     this->user_info.setTextureRect(sf::IntRect(96, 36, 77, 24));
-    this->user_info.setScale(4.5, 4.5);
-    this->user_info.setPosition(0, 0);
+    if (this->side==1)
+    {
+        this->user_info.setScale(4.5, 4.5);
+        this->user_info.setPosition(0, 0);
+    }
+    if(this->side==-1)
+    {
+        this->user_info.setScale(-4.5, 4.5);
+        this->user_info.setPosition(1920, 0);
+    }
+    
+   
 
 }
 
@@ -403,40 +437,48 @@ void UserInterface::init_user_info()
 */
 void UserInterface::drawInterface()
 {
-    for (const auto& button : this->buttons)
-    {
-        this->window->draw(button.second);
-    }
+    
+        this->window->draw(this->user_info);
+        this->window->draw(this->gold);
+        this->window->draw(this->xp_sprite);
+    
 
-    for (const auto& price : this->prices_in_shop)
-    {
-        this->window->draw(price.second);
-    }
-
-    for (const auto& coin : coins)
-    {
-        this->window->draw(coin);
-    }
-
-    this->window->draw(this->user_info);
-
-    this->window->draw(this->gold);
-
-    this->window->draw(this->xp_sprite);
-
-    //this->window->draw(this->hp_sprite_orange);
-
-    this->window->draw(this->hp_sprite_red);
-
-    //drawing buttons in queue from class InitCharacter
-    if (this->num_of_char_queue.size() >= 0)
-    {
-        for (const auto& charc : this->num_of_char_queue)
+        if (this->side==1)
         {
-            charc->drawButton();
-            this->num_of_char_queue[0]->bar_init();
+            for (const auto& button : this->buttons)
+            {
+                this->window->draw(button.second);
+            }
+
+            for (const auto& price : this->prices_in_shop)
+            {
+                this->window->draw(price.second);
+            }
+
+            for (const auto& coin : coins)
+            {
+                this->window->draw(coin);
+            }
+
+
+
+
+
+
+            //this->window->draw(this->hp_sprite_orange);
+
+            this->window->draw(this->hp_sprite_red);
+
+            //drawing buttons in queue from class InitCharacter
+            if (this->num_of_char_queue.size() >= 0)
+            {
+                for (const auto& charc : this->num_of_char_queue)
+                {
+                    charc->drawButton();
+                    this->num_of_char_queue[0]->bar_init();
+                }
+            }
         }
-    }
 }
 
 /*
@@ -588,7 +630,6 @@ void UserInterface::pollEvents()
             changeAgeBackground();
             this->buttons["upgrade_era"].setTextureRect(this->buttons_animation_rects["upgrade_blocked"]);
         }
-
 
     }
 

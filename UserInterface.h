@@ -24,7 +24,7 @@ private:
     sf::Sprite *background_sprite;
     
 
-
+    bool bot;
 
     /*
         BUTTONS
@@ -49,12 +49,13 @@ private:
         INTERFACE BACKGROUND *ONLY SPRITE*
     */
     sf::Sprite user_info;
-    void init_user_info();
+public:
+    void init_user_info(bool bot);
 
     /*
         GAME BACKGROUND
     */
-public:
+
     void changeAgeBackground();
 private:
 
