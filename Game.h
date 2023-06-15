@@ -49,11 +49,15 @@ private:
         USER INTERFACE 
     */
 
-    UserInterface* interface;
-    UserInterface* secondInterface;
+    
    
+
+
     sf::Texture* interface_tex;
     sf::Font* digitals;
+
+    UserInterface* interface;
+    UserInterface* secondInterface;
 
     void initButtons();
     void drawInterface();
@@ -67,6 +71,9 @@ private:
     bool Bot = true;
 
 public:
+
+   
+
 
     /*
         CONSTRUCTOR & DESTRUCTOR

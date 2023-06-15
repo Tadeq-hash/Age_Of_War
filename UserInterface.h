@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "Player.h"
 #include "InitCharacter.h"
 
 class UserInterface 
@@ -20,10 +19,12 @@ private:
 
     Age* age1;
     Age* age2;
-    
+
     sf::Texture *cosmic_era_tex;
     sf::Sprite *background_sprite;
     
+
+
 
     /*
         BUTTONS
@@ -83,7 +84,6 @@ private:
     //bool second_life; 
     int side;
     
-
     //xp_bar
     sf::Sprite xp_sprite;
 

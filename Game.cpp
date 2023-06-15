@@ -189,6 +189,7 @@ void Game::update()
     this->PollEvents();
     this->interface->update();
     this->update_units(interface->player->units, secondInterface->player->units, &clock);
+    
     this->update_arrows();
     clock.restart();
 }
@@ -235,6 +236,7 @@ void Game::drawInterface()
 
 //Update units
 void Game::update_units(std::vector<Unit*> units, std::vector<Unit*> enemies, sf::Clock* clock_) {
+    
     for (int n = 0; n < units.size(); n++) {
         units[n]->attacking = false;
         for (int m = 0; m < enemies.size(); m++) {
@@ -251,8 +253,14 @@ void Game::update_units(std::vector<Unit*> units, std::vector<Unit*> enemies, sf
     }
     this->move(units, clock_);
     this->move(enemies, clock_);
-    interface->player->checkDeads();
-    secondInterface->player->checkDeads();
+
+    interface->player->checkDeads(secondInterface->player);
+    secondInterface->player->checkDeads(interface->player);
+  
+
+  
+    
+
     for (int n = 0; n < units.size(); n++) {
         if (units[n]->unit_type != Unit_type::Base) {
             units[n]->Animate(units[n]->return_hp());

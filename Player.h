@@ -21,6 +21,7 @@ private:
     
     //Base
     Base* baza;
+    bool isAlive;
 
     //Other
     void initVariables();
@@ -61,7 +62,7 @@ public:
     
     //UNITS
     void draw_units();
-    void checkDeads(); 
+    void checkDeads(Player *player);
 };
 
 #endif // PLAYER_H

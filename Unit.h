@@ -50,6 +50,7 @@ protected:
 	float hp;
 	int range;
 	int dmg;
+	int value;
 	int speed;
 	float dmg_reduction;
 	float dmg_delay = 1;
@@ -87,7 +88,7 @@ public:
 		CONSTRUCTORS & DESTRUCTOR
 	*/
 	Unit() {};
-	Unit(sf::Texture* texture_, int &max_hp_, int &hp_, int &range_, int &dmg_, int &speed_, float &dmg_reduction_, int side_, sf::RenderWindow* window_, std::vector<sf::IntRect>& rects_idle, std::vector<sf::IntRect>& rects_move, std::vector<sf::IntRect>& rects_attack, std::vector<sf::IntRect>& rects_die, float scale);
+	Unit(sf::Texture* texture_, int &max_hp_, int &hp_, int &range_, int &dmg_, int &speed_, float &dmg_reduction_, int side_, sf::RenderWindow* window_, std::vector<sf::IntRect>& rects_idle, std::vector<sf::IntRect>& rects_move, std::vector<sf::IntRect>& rects_attack, std::vector<sf::IntRect>& rects_die, float scale, int value_);
 	
 	~Unit();
 
@@ -113,6 +114,7 @@ public:
 	int getRange();
 	int getDmg();
 	int getDmgRed();
+	int getValue();
 	float getDmgDelay();
 	void sufferDmg(int sufferDmg_);
 

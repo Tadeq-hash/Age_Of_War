@@ -39,10 +39,11 @@ std::unique_ptr<Unit> AgeOfKnights::MakeWarrior(int side_) {
 	int speed = 40;
 	float dmg_reduction = 0.9;
 	float scale = 2;
+	int value = 50;
 	
 	//std::cout << "Wywoluje wojownika ze statami z ery Rycerzy" << std::endl;
 	std::cout << this->warrior_move_rects.size() << "\n";
-	Warrior warrior(&warrior_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, warrior_idle_rects, warrior_move_rects, warrior_attack_rects, warrior_die_rects, scale);
+	Warrior warrior(&warrior_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, warrior_idle_rects, warrior_move_rects, warrior_attack_rects, warrior_die_rects, scale, value);
 	return std::make_unique<Unit>(warrior);
 };
 
@@ -55,9 +56,10 @@ std::unique_ptr<Unit> AgeOfKnights::MakeArcher(int side_) {
 	int speed = 20;
 	float dmg_reduction = 1;
 	float scale = 2.2;
+	int value = 75;
 
 	//std::cout << "Wywoluje Lucznika ze statami z ery Rycerzy" << std::endl;
-	Archer archer(&archer_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, archer_idle_rects, archer_move_rects, archer_attack_rects, archer_die_rects, scale);
+	Archer archer(&archer_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, archer_idle_rects, archer_move_rects, archer_attack_rects, archer_die_rects, scale, value);
 	archer.arrow = arr;
 	archer.unit_type = Unit_type::Archer;
 	return std::make_unique<Unit>(archer);
@@ -72,8 +74,9 @@ std::unique_ptr<Unit> AgeOfKnights::MakeBoss(int side_) {
 	int speed = 20;
 	float dmg_reduction = 0.7;
 	float scale = 2;
+	int value = 150;
 
-	Boss boss(&boss_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, boss_idle_rects, boss_move_rects, boss_attack_rects, boss_die_rects, scale);
+	Boss boss(&boss_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, boss_idle_rects, boss_move_rects, boss_attack_rects, boss_die_rects, scale, value);
 	std::cout << "Wywoluje Bossa ze statami z ery Rycerzy" << std::endl;
 	//Boss boss(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
 	std::unique_ptr<Unit> unit = move(std::make_unique<Unit>(boss));
@@ -120,9 +123,10 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeWarrior(int side_) {
 	int speed = 40;
 	float dmg_reduction = 1;
 	float scale = 2.5;
+	int value = 50;
 	//std::cout << "Wywoluje wojownika ze statami z ery Prochu" << std::endl;
 	//Warrior warrior(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
-	return move(std::make_unique<Unit>(Warrior(&warrior_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, warrior_idle_rects_cosmic, warrior_move_rects_cosmic, warrior_attack_rects_cosmic, warrior_die_rects_cosmic,scale)));
+	return move(std::make_unique<Unit>(Warrior(&warrior_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, warrior_idle_rects_cosmic, warrior_move_rects_cosmic, warrior_attack_rects_cosmic, warrior_die_rects_cosmic,scale, value)));
 };
 
 //£uznik
@@ -134,8 +138,9 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeArcher(int side_) {
 	int speed = 40;
 	float dmg_reduction = 1;
 	float scale = 2.4;
+	int value = 75;
 	//std::cout << "Wywoluje Lucznika ze statami z ery Prochu" << std::endl;
-	Archer archer(&archer_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, archer_idle_rects_cosmic, archer_move_rects_cosmic, archer_attack_rects_cosmic, archer_die_rects_cosmic, scale);
+	Archer archer(&archer_texture, max_hp, hp, range, dmg, speed, dmg_reduction, side_, window, archer_idle_rects_cosmic, archer_move_rects_cosmic, archer_attack_rects_cosmic, archer_die_rects_cosmic, scale, value);
 	archer.arrow = arr;
 	archer.unit_type = Unit_type::Archer;
 	return std::make_unique<Unit>(archer);
@@ -150,10 +155,11 @@ std::unique_ptr<Unit> AgeOfGunpowder::MakeBoss(int side_) {
 	int speed = 130;
 	float dmg_reduction = 1;
 	float scale = 2.5;
+	int value = 150;
 	std::cout << "Wywoluje Bossa ze statami z ery Prochu" << std::endl;
 
 	//Boss boss(&texture, &max_hp, hp, &range, &dmg, &speed, &dmg_reduction);
-	return std::make_unique<Unit>(Boss(&boss_texture, max_hp, hp, range, dmg, speed, dmg_reduction,side_, window, boss_idle_rects_cosmic, boss_move_rects_cosmic, boss_attack_rects_cosmic, boss_die_rects_cosmic,scale));
+	return std::make_unique<Unit>(Boss(&boss_texture, max_hp, hp, range, dmg, speed, dmg_reduction,side_, window, boss_idle_rects_cosmic, boss_move_rects_cosmic, boss_attack_rects_cosmic, boss_die_rects_cosmic,scale, value));
 }
 
 void Age::initAnimationsRects_Medieval()

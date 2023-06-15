@@ -7,12 +7,13 @@
 
 
 //	KONSTRUKTOR
-Unit::Unit(sf::Texture* texture_, int &max_hp_, int &hp_, int &range_, int &dmg_, int &speed_, float &dmg_reduction_, int side_, sf::RenderWindow* window_, std::vector<sf::IntRect>& rects_idle, std::vector<sf::IntRect>& rects_move, std::vector<sf::IntRect>& rects_attack, std::vector<sf::IntRect>& rects_die, float scale) {
+Unit::Unit(sf::Texture* texture_, int &max_hp_, int &hp_, int &range_, int &dmg_, int &speed_, float &dmg_reduction_, int side_, sf::RenderWindow* window_, std::vector<sf::IntRect>& rects_idle, std::vector<sf::IntRect>& rects_move, std::vector<sf::IntRect>& rects_attack, std::vector<sf::IntRect>& rects_die, float scale, int value_) {
 	window = window_;
 	side = side_;
 	texture = texture_;
 	max_hp = max_hp_;
 	hp = hp_;
+	value = value_;
 	range = range_;
 	dmg = dmg_;
 	speed = speed_;
@@ -155,6 +156,11 @@ int Unit::getSpeed() {
 
 int Unit::getDmg() { return dmg; }
 int Unit::getDmgRed() { return dmg_reduction; }
+
+int Unit::getValue()
+{
+	return value;
+}
 
 float Unit::getDmgDelay()
 {

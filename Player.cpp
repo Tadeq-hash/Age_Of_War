@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#include "Game.h"
 Player::Player(Age* age1_, Age* age2_, sf::RenderWindow* window_, int side_)
 {
     
@@ -24,15 +24,16 @@ void Player::initVariables()
 {
     this->hp = const_hp; // it's 100, because second life of orange bar
     this->gold_amount = 1000;
-    this->xp = 20;
+    this->xp = 0;
 
+    isAlive = 1;
     baza = new Base(window, side);
     units.push_back(baza);
 }
 
 void Player::change_xp(int _xp)
 {
-    this->xp = _xp;
+    this->xp+=_xp;
 }
 
 void Player::change_hp(int _hp)
@@ -66,16 +67,16 @@ Age* Player::current_age()
 }
 
 void Player::push_arrow(std::unique_ptr<Arrow> arrow_) {
-    std::cout << "Odbieram strzale\n";
+    //std::cout << "Odbieram strzale\n";
     arrows.push_back(arrow_.release());
-    std::cout << "Ilosc strzal w wektorze gracza wynosi: " << arrows.size() << std::endl;
+    //std::cout << "Ilosc strzal w wektorze gracza wynosi: " << arrows.size() << std::endl;
 }
 
 
 void Player::push_unit(std::unique_ptr<Unit> unit_) {
-    std::cout << "Odbieram jednostke\n";
+    //std::cout << "Odbieram jednostke\n";
     units.push_back(unit_.release());
-    std::cout << "Ilosc jednostek w wektorze gracza wynosi: " << units.size() << std::endl;
+    //std::cout << "Ilosc jednostek w wektorze gracza wynosi: " << units.size() << std::endl;
 }
 
 
@@ -108,19 +109,25 @@ void Player::draw_units() {
     for (int i = 0; i < arrows.size(); i++) {
         window->draw(*arrows[i]);
     }
-    for (int i = units.size()-1; i >= 0 ; --i) {
+    for (int i = units.size() - 1; i >= 0; --i) {
         units[i]->draw(window);
     }
+    
 }
 
-void Player::checkDeads() {
+void Player::checkDeads(Player *player_2) {
     for (int i = 0; i < units.size(); i++) {
-        if (units[i]->die == true) {
+        if (units[i]->die) { 
+
+            player_2->change_money(units[i]->getValue());
+            player_2->change_xp(3);
             units.erase(units.begin() + i);
             i--;
+
         }
         else if (units[i]->unit_type == Unit_type::Base) {
             if (units[i]->return_hp() <= 0) {
+                isAlive = 0;
                 units.erase(units.begin() + i);
                 i--;
             }

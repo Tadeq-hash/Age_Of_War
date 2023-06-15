@@ -628,13 +628,3 @@ void UserInterface::pollEvents()
 }
 
 
-
-
-
-
-
-
-
-
-
-
