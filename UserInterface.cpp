@@ -257,7 +257,7 @@ void UserInterface::update_xp_bar()
 {
     if (this->curr_xp >= 43)
     {
-        this->xp_rect = sf::IntRect(8, 6, this->curr_xp, 3);
+        this->xp_rect = sf::IntRect(8, 6, 43, 3);
         this->xp_sprite.setTextureRect(this->xp_rect);
     }
     else

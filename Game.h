@@ -70,6 +70,7 @@ private:
     */
 
     bool Bot = true;
+    bool Game_End = false;
     BotAlgorythm* Bot_Algorythm;
 public:
 
@@ -89,7 +90,9 @@ public:
     void update();
     void render();
     bool getWindowIsOpen();
-
+    void CheckGameConditions();
+    void GameWon();
+    void GameLost();
 
   
 

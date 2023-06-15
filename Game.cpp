@@ -147,6 +147,28 @@ bool Game::getWindowIsOpen()
     return this->window->isOpen();
 }
 
+void Game::CheckGameConditions()
+{
+    if (interface->player->units[0]->return_hp() <= 0) {
+        GameLost();
+    }
+    if (secondInterface->player->units[0]->return_hp() <= 0) {
+        GameWon();
+    }
+}
+
+void Game::GameWon()
+{
+    std::cout << "Game Won!!!\n";
+    Game_End = true;
+}
+
+void Game::GameLost()
+{
+    std::cout << "Game Lost :(( \n";
+    Game_End = true;
+}
+
 /*
     INIT BACKGROUND
 */
@@ -196,6 +218,7 @@ void Game::update()
     this->update_arrows();
     this->Bot_Algorythm->update();
     clock.restart();
+    CheckGameConditions();
 }
 
 /*
@@ -204,25 +227,27 @@ void Game::update()
 
 void Game::render()
 {
-    //clear
-    this->window->clear(sf::Color::Cyan);
-    
-    /*
-        Draw
-    */
+    if (!Game_End) {
+        //clear
+        this->window->clear(sf::Color::Cyan);
 
-    //window
-    this->window->draw(*this->background_sprite);
+        /*
+            Draw
+        */
 
-    //user interface
-    this->drawInterface();
- 
-    //units
-    this->interface->player->draw_units();
-    this->secondInterface->player->draw_units();
-    
-    //display
-    this->window->display();
+        //window
+        this->window->draw(*this->background_sprite);
+
+        //user interface
+        this->drawInterface();
+
+        //units
+        this->interface->player->draw_units();
+        this->secondInterface->player->draw_units();
+
+        //display
+        this->window->display();
+    }
 }
 
 /*

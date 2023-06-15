@@ -13,15 +13,15 @@ void BotAlgorythm::update()
 {
 	checkXp();
 	makeUnits();
-	std::cout << "Bot: Gold: " << bot->current_gold() << "\n";
-	std::cout << "Bot: Xp: " << bot->current_xp() << "\n";
+	//std::cout << "Bot: Gold: " << bot->current_gold() << "\n";
+	//std::cout << "Bot: Xp: " << bot->current_xp() << "\n";
 }
 
 
 
 void BotAlgorythm::checkXp()
 {
-	if (bot->current_xp() >= 30) {
+	if (bot->current_xp() >= 43) {
 		if (bot->age_ptr == bot->age1) {
 			bot->age_ptr = bot->age2;
 			bot->units[0]->sprite.setTexture(bot->age_ptr->base_texture);
@@ -124,13 +124,13 @@ void BotAlgorythm::TakeGold(Unit_type unit_type)
 	switch (unit_type)
 	{
 	case Unit_type::Warrior:
-		bot->change_money(70);
+		bot->change_money(-70);
 		break;
 	case Unit_type::Archer:
-		bot->change_money(100);
+		bot->change_money(-100);
 		break;
 	case Unit_type::Boss:
-		bot->change_money(200);
+		bot->change_money(-200);
 		break;
 	}
 }

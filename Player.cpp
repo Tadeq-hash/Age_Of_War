@@ -125,13 +125,6 @@ void Player::checkDeads(Player *player_2) {
             i--;
             std::cout << player_2->current_xp() << "\n";
         }
-        else if (units[i]->unit_type == Unit_type::Base) {
-            if (units[i]->return_hp() <= 0) {
-                isAlive = 0;
-                units.erase(units.begin() + i);
-                i--;
-            }
-        }
     }
 }
 
