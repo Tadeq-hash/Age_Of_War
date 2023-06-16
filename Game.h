@@ -5,6 +5,7 @@
 #include "UserInterface.h"
 #include "BotAlgorythm.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 class Game
 {
@@ -16,6 +17,7 @@ private:
 
     void InitVariables();
     void LoadTextures();
+    void LoadSounds();
     void LoadFonts();
     void InitWindow();
     void PollEvents();
@@ -36,6 +38,7 @@ private:
     sf::Font* digitals;
     sf::Font EndFont;
     sf::Text EndText;
+    sf::Music music;
 
     UserInterface* interface;
     UserInterface* secondInterface;
@@ -53,6 +56,7 @@ public:
     Game(bool bot_);
     ~Game();
 
+    void playMusic();
     void update();
     void render();
     bool getWindowIsOpen();

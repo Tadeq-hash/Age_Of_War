@@ -26,7 +26,7 @@ void Player::initVariables()
     if (this->side == -1)
     {
         this->hp = 500;
-        this->gold_amount = 275;
+        this->gold_amount = 800;
         this->xp = 0;
     }
 

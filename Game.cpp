@@ -49,6 +49,12 @@ void Game::LoadTextures()
     }
 }
 
+void Game::LoadSounds()
+{
+    music.openFromFile("sounds/Glorious_morning.wav");
+    music.setLoop(true);
+}
+
 /*
     LOAD FONTS
 */
@@ -110,6 +116,8 @@ Game::Game(bool bot_)
     this->InitWindow();
     this->initAges();
     this->LoadFonts();
+    this->LoadSounds();
+    this->playMusic();
     this->initButtons();
     this->initBot();
 }
@@ -208,6 +216,11 @@ void Game::initAges()
     age_of_gunpowder = new AgeOfGunpowder(window);
 }
 
+
+void Game::playMusic()
+{
+    music.play();
+}
 
 /*
     GAME UPDATE
